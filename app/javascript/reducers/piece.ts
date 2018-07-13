@@ -1,8 +1,8 @@
-import { SwitchPiece } from '../actions';
+import { SwitchPieceAction } from '../actions';
 import { StoreState } from '../types/index';
 import { SWITCH_PIECE } from '../constants/index';
 
-export function piece(state: StoreState, action: SwitchPiece): StoreState {
+export function piece(state: StoreState, action: SwitchPieceAction): StoreState {
   switch (action.type) {
     case SWITCH_PIECE:
       return { ...state, piece: { ...state.piece, name: action.pieceId } };

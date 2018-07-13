@@ -4,7 +4,7 @@ import { switchPiece } from '../../../actions';
 
 export interface Props {
   piece: PieceState;
-  switchPiece: (string) => void;
+  switchPiece(): void;
 }
 
 class PieceList extends React.Component<Props, object> {

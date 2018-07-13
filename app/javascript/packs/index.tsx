@@ -9,6 +9,7 @@ import * as reducers from '../reducers/index';
 import { StoreState } from '../types/index';
 
 import SideBar from './sideBar/containers/SideBar';
+import Editor from './editor/containers/Editor';
 
 
 import {
@@ -33,6 +34,7 @@ const store = createStore(
 ReactDOM.render(
   <Provider store={store}>
     <SideBar />
+    <Editor />
   </Provider>,
-  document.getElementById('root') as HTMLElement
+  document.getElementById('main') as HTMLElement
 );

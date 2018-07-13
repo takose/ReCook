@@ -1,21 +1,20 @@
 import { connect } from 'react-redux';
 import { Dispatch } from "redux";
 import * as actions from '../../../actions/';
-import { StoreState } from '../../../types/index';
+import { PieceState } from '../../../types/index';
 
-import PieceList from '../components/Editor';
+import PieceList from '../components/PieceList';
 
-export function mapStateToProps({ piece }: StoreState) {
+export function mapStateToProps(piece: PieceState) {
   return {
     piece,
   }
 }
 
-export function mapDispatchToProps(dispatch: Dispatch<actions.SwitchPiece>) {
+export function mapDispatchToProps(dispatch) {
   return {
-    switchPiece: (pieceId) => dispatch(actions.switchPiece(pieceId)),
+    switchPiece: (pieceId: string) => dispatch(actions.switchPiece(pieceId)),
   }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PieceList);
-

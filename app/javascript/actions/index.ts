@@ -5,7 +5,7 @@ export interface SwitchPiece {
     pieceId: string
 }
 
-export type ModeAction = SwitchPiece;
+export type SwitchPieceAction = SwitchPiece;
 
 export function switchPiece(pieceId: string): SwitchPiece {
     return {
