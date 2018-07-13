@@ -3,6 +3,6 @@ import { combineReducers } from 'redux';
 
 import { piece } from './piece';
 
-const recipeBulder = combineReducers({
+export const recipeBulder = combineReducers({
   piece,
 })

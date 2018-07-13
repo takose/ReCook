@@ -1,11 +1,15 @@
 import { SwitchPieceAction } from '../actions';
-import { StoreState } from '../types/index';
+import { PieceState } from '../types/index';
 import { SWITCH_PIECE } from '../constants/index';
 
-export function piece(state: StoreState, action: SwitchPieceAction): StoreState {
+const initialState = {
+  name: 'puta',
+};
+
+export const piece = (state: PieceState = initialState, action: SwitchPieceAction): PieceState => {
   switch (action.type) {
     case SWITCH_PIECE:
-      return { ...state, piece: { ...state.piece, name: action.pieceId } };
+      return { ...state, name: action.pieceId };
   }
   return state;
 }

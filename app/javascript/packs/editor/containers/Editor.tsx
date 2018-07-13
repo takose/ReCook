@@ -3,6 +3,6 @@ import { Dispatch } from "redux";
 import * as actions from '../../../actions/';
 import { StoreState } from '../../../types/index';
 
-import SideBar from '../components/Editor';
+import Editor from '../components/Editor';
 
-export default connect()(SideBar);
+export default connect()(Editor);

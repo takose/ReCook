@@ -3,13 +3,14 @@ import * as ReactDOM from "react-dom";
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import { Provider } from 'react-redux';
 import createHistory from "history/createBrowserHistory";
-import { Route } from "react-router";
+import { Router, Route } from "react-router";
 
 import * as reducers from '../reducers/index';
 import { StoreState } from '../types/index';
 
 import SideBar from './sideBar/containers/SideBar';
 import Editor from './editor/containers/Editor';
+import Explore from './explore/containers/Explore';
 
 
 import {
@@ -33,8 +34,9 @@ const store = createStore(
 
 ReactDOM.render(
   <Provider store={store}>
-    <SideBar />
-    <Editor />
+    <Router history={history}>
+      <Route path="/" component={Editor} />
+    </Router>
   </Provider>,
-  document.getElementById('main') as HTMLElement
+  document.getElementById('main')
 );
