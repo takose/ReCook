@@ -8,9 +8,9 @@ import { Router, Route } from "react-router";
 import * as reducers from '../reducers/index';
 import { StoreState } from '../types/index';
 
-import SideBar from './sideBar/containers/SideBar';
-import Editor from './editor/containers/Editor';
-import Explore from './explore/containers/Explore';
+import SideBar from './sideBar/components/SideBar';
+import Editor from './editor/components/Editor';
+import Explore from './explore/components/Explore';
 
 
 import {
@@ -34,9 +34,13 @@ const store = createStore(
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={history}>
-      <Route path="/" component={Editor} />
-    </Router>
+    <ConnectedRouter history={history}>
+      <div>
+        <Route path="/recipes/editor" component={Editor} />
+        <Route path="/recipes/explore" component={Explore} />
+        <Route exact path="/recipes" component={SideBar} />
+      </div>
+    </ConnectedRouter>
   </Provider>,
   document.getElementById('main')
 );
