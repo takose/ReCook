@@ -4,8 +4,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --watch --progress --colors --config webpack.prod.js",
-    "start": "webpack-dev-server --history-api-fallback --host 0.0.0.0 --config webpack.dev.js",
-    "lint": "eslint --ext .js --ext .jsx --ext .ts --ext .tsx ./app/javascript --fix"
+    "start": "webpack-dev-server --history-api-fallback --host 0.0.0.0 --config webpack.dev.js"
   },
   "dependencies": {
     "@rails/webpacker": "3.5",
@@ -27,12 +26,9 @@
     "typescript": "^2.9.2"
   },
   "devDependencies": {
-    "eslint": "^5.2.0",
-    "eslint-config-airbnb": "^17.0.0",
-    "eslint-plugin-import": "^2.13.0",
-    "eslint-plugin-jsx-a11y": "^6.1.1",
-    "eslint-plugin-react": "^7.10.0",
-    "typescript-eslint-parser": "^16.0.1",
+    "tslint": "^5.11.0",
+    "tslint-config-airbnb": "^5.9.2",
+    "tslint-loader": "^3.6.0",
     "webpack-dev-server": "2.11.2"
   }
 }
