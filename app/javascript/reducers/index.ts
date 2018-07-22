@@ -5,4 +5,4 @@ import { piece } from './piece';
 
 export const recipeBulder = combineReducers({
   piece,
-})
+});

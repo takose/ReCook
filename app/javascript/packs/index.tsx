@@ -1,10 +1,16 @@
-import * as React from "react";
-import * as ReactDOM from "react-dom";
-import { createStore, combineReducers, applyMiddleware } from "redux";
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import createHistory from "history/createBrowserHistory";
-import { Router, Route } from "react-router";
+import createHistory from 'history/createBrowserHistory';
+import { Router, Route } from 'react-router';
 
+import {
+  ConnectedRouter,
+  routerReducer,
+  routerMiddleware,
+  push,
+} from 'react-router-redux';
 import * as reducers from '../reducers/index';
 import { StoreState } from '../types/index';
 
@@ -13,13 +19,6 @@ import Editor from './editor/components/Editor';
 import Explore from './explore/components/Explore';
 
 
-import {
-  ConnectedRouter,
-  routerReducer,
-  routerMiddleware,
-  push
-} from "react-router-redux";
-
 const history = createHistory();
 
 const middleware = routerMiddleware(history);
@@ -27,9 +26,9 @@ const middleware = routerMiddleware(history);
 const store = createStore(
   combineReducers({
     ...reducers,
-    router: routerReducer
+    router: routerReducer,
   }),
-  applyMiddleware(middleware)
+  applyMiddleware(middleware),
 );
 
 ReactDOM.render(
@@ -42,5 +41,5 @@ ReactDOM.render(
       </div>
     </ConnectedRouter>
   </Provider>,
-  document.getElementById('main')
+  document.getElementById('main'),
 );
