@@ -12,4 +12,4 @@ export const piece = (state: PieceState = initialState, action: SwitchPieceActio
       return { ...state, name: action.pieceId };
   }
   return state;
-}
+};

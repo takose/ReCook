@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+import createBrowserHistory from 'history/createBrowserHistory';
 import createHistory from 'history/createBrowserHistory';
 import { Router, Route } from 'react-router';
 
@@ -17,7 +18,6 @@ import { StoreState } from '../types/index';
 import SideBar from './sideBar/components/SideBar';
 import Editor from './editor/components/Editor';
 import Explore from './explore/components/Explore';
-
 
 const history = createHistory();
 
