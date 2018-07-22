@@ -1,6 +1,12 @@
 {
   "name": "ReCook",
   "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --watch --progress --colors --config webpack.prod.js",
+    "start": "webpack-dev-server --history-api-fallback --host 0.0.0.0 --config webpack.dev.js",
+    "lint": "eslint --ext .js --ext .jsx --ext .ts --ext .tsx ./app/javascript --fix"
+  },
   "dependencies": {
     "@rails/webpacker": "3.5",
     "@types/history": "^4.6.2",
