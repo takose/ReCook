@@ -4,6 +4,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import createBrowserHistory from 'history/createBrowserHistory';
 import { Route } from 'react-router';
+import { root as Root } from './styles/Root';
 
 import {
   ConnectedRouter,
@@ -33,11 +34,11 @@ const store = createStore(
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <div>
+      <Root>
         <Route path="/*" component={SideBar} />
         <Route path="/editor" component={Editor} />
         <Route path="/explore" component={Explore} />
-      </div>
+      </Root>
     </ConnectedRouter>
   </Provider>,
   document.getElementById('main'),
