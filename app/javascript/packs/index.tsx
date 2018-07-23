@@ -3,7 +3,7 @@ import * as ReactDOM from 'react-dom';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import createBrowserHistory from 'history/createBrowserHistory';
-import { Router, Route } from 'react-router';
+import { Route } from 'react-router';
 
 import {
   ConnectedRouter,
@@ -34,9 +34,9 @@ ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <div>
-        <Route path="/recipes/editor" component={Editor} />
-        <Route path="/recipes/explore" component={Explore} />
-        <Route exact path="/recipes" component={SideBar} />
+        <Route path="/*" component={SideBar} />
+        <Route path="/editor" component={Editor} />
+        <Route path="/explore" component={Explore} />
       </div>
     </ConnectedRouter>
   </Provider>,
