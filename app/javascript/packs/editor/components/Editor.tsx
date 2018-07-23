@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PieceList from '../containers/PieceList'
+import PieceList from '../containers/PieceList';
 
 export interface Props {
 }

@@ -9,7 +9,7 @@ export type SwitchPieceAction = SwitchPiece;
 
 export function switchPiece(pieceId: string): SwitchPiece {
   return {
-    type: constants.SWITCH_PIECE,
     pieceId,
+    type: constants.SWITCH_PIECE,
   };
 }
