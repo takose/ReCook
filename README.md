@@ -4,6 +4,7 @@ Awesome Cooking experience platform 🍳
 ## Getting Started
 
 ```
+$ bundle install
 $ yarn
 ```
 
