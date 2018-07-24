@@ -18,28 +18,28 @@ class SideBar extends React.Component<Props, object> {
     return (
       <Wrapper>
         <Item>
-          <NavLink to="/explore" style={{ opacity: 0.5 }} activeStyle={{ opacity: 1 }}>
+          <NavLink to="/recipes/explore" style={{ opacity: 0.5 }} activeStyle={{ opacity: 1 }}>
           <Icon>
             <FontAwesomeIcon icon={faSearch} />
           </Icon>
           </NavLink>
         </Item>
         <Item>
-          <NavLink to="/editor" style={{ opacity: 0.5 }} activeStyle={{ opacity: 1 }}>
+          <NavLink to="/recipes/editor" style={{ opacity: 0.5 }} activeStyle={{ opacity: 1 }}>
             <Icon>
               <FontAwesomeIcon icon={faEdit} />
             </Icon>
           </NavLink>
         </Item>
         <Item>
-          <NavLink to="/player" style={{ opacity: 0.5 }} activeStyle={{ opacity: 1 }}>
+          <NavLink to="/recipes/player" style={{ opacity: 0.5 }} activeStyle={{ opacity: 1 }}>
             <Icon>
               <FontAwesomeIcon icon={faPlay} />
             </Icon>
           </NavLink>
         </Item>
         <Item>
-          <NavLink to="/settings" style={{ opacity: 0.5 }} activeStyle={{ opacity: 1 }}>
+          <NavLink to="recipes/settings" style={{ opacity: 0.5 }} activeStyle={{ opacity: 1 }}>
             <Icon>
               <FontAwesomeIcon icon={faCog} />
             </Icon>
