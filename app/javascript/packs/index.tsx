@@ -15,9 +15,9 @@ import {
 import * as reducers from '../reducers/index';
 import { StoreState } from '../types/index';
 
-import SideBar from './sideBar/components/SideBar';
-import Editor from './editor/components/Editor';
-import Explore from './explore/components/Explore';
+import SideBar from './sideBar/containers/SideBar';
+import Editor from './editor/containers/Editor';
+import Explore from './explore/containers/Explore';
 
 const history = createBrowserHistory();
 
