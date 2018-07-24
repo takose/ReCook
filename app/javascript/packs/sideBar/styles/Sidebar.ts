@@ -3,7 +3,7 @@ import styledComponents from 'styled-components';
 export const wrapper = styledComponents.div`
   height: 100%;
   width: 80px;
-  padding: 30px 20px;
+  padding: 30px 0;
   background: #3B72A1;
 `;
 
@@ -19,6 +19,8 @@ export const icon = styledComponents.svg`
   color: #EBF1F6;
 `;
 
-export const navLink = styledComponents.a`
-  opacity: 0.8;
+export const signup = styledComponents.a`
+  font-size: 12px;
+  text-align: center;
+  color: #EBF1F6;
 `;

@@ -5,7 +5,7 @@ import {
   wrapper as Wrapper,
   item as Item,
   icon as Icon,
-  navLink,
+  signup as Signup,
 } from '../styles/Sidebar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faPlay, faSearch, faCog } from '@fortawesome/free-solid-svg-icons';
@@ -44,6 +44,9 @@ class SideBar extends React.Component<Props, object> {
               <FontAwesomeIcon icon={faCog} />
             </Icon>
           </NavLink>
+        </Item>
+        <Item>
+          <Signup href="/auth/twitter">sign up</Signup>
         </Item>
       </Wrapper>
     );
