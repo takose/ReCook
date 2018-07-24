@@ -15,15 +15,13 @@
 
 class User < ApplicationRecord
   def self.find_or_create_by_auth_hash(auth_hash)
-    return if auth_hash.provider != "twitter"
+    return if auth_hash[:provider] != "twitter"
 
-    uid = auth_hash[:uid]
-    nickname = auth_hash[:info][:nickname]
-    image_url = auth_hash[:info][:image]
-
-    User.find_or_create_by(provider: provider, uid: uid) do |user|
-      user.nickname = nickname
-      user.image_url = image_url
+    User.find_or_create_by(provider: auth_hash[:provider], uid: auth_hash[:uid]) do |user|
+      user.nickname = auth_hash[:info][:nickname]
+      user.image_url = auth_hash[:info][:image]
+      user.consumer_token = auth_hash[:credentials][:token]
+      user.consumer_secret = auth_hash[:credentials][:secret]
     end
   end
 end
