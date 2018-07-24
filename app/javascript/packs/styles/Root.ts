@@ -13,4 +13,7 @@ injectGlobal`
   body {
     margin: 0;
   }
+  a {
+    text-decoration: none;
+  }
 `;

@@ -15,9 +15,9 @@ import {
 import * as reducers from '../reducers/index';
 import { StoreState } from '../types/index';
 
-import SideBar from './sideBar/components/SideBar';
-import Editor from './editor/components/Editor';
-import Explore from './explore/components/Explore';
+import SideBar from './sideBar/containers/SideBar';
+import Editor from './editor/containers/Editor';
+import Explore from './explore/containers/Explore';
 
 const history = createBrowserHistory();
 
@@ -31,13 +31,15 @@ const store = createStore(
   applyMiddleware(middleware),
 );
 
+const node = document.getElementById('main');
+const user = JSON.parse(node.getAttribute('user'));
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <Root>
-        <Route path="/*" component={SideBar} />
-        <Route path="/editor" component={Editor} />
-        <Route path="/explore" component={Explore} />
+        <Route path="/recipes/*" render={() => <SideBar {...user} />} />
+        <Route path="/recipes/editor" component={Editor} />
+        <Route path="/recipes/explore" component={Explore} />
       </Root>
     </ConnectedRouter>
   </Provider>,
