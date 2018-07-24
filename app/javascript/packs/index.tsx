@@ -35,9 +35,9 @@ ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <Root>
-        <Route path="/*" component={SideBar} />
-        <Route path="/editor" component={Editor} />
-        <Route path="/explore" component={Explore} />
+        <Route path="/recipes/*" component={SideBar} />
+        <Route path="/recipes/editor" component={Editor} />
+        <Route path="/recipes/explore" component={Explore} />
       </Root>
     </ConnectedRouter>
   </Provider>,
