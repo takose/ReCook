@@ -3,8 +3,9 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --watch --progress --colors --config webpack.prod.js",
-    "start": "webpack-dev-server --history-api-fallback --host 0.0.0.0 --config webpack.dev.js"
+    "build": "webpack --watch --progress --colors --config config/webpack/production.js",
+    "start": "webpack-dev-server --history-api-fallback --host 0.0.0.0 --config webpack.dev.js",
+    "lint": "tslint --project ."
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.0-14",
