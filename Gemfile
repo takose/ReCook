@@ -33,6 +33,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'haml-rails'
 gem 'dotenv-rails'
 gem 'config'
+gem 'omniauth'
+gem 'omniauth-twitter'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
