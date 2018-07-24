@@ -31,11 +31,13 @@ const store = createStore(
   applyMiddleware(middleware),
 );
 
+const node = document.getElementById('main');
+const user = JSON.parse(node.getAttribute('user'));
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <Root>
-        <Route path="/recipes/*" component={SideBar} />
+        <Route path="/recipes/*" render={() => <SideBar {...user} />} />
         <Route path="/recipes/editor" component={Editor} />
         <Route path="/recipes/explore" component={Explore} />
       </Root>
