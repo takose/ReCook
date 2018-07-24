@@ -1,24 +1,16 @@
-# README
+# ReCook
+Awesome Cooking experience platform 🍳
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Getting Started
 
-Things you may want to cover:
+```
+$ yarn
+```
 
-* Ruby version
+## Development
+Run
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```
+$ rails s
+$ ./bin/webpack-dev-server
+```
