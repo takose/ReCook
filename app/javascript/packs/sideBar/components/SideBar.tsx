@@ -2,9 +2,11 @@ import * as React from 'react';
 import { NavLink } from 'react-router-dom';
 
 import {
-  wrapper as Wrapper,
+  itemList as ItemList,
   item as Item,
   icon as Icon,
+  wrapper as Wrapper,
+  avatar as Avatar,
   signup as Signup,
 } from '../styles/Sidebar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -15,40 +17,48 @@ export interface Props {
 
 class SideBar extends React.Component<Props, object> {
   render() {
+    const { nickname, image_url } = this.props;
+    const account = nickname === undefined ? (
+      <Signup href="/auth/twitter">sign up</Signup>
+    ) : (
+      <Avatar src={image_url} />
+    );
     return (
-      <Wrapper>
-        <Item>
-          <NavLink to="/recipes/explore" style={{ opacity: 0.5 }} activeStyle={{ opacity: 1 }}>
-          <Icon>
-            <FontAwesomeIcon icon={faSearch} />
-          </Icon>
-          </NavLink>
-        </Item>
-        <Item>
-          <NavLink to="/recipes/editor" style={{ opacity: 0.5 }} activeStyle={{ opacity: 1 }}>
+      <ItemList>
+        <Wrapper>
+          <Item>
+            <NavLink to="/recipes/explore" style={{ opacity: 0.5 }} activeStyle={{ opacity: 1 }}>
             <Icon>
-              <FontAwesomeIcon icon={faEdit} />
+              <FontAwesomeIcon icon={faSearch} />
             </Icon>
-          </NavLink>
-        </Item>
+            </NavLink>
+          </Item>
+          <Item>
+            <NavLink to="/recipes/editor" style={{ opacity: 0.5 }} activeStyle={{ opacity: 1 }}>
+              <Icon>
+                <FontAwesomeIcon icon={faEdit} />
+              </Icon>
+            </NavLink>
+          </Item>
+          <Item>
+            <NavLink to="/recipes/player" style={{ opacity: 0.5 }} activeStyle={{ opacity: 1 }}>
+              <Icon>
+                <FontAwesomeIcon icon={faPlay} />
+              </Icon>
+            </NavLink>
+          </Item>
+          <Item>
+            <NavLink to="recipes/settings" style={{ opacity: 0.5 }} activeStyle={{ opacity: 1 }}>
+              <Icon>
+                <FontAwesomeIcon icon={faCog} />
+              </Icon>
+            </NavLink>
+          </Item>
+        </Wrapper>
         <Item>
-          <NavLink to="/recipes/player" style={{ opacity: 0.5 }} activeStyle={{ opacity: 1 }}>
-            <Icon>
-              <FontAwesomeIcon icon={faPlay} />
-            </Icon>
-          </NavLink>
+          {account}
         </Item>
-        <Item>
-          <NavLink to="recipes/settings" style={{ opacity: 0.5 }} activeStyle={{ opacity: 1 }}>
-            <Icon>
-              <FontAwesomeIcon icon={faCog} />
-            </Icon>
-          </NavLink>
-        </Item>
-        <Item>
-          <Signup href="/auth/twitter">sign up</Signup>
-        </Item>
-      </Wrapper>
+      </ItemList>
     );
   }
 }
