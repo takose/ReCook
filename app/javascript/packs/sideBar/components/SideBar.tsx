@@ -13,6 +13,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faPlay, faSearch, faCog } from '@fortawesome/free-solid-svg-icons';
 
 export interface Props {
+  nickname?: string;
+  image_url?: string;
 }
 
 class SideBar extends React.Component<Props, object> {
