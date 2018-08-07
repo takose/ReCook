@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { NavLink } from 'react-router-dom';
+import { UserState } from './../../../types/index';
 
 import {
   itemList as ItemList,
@@ -13,13 +14,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faPlay, faSearch, faCog } from '@fortawesome/free-solid-svg-icons';
 
 export interface Props {
-  nickname?: string;
-  image_url?: string;
+  user?: UserState;
 }
 
 class SideBar extends React.Component<Props, object> {
   render() {
-    const { nickname, image_url } = this.props;
+    const { nickname, image_url } = this.props.user;
     const account = nickname === undefined ? (
       <Signup href="/auth/twitter">sign up</Signup>
     ) : (
@@ -50,7 +50,7 @@ class SideBar extends React.Component<Props, object> {
             </NavLink>
           </Item>
           <Item>
-            <NavLink to="recipes/settings" style={{ opacity: 0.5 }} activeStyle={{ opacity: 1 }}>
+            <NavLink to="/recipes/settings" style={{ opacity: 0.5 }} activeStyle={{ opacity: 1 }}>
               <Icon>
                 <FontAwesomeIcon icon={faCog} />
               </Icon>
