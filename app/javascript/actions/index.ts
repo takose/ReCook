@@ -6,6 +6,7 @@ export interface SwitchPiece {
 }
 
 export type SwitchPieceAction = SwitchPiece;
+export type SessionAction = Session;
 
 export function switchPiece(pieceId: string): SwitchPiece {
   return {
