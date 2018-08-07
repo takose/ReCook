@@ -10,10 +10,8 @@ import {
   ConnectedRouter,
   routerReducer,
   routerMiddleware,
-  push,
 } from 'react-router-redux';
-import * as reducers from '../reducers/index';
-import { StoreState } from '../types/index';
+import { reCook } from '../reducers/index';
 
 import SideBar from './sideBar/containers/SideBar';
 import Editor from './editor/containers/Editor';
@@ -25,7 +23,7 @@ const middleware = routerMiddleware(history);
 
 const store = createStore(
   combineReducers({
-    ...reducers,
+    ...reCook,
     router: routerReducer,
   }),
   applyMiddleware(middleware),
