@@ -1,10 +1,11 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
-import { Provider } from 'react-redux';
+import { Provider, connect } from 'react-redux';
 import createBrowserHistory from 'history/createBrowserHistory';
 import { Route } from 'react-router';
 import { root as Root } from './styles/Root';
+import { UserState } from './../types/index';
 
 import {
   ConnectedRouter,
@@ -30,12 +31,16 @@ const store = createStore(
 );
 
 const node = document.getElementById('main');
-const user = JSON.parse(node.getAttribute('user'));
+const user: UserState = JSON.parse(node.getAttribute('user'));
+const connectedSideBar = connect(state => ({
+  user,
+}))(SideBar);
+
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <Root>
-        <Route path="/recipes/*" render={() => <SideBar {...user} />} />
+        <Route path="/recipes" component={connectedSideBar} />
         <Route path="/recipes/editor" component={Editor} />
         <Route path="/recipes/explore" component={Explore} />
       </Root>
