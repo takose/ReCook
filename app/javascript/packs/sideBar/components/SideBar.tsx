@@ -19,11 +19,10 @@ export interface Props {
 
 class SideBar extends React.Component<Props, object> {
   render() {
-    const { nickname, image_url } = this.props.user;
-    const account = nickname === undefined ? (
+    const account = this.props.user === null ? (
       <Signup href="/auth/twitter">sign up</Signup>
     ) : (
-      <Avatar src={image_url} />
+      <Avatar src={this.props.user.image_url} />
     );
     return (
       <ItemList>
