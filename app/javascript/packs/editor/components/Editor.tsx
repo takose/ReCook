@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PieceList from '../containers/PieceList';
+import InfoPanel from '../components/InfoPanel';
 
 export interface Props {
 }
@@ -8,7 +8,7 @@ class Editor extends React.Component<Props, object> {
   render() {
     return (
       <div className="Editor">
-        <PieceList />
+        <InfoPanel />
       </div>
     );
   }

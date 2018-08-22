@@ -5,14 +5,14 @@ import { Provider, connect } from 'react-redux';
 import createBrowserHistory from 'history/createBrowserHistory';
 import { Route } from 'react-router';
 import { root as Root } from './styles/Root';
-import { UserState } from './../types/index';
+import { UserState } from '../types';
 
 import {
   ConnectedRouter,
   routerReducer,
   routerMiddleware,
 } from 'react-router-redux';
-import { reCook } from '../reducers/index';
+import { reCook } from '../reducers';
 
 import SideBar from './sideBar/containers/SideBar';
 import Editor from './editor/containers/Editor';

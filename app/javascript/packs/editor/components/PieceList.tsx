@@ -1,19 +1,21 @@
 import * as React from 'react';
-import { PieceState } from '../../../types/index';
+import { PiecesState, PieceState } from '../../../types';
 
 export interface Props {
-  piece: PieceState;
+  pieces: PiecesState;
+  currentPiece: PieceState;
   switchPiece(pieceId: string): void;
 }
 
 class PieceList extends React.Component<Props, object> {
   render() {
-    const { switchPiece } = this.props;
+    const { switchPiece, pieces } = this.props;
+    const piecesDom = pieces.pieces.map(piece => (
+      <button className="piece" onClick={() => switchPiece(piece.name)}>{piece.name}</button>
+    ));
     return (
       <div className="piece-list">
-        <button className="piece" onClick={() => switchPiece('mix')}>mix</button>
-        <button className="piece" onClick={() => switchPiece('bake')}>bake</button>
-        <p>{this.props.piece.name}</p>
+        {piecesDom}
       </div>
     );
   }

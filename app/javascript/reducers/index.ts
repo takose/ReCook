@@ -1,10 +1,9 @@
-import { routerReducer } from 'react-router-redux';
-import { combineReducers } from 'redux';
-
-import { piece } from './piece';
+import { current } from './current';
 import { user } from './user';
+import { pieces } from './pieces';
 
 export const reCook = {
-  piece,
+  current,
   user,
+  pieces,
 };

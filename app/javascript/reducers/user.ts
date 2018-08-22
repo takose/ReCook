@@ -1,6 +1,6 @@
 import { SessionAction } from '../actions';
-import { UserState } from '../types/index';
-import { LOG_IN } from '../constants/index';
+import { UserState } from '../types';
+import { LOG_IN } from '../constants';
 
 const initialState = {
   nickname: '',

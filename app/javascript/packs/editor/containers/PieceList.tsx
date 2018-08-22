@@ -1,13 +1,14 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import * as actions from '../../../actions/';
-import { StoreState } from '../../../types/index';
+import * as actions from '../../../actions';
+import { StoreState } from '../../../types';
 
 import PieceList from '../components/PieceList';
 
 export function mapStateToProps(state: StoreState) {
   return {
-    piece: state.piece,
+    pieces: state.pieces,
+    currentPiece: state.current.piece,
   };
 }
 
