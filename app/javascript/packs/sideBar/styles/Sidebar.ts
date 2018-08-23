@@ -2,7 +2,7 @@ import styledComponents from 'styled-components';
 
 export const itemList = styledComponents.div`
   height: 100%;
-  width: 80px;
+  width: 60px;
   padding: 30px 0;
   background: #3B72A1;
   display: flex;

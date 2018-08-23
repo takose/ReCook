@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { NavLink } from 'react-router-dom';
-import { UserState } from './../../../types/index';
+import { UserState } from '../../../types';
 
 import {
   itemList as ItemList,
