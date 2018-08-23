@@ -1,5 +1,9 @@
 import * as React from 'react';
-import InfoPanel from '../components/InfoPanel';
+import InfoPanel from './InfoPanel';
+import MainPanel from './MainPanel';
+import {
+  main as Main,
+} from '../styles/Editor';
 
 export interface Props {
 }
@@ -7,9 +11,10 @@ export interface Props {
 class Editor extends React.Component<Props, object> {
   render() {
     return (
-      <div className="Editor">
+      <Main>
         <InfoPanel />
-      </div>
+        <MainPanel />
+      </Main>
     );
   }
 }
