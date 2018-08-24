@@ -21,6 +21,23 @@ ActiveRecord::Schema.define(version: 2018_08_24_054439) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "recipes", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "steps", force: :cascade do |t|
+    t.integer "step_ingredient_id"
+    t.string "piece_step_type"
+    t.integer "piece_step_id"
+    t.integer "recipe_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "user_pieces", force: :cascade do |t|
     t.integer "piece_id", null: false
     t.integer "user_id", null: false
