@@ -1,24 +1,9 @@
 import { SwitchPieceAction } from '../actions';
-import { PiecesState } from '../types';
 
-const initialState = {
-  pieces: [
-    {
-      id: 'puta',
-      name: 'PUTA',
-    },
-    {
-      id: 'ff',
-      name: 'FF',
-    },
-    {
-      id: 'text',
-      name: 'TEXT',
-    },
-  ],
-};
+const node = document.getElementById('main');
+const initialState = JSON.parse(node.getAttribute('pieces'));
 
 export const pieces =
-  (state: PiecesState = initialState, action): PiecesState => {
+  (state = initialState, action) => {
     return state;
   };

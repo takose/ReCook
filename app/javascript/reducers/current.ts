@@ -3,7 +3,7 @@ import { CurrentState } from '../types';
 import { SWITCH_PIECE } from '../constants';
 
 const initialState = {
-  pieceId: 'puta',
+  pieceId: 1,
 };
 
 export const current =

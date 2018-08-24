@@ -1,16 +1,12 @@
 export interface StoreState {
-  pieces: PiecesState;
+  pieces: PieceState[];
   current: CurrentState;
   user: UserState;
 }
 
 export interface PieceState {
-  id: string;
+  id: number;
   name: string;
-}
-
-export interface PiecesState {
-  pieces: PieceState[];
 }
 
 export interface UserState {
@@ -19,5 +15,5 @@ export interface UserState {
 }
 
 export interface CurrentState {
-  pieceId: string;
+  pieceId: number;
 }

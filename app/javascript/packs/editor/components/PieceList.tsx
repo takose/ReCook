@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PiecesState, PieceState } from '../../../types';
+import { PieceState } from '../../../types';
 import {
   pieceList as PieceListMain,
   piece as Piece,
@@ -7,7 +7,7 @@ import {
 } from '../styles/InfoPanel';
 
 export interface Props {
-  pieces: PiecesState;
+  pieces: PieceState[];
   currentPiece: PieceState;
   switchPiece(pieceId: string): void;
 }
@@ -15,7 +15,7 @@ export interface Props {
 class PieceList extends React.Component<Props, object> {
   render() {
     const { switchPiece, pieces } = this.props;
-    const piecesDom = pieces.pieces.map(piece => (
+    const piecesDom = pieces.map(piece => (
       <Piece className="piece" onClick={() => switchPiece(piece.name)}>
         {piece.name}
       </Piece>
