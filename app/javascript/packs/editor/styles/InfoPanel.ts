@@ -13,16 +13,17 @@ export const title = styledComponents.div`
   border-bottom: solid 1px #7E6C62;
   font-size: 16px;
   color: ${BASE};
+  margin-bottom: 8px;
 `;
 
 export const piece = styledComponents.button`
   width: 100%;
+  padding: 8px ${INTERVAL};
   font-size: 16px;
   text-align: left;
-  margin-bottom: 8px;
-  color: ${BASE};
+  color: ${(props: {primary: boolean}) => props.primary ? '#fff' : BASE};
+  background: ${(props: {primary: boolean}) => props.primary ? PRIMARY : 'inherit'}
 `;
 
 export const pieceList = styledComponents.div`
-  padding: ${INTERVAL};
 `;

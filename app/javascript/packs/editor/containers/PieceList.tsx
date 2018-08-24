@@ -15,7 +15,7 @@ export function mapStateToProps(state: StoreState) {
 
 export function mapDispatchToProps(dispatch) {
   return {
-    switchPiece: (pieceId: string) => {
+    switchPiece: (pieceId: number) => {
       dispatch(actions.switchPiece(pieceId));
     },
   };

@@ -2,13 +2,13 @@ import * as constants from '../constants';
 
 export interface SwitchPiece {
   type: constants.SWITCH_PIECE;
-  pieceId: string;
+  pieceId: number;
 }
 
 export type SwitchPieceAction = SwitchPiece;
 export type SessionAction = Session;
 
-export function switchPiece(pieceId: string): SwitchPiece {
+export function switchPiece(pieceId: number): SwitchPiece {
   return {
     pieceId,
     type: constants.SWITCH_PIECE,

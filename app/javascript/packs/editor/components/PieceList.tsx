@@ -9,14 +9,17 @@ import {
 export interface Props {
   pieces: PieceState[];
   currentPiece: PieceState;
-  switchPiece(pieceId: string): void;
+  switchPiece(pieceId: number): void;
 }
 
 class PieceList extends React.Component<Props, object> {
   render() {
-    const { switchPiece, pieces } = this.props;
+    const { switchPiece, pieces, currentPiece } = this.props;
     const piecesDom = pieces.map(piece => (
-      <Piece className="piece" onClick={() => switchPiece(piece.name)}>
+      <Piece
+        className="piece"
+        onClick={() => switchPiece(piece.id)}
+        primary={piece.id === currentPiece.id}>
         {piece.name}
       </Piece>
     ));
