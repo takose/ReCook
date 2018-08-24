@@ -11,4 +11,5 @@
 class Piece < ApplicationRecord
   has_many :user_pieces, dependent: :destroy
   has_many :users, through: :user_pieces
+  has_many :steps
 end
