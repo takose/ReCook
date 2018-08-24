@@ -14,6 +14,9 @@
 #
 
 class User < ApplicationRecord
+  has_many :pieces, through: :user_pieces
+  has_many :user_pieces, dependent: :destroy
+
   def self.find_or_create_by_auth_hash(auth_hash)
     return if auth_hash[:provider] != "twitter"
 
