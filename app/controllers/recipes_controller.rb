@@ -7,6 +7,6 @@ class RecipesController < ApplicationController
 
   def set_current_user
     @user = current_user.to_json(only: [:nickname, :image_url])
-    @pieces = current_user.pieces.to_json(only: [:id, :name])
+    @pieces = current_user&.pieces&.to_json(only: [:id, :name])
   end
 end
