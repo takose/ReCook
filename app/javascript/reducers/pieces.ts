@@ -4,10 +4,16 @@ import { PiecesState } from '../types';
 const initialState = {
   pieces: [
     {
+      id: 'puta',
       name: 'PUTA',
     },
     {
+      id: 'ff',
       name: 'FF',
+    },
+    {
+      id: 'text',
+      name: 'TEXT',
     },
   ],
 };

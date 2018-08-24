@@ -8,7 +8,9 @@ import PieceList from '../components/PieceList';
 export function mapStateToProps(state: StoreState) {
   return {
     pieces: state.pieces,
-    currentPiece: state.current.piece,
+    currentPiece: state.pieces.pieces.find(piece => (
+      piece.id === state.current.pieceId
+    )),
   };
 }
 

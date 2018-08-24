@@ -3,9 +3,7 @@ import { CurrentState } from '../types';
 import { SWITCH_PIECE } from '../constants';
 
 const initialState = {
-  piece: {
-    name: 'puta',
-  },
+  pieceId: 'puta',
 };
 
 export const current =
@@ -14,9 +12,7 @@ export const current =
       case SWITCH_PIECE:
         return {
           ...state,
-          piece: {
-            name: action.pieceId,
-          },
+          pieceId: action.pieceId,
         };
     }
     return state;
