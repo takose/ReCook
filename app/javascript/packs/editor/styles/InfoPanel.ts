@@ -1,6 +1,7 @@
 import styledComponents from 'styled-components';
 const INTERVAL = '12px';
 const BASE = '#141B23';
+const PRIMARY = '#3B72A1';
 export const main = styledComponents.div`
   width: 120px;
   height: 100%;
