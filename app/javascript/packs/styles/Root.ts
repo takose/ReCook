@@ -9,6 +9,7 @@ export const root = styledComponents.div`
 injectGlobal`
   * {
     box-sizing: border-box;
+    font-family: 'Muli', sans-serif;
   }
   body {
     margin: 0;
@@ -23,5 +24,8 @@ injectGlobal`
     outline: none;
     padding: 0;
     appearance: none;
+  }
+  input[type='number'] {
+    width: 120px;
   }
 `;
