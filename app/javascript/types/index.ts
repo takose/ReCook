@@ -2,6 +2,8 @@ export interface StoreState {
   pieces: PieceState[];
   current: CurrentState;
   user: UserState;
+  ff: FFState[];
+  steps: StepState[];
 }
 
 export interface PieceState {
@@ -16,4 +18,16 @@ export interface UserState {
 
 export interface CurrentState {
   pieceId: number;
+}
+
+export interface FFState {
+  id: number;
+  sec?: number;
+  power?: number;
+  temperature?: number;
+}
+
+export interface StepState {
+  pieceId: number;
+  stepId: number;
 }
