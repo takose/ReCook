@@ -1,8 +1,47 @@
 import styledComponents from 'styled-components';
-export const workspace = styledComponents.div`
+const GRAY = '#EEE';
+export const main = styledComponents.div`
   display: flex;
-  height: 300px;
+  align-items: flex-end;
 `;
+
+export const modeSelectorList = styledComponents.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const modeSelector = styledComponents.button`
+  padding: 4px;
+  font-size: 12px;
+  background: ${(props: {primary: boolean}) => props.primary ? GRAY : 'none'};
+`;
+
+export const form = styledComponents.div`
+  margin-left: 80px;
+`;
+
+export const input = styledComponents.input`
+`;
+
+export const inputWrapper = styledComponents.div`
+  margin-bottom: 12px;
+`;
+
+export const add = styledComponents.button`
+  background-color: #6D4C41;
+  margin: 0 0 0 60px;
+  padding: 0 18px;
+  color: #fff;
+  height: 36px;
+  width: 100px;
+  letter-spacing: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 3px;
+`;
+
+///////// old
 
 export const chart = styledComponents.div`
   width: 600px;
