@@ -29,3 +29,25 @@ export function login(nickname: string, imageUrl: string): Session {
     type: constants.LOG_IN,
   };
 }
+
+export function powerOnChange(power: number, stepId: number) {
+  return {
+    power,
+    stepId,
+    type: constants.POWER_ON_CHANGE,
+  };
+}
+
+export function createStepToFF() {
+  return {
+    type: constants.CREATE_STEP_TO_FF,
+  };
+}
+
+export function createStep(pieceId: number, stepId: number) {
+  return {
+    pieceId,
+    stepId,
+    type: constants.CREATE_STEP,
+  };
+}
