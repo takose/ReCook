@@ -1,11 +1,13 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import createSagaMiddleware from 'redux-saga'; // tslint:disable-line:import-name
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider, connect } from 'react-redux';
 import createBrowserHistory from 'history/createBrowserHistory';
 import { Route } from 'react-router';
 import { root as Root } from './styles/Root';
 import { UserState } from '../types';
+import reCookSaga from '../sagas'; // tslint:disable-line:import-name
 
 import {
   ConnectedRouter,
@@ -20,6 +22,7 @@ import Explore from './explore/containers/Explore';
 
 const history = createBrowserHistory();
 
+const sagaMiddleware = createSagaMiddleware();
 const middleware = routerMiddleware(history);
 
 const store = createStore(
@@ -27,8 +30,10 @@ const store = createStore(
     ...reCook,
     router: routerReducer,
   }),
-  applyMiddleware(middleware),
+  applyMiddleware(middleware, sagaMiddleware),
 );
+
+sagaMiddleware.run(reCookSaga);
 
 const node = document.getElementById('main');
 const user: UserState = JSON.parse(node.getAttribute('user'));
