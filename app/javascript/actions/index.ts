@@ -51,3 +51,9 @@ export function createStep(pieceId: number, stepId: number) {
     type: constants.CREATE_STEP,
   };
 }
+
+export function createRecipe() {
+  return {
+    type: constants.CREATE_RECIPE,
+  };
+}

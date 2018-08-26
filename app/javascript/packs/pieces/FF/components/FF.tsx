@@ -2,7 +2,7 @@ import 'babel-polyfill';
 import * as React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
-import * as io from 'socket.io-client';
+import { CurrentState, StepState, FFState } from '../../../../types';
 import {
   main as Main,
   modeSelector as ModeSelector,
@@ -11,9 +11,19 @@ import {
   input as Input,
   inputWrapper as InputWrapper,
   add as Add,
+  step as Step,
 } from '../styles/FF';
 
-export default class FF extends React.Component {
+export interface Props {
+  current: CurrentState;
+  steps: StepState[];
+  ffSteps: FFState[];
+  createRecipe(): void;
+  createFFStep(): void;
+  createStep(stepId: number): void;
+}
+
+export default class FF extends React.Component<Props, object> {
   state = {
     mode: 0,
   };
@@ -22,6 +32,14 @@ export default class FF extends React.Component {
     this.setState({ mode });
   }
   render() {
+    const {
+      current,
+      createRecipe,
+      createFFStep,
+      createStep,
+      ffSteps,
+      steps,
+    } = this.props;
     const form = () => {
       const temp = (
         <InputWrapper>
@@ -99,7 +117,13 @@ export default class FF extends React.Component {
           </ModeSelector>
         </ModeSelectorList>
         {form()}
-        <Add>
+        <Add
+          onClick={() => {
+            if (current.recipeId === null) {
+              createRecipe();
+            }
+            createFFStep();
+          }}>
           <FontAwesomeIcon icon={faPlus} />&nbsp; Add
         </Add>
       </Main>

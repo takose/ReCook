@@ -1,9 +1,9 @@
-import { SwitchPieceAction } from '../actions';
 import { CurrentState } from '../types';
 import { SWITCH_PIECE } from '../constants';
 
 const initialState = {
   pieceId: 1,
+  recipeId: null,
 };
 
 export const current =

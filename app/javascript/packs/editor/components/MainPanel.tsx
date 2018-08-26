@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { main as Main } from '../styles/MainPanel';
-import FF from '../../pieces/FF/components/FF';
+import FF from '../../pieces/FF/containers/FF';
 
 export interface Props {
 }

@@ -18,6 +18,7 @@ export interface UserState {
 
 export interface CurrentState {
   pieceId: number;
+  recipeId: number;
 }
 
 export interface FFState {
