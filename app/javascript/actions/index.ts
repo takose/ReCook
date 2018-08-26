@@ -1,5 +1,4 @@
 import * as constants from '../constants';
-import { func } from '../../../node_modules/@types/prop-types';
 
 export interface SwitchPiece {
   type: constants.SWITCH_PIECE;

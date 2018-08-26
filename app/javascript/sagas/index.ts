@@ -1,4 +1,4 @@
-import { call, put, takeEvery, takeLatest, select } from 'redux-saga/effects'
+import { call, put, takeEvery, takeLatest, select } from 'redux-saga/effects';
 import { CREATE_STEP, CREATE_FF_STEP, FF_ID } from '../constants';
 
 function* createFFStep() {
