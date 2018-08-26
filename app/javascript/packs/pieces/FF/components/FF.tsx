@@ -78,6 +78,7 @@ export default class FF extends React.Component {
           break;
       }
     };
+
     return (
       <Main>
         <ModeSelectorList>

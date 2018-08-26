@@ -1,6 +1,6 @@
 import { FFState } from '../types';
 import {
-  POWER_ON_CHANGE, CREATE_STEP_TO_FF,
+  POWER_ON_CHANGE, CREATE_FF_STEP,
 } from '../constants';
 
 export const ff =

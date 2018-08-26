@@ -16,7 +16,7 @@ export function mapStateToProps(state: StoreState) {
 
 export function mapDispatchToProps(dispatch) {
   return {
-    createStepToFF: () => {
+    createFFStep: () => {
       dispatch(actions.createStepToFF());
     },
     createStep: (stepId: number) => {

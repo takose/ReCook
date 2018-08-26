@@ -40,7 +40,7 @@ export function powerOnChange(power: number, stepId: number) {
 
 export function createStepToFF() {
   return {
-    type: constants.CREATE_STEP_TO_FF,
+    type: constants.CREATE_FF_STEP,
   };
 }
 
