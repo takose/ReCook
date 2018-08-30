@@ -1,6 +1,6 @@
 import * as React from 'react';
 import InfoPanel from './InfoPanel';
-import MainPanel from './MainPanel';
+import MainPanel from '../containers/MainPanel';
 import {
   main as Main,
 } from '../styles/Editor';
