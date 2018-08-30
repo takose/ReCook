@@ -13,3 +13,9 @@ export const CREATE_RECIPE = 'CREATE_RECIPE';
 export const FF_ID = 1;
 export const TEXT_ID = 2;
 export const TASTE_ID = 3;
+
+export const CONFIG = {
+  lang: 'eng',
+  tessedit_char_blacklist: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz',
+  tessedit_char_whitelist: '0123456789',
+};
