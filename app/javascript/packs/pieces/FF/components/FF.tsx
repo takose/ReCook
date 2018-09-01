@@ -11,22 +11,70 @@ import {
   input as Input,
   inputWrapper as InputWrapper,
   add as Add,
-  step as Step,
 } from '../styles/FF';
+
+interface State {
+  power?: number;
+  temperature: number;
+  time: number;
+  mode: number;
+}
 
 export interface Props {
   current: CurrentState;
   steps: StepState[];
   ffSteps: FFState[];
   createRecipe(): void;
-  createFFStep(): void;
+  createFFStep(power: number, temperature: number, time: number): void;
   createStep(stepId: number): void;
 }
 
-export default class FF extends React.Component<Props, object> {
+export default class FF extends React.Component<Props, State> {
+  private timeDom;
+  private temperatureDom;
+  private powerDom;
   state = {
     mode: 0,
+    power: 0,
+    time: 0,
+    temperature: 0,
   };
+
+  reset = () => {
+    switch (this.state.mode) {
+      case 0:
+        this.temperatureDom.value = 0;
+        this.timeDom.value = 0;
+        break;
+      case 1:
+        this.temperatureDom.value = 0;
+        this.powerDom.value = 0;
+        break;
+      case 2:
+        this.powerDom.value = 0;
+        this.timeDom.value = 0;
+        break;
+      default:
+        break;
+    }
+  }
+  timeOnChange = (e) => {
+    this.setState({
+      time: e.target.value,
+    });
+  }
+
+  powerOnChange = (e) => {
+    this.setState({
+      power: e.target.value,
+    });
+  }
+
+  temperatureOnChange = (e) => {
+    this.setState({
+      temperature: e.target.value,
+    });
+  }
 
   modeOnChanged = (mode: number) => {
     this.setState({ mode });
@@ -48,6 +96,9 @@ export default class FF extends React.Component<Props, object> {
             min={0}
             max={200}
             placeholder="Temperature"
+            value={this.state.temperature}
+            onChange={this.temperatureOnChange}
+            innerRef={e => this.temperatureDom = e}
           /> ℃
         </InputWrapper>
       );
@@ -58,6 +109,9 @@ export default class FF extends React.Component<Props, object> {
             min={0}
             max={6}
             placeholder="Power"
+            value={this.state.power}
+            onChange={this.powerOnChange}
+            innerRef={e => this.powerDom = e}
           />
         </InputWrapper>
       );
@@ -67,6 +121,9 @@ export default class FF extends React.Component<Props, object> {
             type="number"
             min={0}
             placeholder="Time"
+            value={this.state.time}
+            onChange={this.timeOnChange}
+            innerRef={e => this.timeDom = e}
           /> sec
         </InputWrapper>
       );
@@ -122,7 +179,14 @@ export default class FF extends React.Component<Props, object> {
             if (current.recipeId === null) {
               createRecipe();
             }
-            createFFStep();
+            const { power, temperature, time } = this.state;
+            createFFStep(power, temperature, time);
+            this.setState({
+              temperature: 0,
+              power: 0,
+              time: 0,
+            });
+            this.reset();
           }}>
           <FontAwesomeIcon icon={faPlus} />&nbsp; Add
         </Add>

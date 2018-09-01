@@ -4,7 +4,6 @@ export type SWITCH_PIECE = typeof SWITCH_PIECE;
 export const LOG_IN = 'LOG_IN';
 export type LOG_IN = typeof LOG_IN;
 
-export const POWER_ON_CHANGE = 'POWER_ON_CHANGE';
 export const CREATE_FF_STEP = 'CREATE_FF_STEP';
 
 export const CREATE_STEP = 'CREATE_STEP';

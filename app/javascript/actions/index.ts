@@ -29,16 +29,11 @@ export function login(nickname: string, imageUrl: string): Session {
   };
 }
 
-export function powerOnChange(power: number, stepId: number) {
+export function createFFStep(power: number, temperature: number, time: number) {
   return {
     power,
-    stepId,
-    type: constants.POWER_ON_CHANGE,
-  };
-}
-
-export function createStepToFF() {
-  return {
+    temperature,
+    time,
     type: constants.CREATE_FF_STEP,
   };
 }

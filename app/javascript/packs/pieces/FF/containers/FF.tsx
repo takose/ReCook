@@ -19,17 +19,14 @@ export function mapStateToProps(state: StoreState) {
 
 export function mapDispatchToProps(dispatch) {
   return {
-    createFFStep: () => {
-      dispatch(actions.createStepToFF());
+    createFFStep: (power: number, temperature: number, time: number) => {
+      dispatch(actions.createFFStep(power, temperature, time));
     },
     createStep: (stepId: number) => {
       dispatch(actions.createStep(FF_ID, stepId));
     },
     createRecipe: () => {
       dispatch(actions.createRecipe());
-    },
-    powerChanged: (power: number, stepId: number) => {
-      dispatch(actions.powerOnChange(power, stepId));
     },
   };
 }
