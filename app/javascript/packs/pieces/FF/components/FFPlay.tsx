@@ -4,7 +4,7 @@ import { CONFIG } from '../../../../constants';
 import {
   video as Video,
   canvas as Canvas,
-} from '../styles/FFPlayer';
+} from '../styles/FFPlay';
 
 export interface Props {
 }
