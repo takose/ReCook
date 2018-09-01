@@ -84,9 +84,6 @@ export default class FF extends React.Component<Props, State> {
       current,
       createRecipe,
       createFFStep,
-      createStep,
-      ffSteps,
-      steps,
     } = this.props;
     const form = () => {
       const temp = (

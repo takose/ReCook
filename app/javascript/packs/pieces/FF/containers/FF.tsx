@@ -4,11 +4,6 @@ import { StoreState, StepState, FFState } from '../../../../types';
 import  FF from '../components/FF';
 import { FF_ID } from '../../../../constants';
 
-export interface Props {
-  ffSteps: FFState[];
-  steps: StepState[];
-}
-
 export function mapStateToProps(state: StoreState) {
   return {
     ffSteps: state.ff, // TODO
