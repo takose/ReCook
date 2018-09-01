@@ -1,5 +1,9 @@
 import * as React from 'react';
-import { main as Main } from '../styles/MainPanel';
+import {
+  main as Main,
+  topPanel as TopPanel,
+  bottomPanel as BottomPanel,
+} from '../styles/MainPanel';
 import { StepState, CurrentState } from '../../../types';
 import FF from '../../pieces/FF/containers/FF';
 import { FF_ID } from '../../../constants';
@@ -23,7 +27,11 @@ class MainPanel extends React.Component<Props, object> {
     const currentPiece = selectPiece();
     return (
       <Main>
-        {currentPiece}
+        <TopPanel>
+          {currentPiece}
+        </TopPanel>
+        <BottomPanel>
+        </BottomPanel>
       </Main>
     );
   }
