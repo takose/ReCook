@@ -19,6 +19,7 @@ import { reCook } from '../reducers';
 import SideBar from './sideBar/containers/SideBar';
 import Editor from './editor/containers/Editor';
 import Explore from './explore/containers/Explore';
+import Player from './player/containers/Player';
 
 const history = createBrowserHistory();
 
@@ -48,6 +49,7 @@ ReactDOM.render(
         <Route path="/recipes" component={connectedSideBar} />
         <Route path="/recipes/editor" component={Editor} />
         <Route path="/recipes/explore" component={Explore} />
+        <Route path="/recipes/player" component={Player} />
       </Root>
     </ConnectedRouter>
   </Provider>,
