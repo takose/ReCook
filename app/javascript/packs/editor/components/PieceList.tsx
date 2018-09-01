@@ -17,6 +17,7 @@ class PieceList extends React.Component<Props, object> {
     const { switchPiece, pieces, currentPiece } = this.props;
     const piecesDom = pieces.map(piece => (
       <Piece
+        key={piece.id}
         className="piece"
         onClick={() => switchPiece(piece.id)}
         primary={piece.id === currentPiece.id}>
