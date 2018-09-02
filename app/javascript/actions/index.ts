@@ -29,11 +29,12 @@ export function login(nickname: string, imageUrl: string): Session {
   };
 }
 
-export function createFFStep(power: number, temperature: number, time: number) {
+export function createFFStep(power: number, temperature: number, time: number, mode: number) {
   return {
     power,
     temperature,
     time,
+    mode,
     type: constants.CREATE_FF_STEP,
   };
 }

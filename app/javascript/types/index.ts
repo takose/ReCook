@@ -23,6 +23,7 @@ export interface CurrentState {
 
 export interface FFState {
   id: number;
+  mode: number;
   time?: number;
   power?: number;
   temperature?: number;

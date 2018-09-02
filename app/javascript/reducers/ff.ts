@@ -12,6 +12,7 @@ export const ff =
           power: action.power,
           time: action.time,
           temperature: action.temperature,
+          mode: action.mode,
           id: lastId ? lastId.id + 1 : 1,
         }); // FIXME
         return newSteps;
