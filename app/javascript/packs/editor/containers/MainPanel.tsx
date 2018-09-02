@@ -6,6 +6,7 @@ import  MainPanel from '../components/MainPanel';
 export function mapStateToProps(state: StoreState) {
   return {
     steps: state.steps,
+    ffSteps: state.ff,
     current: state.current,
   };
 }
