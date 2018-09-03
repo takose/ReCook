@@ -26,7 +26,6 @@ export interface Props {
   ffSteps: FFState[];
   createRecipe(): void;
   createFFStep(power: number, temperature: number, time: number, mode: number): void;
-  createStep(stepId: number): void;
 }
 
 export default class FF extends React.Component<Props, State> {
@@ -173,9 +172,6 @@ export default class FF extends React.Component<Props, State> {
         {form()}
         <Add
           onClick={() => {
-            if (current.recipeId === null) {
-              createRecipe();
-            }
             const { power, temperature, time, mode } = this.state;
             createFFStep(power, temperature, time, mode);
             this.setState({

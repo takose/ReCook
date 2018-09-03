@@ -17,9 +17,6 @@ export function mapDispatchToProps(dispatch) {
     createFFStep: (power: number, temperature: number, time: number, mode: number) => {
       dispatch(actions.createFFStep(power, temperature, time, mode));
     },
-    createStep: (stepId: number) => {
-      dispatch(actions.createStep(FF_ID, stepId));
-    },
     createRecipe: () => {
       dispatch(actions.createRecipe());
     },

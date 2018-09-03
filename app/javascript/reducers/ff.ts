@@ -12,8 +12,8 @@ export const ff =
           time: action.time,
           temperature: action.temperature,
           mode: action.mode,
-          id: lastId ? lastId.id + 1 : 1,
-        }); // FIXME
+          id: action.id,
+        });
         return newSteps;
     }
     return state;
