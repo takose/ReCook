@@ -5,6 +5,7 @@ export const LOG_IN = 'LOG_IN';
 export type LOG_IN = typeof LOG_IN;
 
 export const CREATE_FF_STEP = 'CREATE_FF_STEP';
+export const CREATE_FF_STEP_SUCCEEDED = 'CREATE_FF_STEP_SUCCEEDED';
 
 export const CREATE_STEP = 'CREATE_STEP';
 export const CREATE_RECIPE = 'CREATE_RECIPE';

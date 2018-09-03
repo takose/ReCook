@@ -29,6 +29,18 @@ export function login(nickname: string, imageUrl: string): Session {
   };
 }
 
+// tslint:disable-next-line:max-line-length
+export function createFFStepSucceeded(id: number, power: number, temperature: number, time: number, mode: number) {
+  return {
+    id,
+    power,
+    temperature,
+    time,
+    mode,
+    type: constants.CREATE_FF_STEP_SUCCEEDED,
+  };
+}
+
 export function createFFStep(power: number, temperature: number, time: number, mode: number) {
   return {
     power,
