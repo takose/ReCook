@@ -20,4 +20,8 @@ Rails.application.routes.draw do
   get 'recipes/*path', to: 'recipes#index'
 
   get 'auth/twitter/callback', to: 'sessions#create'
+
+  namespace :api do
+    resources :steps, only: [:create]
+  end
 end
