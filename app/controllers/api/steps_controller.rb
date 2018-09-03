@@ -9,10 +9,9 @@ class Api::StepsController < ApplicationController
       # recipe = Recipe.create(user_id: current_user.id)
       recipe = Recipe.create(user_id: User.first.id) # TODO
     end
-    p res = JSON.parse(request.body.read)
-    step = Step.new({piece_id: res['recipeId'], content: res['content']})
+    res = JSON.parse(request.body.read)
+    step = Step.new({piece_id: res['pieceId'], content: res['content']})
     step.update_attribute(:recipe_id, recipe.id)
-    p step.content
     render json: step.content
   end
 end
