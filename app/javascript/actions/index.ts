@@ -59,8 +59,9 @@ export function createStep(pieceId: number, stepId: number) {
   };
 }
 
-export function createRecipe() {
+export function createRecipe(recipeId: number) {
   return {
+    recipeId,
     type: constants.CREATE_RECIPE,
   };
 }

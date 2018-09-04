@@ -23,11 +23,16 @@ export function createStepsRequest(payload) {
   };
   return fetch('/api/steps', options)
     .then(res => res.json())
-    .then(result => ({
-      mode: result.mode,
-      power: result.power,
-      time: result.time,
-      temperature: result.temperature,
-      id: result.id,
-    }));
+    .then((res) => {
+      const content = JSON.parse(res.content);
+      return {
+        mode: content.mode,
+        power: content.power,
+        time: content.time,
+        temperature: content.temperature,
+        id: res.id,
+        recipeId: res.recipe_id,
+        pieceId: res.piece_id,
+      };
+    });
 }

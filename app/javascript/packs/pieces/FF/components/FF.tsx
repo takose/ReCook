@@ -24,7 +24,6 @@ export interface Props {
   current: CurrentState;
   steps: StepState[];
   ffSteps: FFState[];
-  createRecipe(): void;
   createFFStep(power: number, temperature: number, time: number, mode: number): void;
 }
 
@@ -81,7 +80,6 @@ export default class FF extends React.Component<Props, State> {
   render() {
     const {
       current,
-      createRecipe,
       createFFStep,
     } = this.props;
     const form = () => {
