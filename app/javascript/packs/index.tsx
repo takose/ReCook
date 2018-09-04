@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import createSagaMiddleware from 'redux-saga'; // tslint:disable-line:import-name
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import { Provider, connect } from 'react-redux';
 import createBrowserHistory from 'history/createBrowserHistory';
 import { Route } from 'react-router';
@@ -26,12 +26,16 @@ const history = createBrowserHistory();
 const sagaMiddleware = createSagaMiddleware();
 const middleware = routerMiddleware(history);
 
+const windowIfDefined = typeof window === 'undefined' ? null : window as any;
+const composeEnhancers = windowIfDefined.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   combineReducers({
     ...reCook,
     router: routerReducer,
   }),
-  applyMiddleware(middleware, sagaMiddleware),
+  composeEnhancers(
+    applyMiddleware(middleware, sagaMiddleware),
+  ),
 );
 
 sagaMiddleware.run(reCookSaga);
