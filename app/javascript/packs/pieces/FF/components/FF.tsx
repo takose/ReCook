@@ -1,7 +1,7 @@
 import 'babel-polyfill';
 import * as React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { CurrentState, StepState, FFState } from '../../../../types';
 import {
   main as Main,
@@ -14,7 +14,7 @@ import {
 } from '../styles/FF';
 
 interface State {
-  power?: number;
+  power: number;
   temperature: number;
   time: number;
   mode: number;
@@ -56,27 +56,11 @@ export default class FF extends React.Component<Props, State> {
         break;
     }
   }
-  timeOnChange = (e) => {
-    this.setState({
-      time: e.target.value,
-    });
-  }
+  timeOnChange = e => this.setState({ time: e.target.value });
+  powerOnChange = e => this.setState({ power: e.target.value });
+  temperatureOnChange = e => this.setState({ temperature: e.target.value });
+  modeOnChanged = (mode: number) => this.setState({ mode });
 
-  powerOnChange = (e) => {
-    this.setState({
-      power: e.target.value,
-    });
-  }
-
-  temperatureOnChange = (e) => {
-    this.setState({
-      temperature: e.target.value,
-    });
-  }
-
-  modeOnChanged = (mode: number) => {
-    this.setState({ mode });
-  }
   render() {
     const {
       current,
@@ -86,9 +70,7 @@ export default class FF extends React.Component<Props, State> {
       const temp = (
         <InputWrapper>
           <Input
-            type="number"
-            min={0}
-            max={200}
+            type="number" min={0} max={200}
             placeholder="Temperature"
             value={this.state.temperature}
             onChange={this.temperatureOnChange}
@@ -99,9 +81,7 @@ export default class FF extends React.Component<Props, State> {
       const power = (
         <InputWrapper>
           <Input
-            type="number"
-            min={0}
-            max={6}
+            type="number" min={0} max={6}
             placeholder="Power"
             value={this.state.power}
             onChange={this.powerOnChange}
@@ -112,8 +92,7 @@ export default class FF extends React.Component<Props, State> {
       const time = (
         <InputWrapper>
           <Input
-            type="number"
-            min={0}
+            type="number" min={0}
             placeholder="Time"
             value={this.state.time}
             onChange={this.timeOnChange}
@@ -123,26 +102,11 @@ export default class FF extends React.Component<Props, State> {
       );
       switch (this.state.mode) {
         case 0:
-          return (
-            <Form>
-              {temp}
-              {time}
-            </Form>
-          );
+          return <Form>{temp}{time}</Form>;
         case 1:
-          return (
-            <Form>
-              {temp}
-              {power}
-            </Form>
-          );
+          return <Form>{temp}{power}</Form>;
         case 2:
-          return (
-            <Form>
-              {power}
-              {time}
-            </Form>
-          );
+          return <Form>{power}{time}</Form>;
         default:
           break;
       }
