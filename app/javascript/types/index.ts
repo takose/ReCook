@@ -4,6 +4,7 @@ export interface StoreState {
   user: UserState;
   ff: FFState[];
   steps: StepState[];
+  text: TextState[];
 }
 
 export interface PieceState {
@@ -27,6 +28,11 @@ export interface FFState {
   time?: number;
   power?: number;
   temperature?: number;
+}
+
+export interface TextState {
+  id: number;
+  body: string;
 }
 
 export interface StepState {

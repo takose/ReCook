@@ -51,6 +51,13 @@ export function createFFStep(power: number, temperature: number, time: number, m
   };
 }
 
+export function createTextStep(body: string) {
+  return {
+    body,
+    type: constants.CREATE_TEXT_STEP,
+  };
+}
+
 export function createStep(pieceId: number, stepId: number) {
   return {
     pieceId,
