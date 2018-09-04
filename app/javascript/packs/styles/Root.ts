@@ -28,4 +28,13 @@ injectGlobal`
   input[type='number'] {
     width: 120px;
   }
+  textarea {
+    appearance: none;
+    padding: 5px;
+    resize: none;
+    border: solid 1px #9E9E9E;
+    border-radius: 3px;
+    outline: none;
+    background: #fafafa;
+  }
 `;
