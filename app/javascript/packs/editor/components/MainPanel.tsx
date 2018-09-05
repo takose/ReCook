@@ -34,10 +34,10 @@ class MainPanel extends React.Component<Props, object> {
       switch (step.pieceId) {
         case FF_ID:
           const ffStep = this.props.ffSteps.find(s => s.id === step.stepId);
-          return <FFStep step={ffStep} />;
+          return <FFStep step={ffStep} key={ffStep.id} />;
         case TEXT_ID:
           const textStep = this.props.textSteps.find(s => s.id === step.stepId);
-          return <TextStep step={textStep} />;
+          return <TextStep step={textStep} key={textStep.id} />;
         default:
           break;
       }
