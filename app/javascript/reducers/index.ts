@@ -4,6 +4,7 @@ import { pieces } from './pieces';
 import { ff } from './ff';
 import { steps } from './steps';
 import { text } from './text';
+import { taste } from './taste';
 
 export const reCook = {
   current,
@@ -12,4 +13,5 @@ export const reCook = {
   ff,
   steps,
   text,
+  taste,
 };
