@@ -4,18 +4,21 @@ import {
   topPanel as TopPanel,
   bottomPanel as BottomPanel,
 } from '../styles/MainPanel';
-import { StepState, CurrentState, FFState, TextState } from '../../../types';
+import { StepState, CurrentState, FFState, TextState, TasteState } from '../../../types';
 import FF from '../../pieces/FF/containers/FF';
 import EditorText from '../../pieces/Text/containers/EditorText';
-import { FF_ID, TEXT_ID } from '../../../constants';
+import EditorTaste from '../../pieces/Taste/containers/EditorTaste';
+import { FF_ID, TEXT_ID, TASTE_ID } from '../../../constants';
 import FFStep from '../../pieces/FF/components/FFStep';
 import TextStep from '../../pieces/Text/components/TextStep';
+import TasteStep from '../../pieces/Taste/components/TasteStep';
 
 export interface Props {
   steps: StepState[];
   current: CurrentState;
   ffSteps: FFState[];
   textSteps: TextState[];
+  tasteSteps: TasteState[];
 }
 
 class MainPanel extends React.Component<Props, object> {
@@ -26,6 +29,8 @@ class MainPanel extends React.Component<Props, object> {
           return <FF />;
         case TEXT_ID:
           return <EditorText />;
+        case TASTE_ID:
+          return <EditorTaste />;
         default:
           break;
       }

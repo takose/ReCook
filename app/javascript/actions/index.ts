@@ -58,6 +58,16 @@ export function createTextStep(body: string) {
   };
 }
 
+export function createTasteStep(soysauce: number, mirin: number, sake: number, vinegar: number) {
+  return {
+    soysauce,
+    mirin,
+    sake,
+    vinegar,
+    type: constants.CREATE_FF_STEP,
+  };
+}
+
 export function createStep(pieceId: number, stepId: number) {
   return {
     pieceId,

@@ -2,11 +2,14 @@ import { call, put, takeEvery, select } from 'redux-saga/effects';
 import {
   FF_ID,
   TEXT_ID,
+  TASTE_ID,
   CREATE_STEP,
   CREATE_FF_STEP,
   CREATE_FF_STEP_SUCCEEDED,
   CREATE_TEXT_STEP,
   CREATE_TEXT_STEP_SUCCEEDED,
+  CREATE_TASTE_STEP,
+  CREATE_TASTE_STEP_SUCCEEDED,
   CREATE_RECIPE,
 } from '../constants';
 import { createStepsRequest } from './api';
@@ -16,6 +19,8 @@ function getAction(pieceId) {
       return CREATE_FF_STEP_SUCCEEDED;
     case TEXT_ID:
       return CREATE_TEXT_STEP_SUCCEEDED;
+    case TASTE_ID:
+      return CREATE_TASTE_STEP_SUCCEEDED;
     default:
       break;
   }
@@ -42,6 +47,7 @@ function* createStep(action) {
 function* reCookSaga() {
   yield takeEvery(CREATE_FF_STEP, createStep);
   yield takeEvery(CREATE_TEXT_STEP, createStep);
+  yield takeEvery(CREATE_TASTE_STEP, createStep);
 }
 
 export default reCookSaga;

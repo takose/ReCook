@@ -3,6 +3,7 @@ export interface StoreState {
   current: CurrentState;
   user: UserState;
   ff: FFState[];
+  taste: TasteState[];
   steps: StepState[];
   text: TextState[];
 }
@@ -33,6 +34,14 @@ export interface FFState {
 export interface TextState {
   id: number;
   body: string;
+}
+
+export interface TasteState {
+  id: number;
+  soysauce: number;
+  sake: number;
+  mirin: number;
+  vinegar: number;
 }
 
 export interface StepState {

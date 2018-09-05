@@ -8,6 +8,7 @@ export function mapStateToProps(state: StoreState) {
     steps: state.steps,
     ffSteps: state.ff,
     textSteps: state.text,
+    tasteSteps: state.taste,
     current: state.current,
   };
 }
