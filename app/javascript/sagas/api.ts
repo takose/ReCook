@@ -2,6 +2,7 @@ import { FF_ID } from '../constants';
 
 export function createStepsRequest(payload) {
   const { action, recipeId, pieceId } = payload;
+  delete action['type'];
   const content = JSON.stringify({
     ...action,
   });

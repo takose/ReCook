@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import * as actions from '../../../../actions';
-import { StoreState, StepState, FFState } from '../../../../types';
+import { StoreState } from '../../../../types';
 import  EditorTaste from '../components/EditorTaste';
 
 export function mapStateToProps(state: StoreState) {

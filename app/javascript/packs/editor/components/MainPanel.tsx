@@ -38,24 +38,28 @@ class MainPanel extends React.Component<Props, object> {
     };
     const stepListDom = this.props.steps.map((step) => {
       let dom;
+      let id;
       switch (step.pieceId) {
         case FF_ID:
           const ffStep = this.props.ffSteps.find(s => s.id === step.stepId);
-          dom = <FFStep step={ffStep} key={ffStep.id} />;
+          dom = <FFStep step={ffStep} />;
+          id = ffStep.id;
           break;
         case TEXT_ID:
           const textStep = this.props.textSteps.find(s => s.id === step.stepId);
-          dom = <TextStep step={textStep} key={textStep.id} />;
+          dom = <TextStep step={textStep} />;
+          id = textStep.id;
           break;
         case TASTE_ID:
           const tasteStep = this.props.tasteSteps.find(s => s.id === step.stepId);
-          dom = <TasteStep step={tasteStep} key={tasteStep.id} />;
+          dom = <TasteStep step={tasteStep} />;
+          id = tasteStep.id;
           break;
         default:
           break;
       }
       return (
-        <StepWrapper>
+        <StepWrapper key={id}>
           {dom}
         </StepWrapper>
       );
