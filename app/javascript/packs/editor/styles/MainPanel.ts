@@ -9,4 +9,13 @@ export const topPanel = styledComponents.div`
 
 export const bottomPanel = styledComponents.div`
   height: 50%;
+  display: flex;
+  flex-wrap: wrap;
+`;
+
+export const stepWrapper = styledComponents.div`
+  width: 200px;
+  height: 200px;
+  border-radius: 3px;
+  border: solid 1px #ccc;
 `;
