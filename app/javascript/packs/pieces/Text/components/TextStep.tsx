@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {
   main as Main,
-} from '../styles/Text';
+} from '../../style';
 import { TextState } from '../../../../types';
 
 export interface Props {

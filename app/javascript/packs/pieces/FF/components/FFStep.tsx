@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {
   main as Main,
-} from '../styles/FF';
+} from '../../style';
 import { FFState } from '../../../../types';
 
 export interface Props {

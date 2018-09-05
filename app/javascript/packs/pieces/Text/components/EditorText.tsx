@@ -5,7 +5,7 @@ import {
   main as Main,
   textbox as Textbox,
   add as Add,
-} from '../styles/Text';
+} from '../../style';
 
 interface State {
   body: string;

@@ -21,10 +21,23 @@ export const form = styledComponents.div`
 `;
 
 export const input = styledComponents.input`
+  margin: 0 10px;
+`;
+
+export const label = styledComponents.label`
+  width: 50px;
+  text-align: right;
 `;
 
 export const inputWrapper = styledComponents.div`
   margin-bottom: 12px;
+  display: flex;
+`;
+
+export const textbox = styledComponents.textarea`
+  width: 200px;
+  height: 150px;
+  font-size: 18px;
 `;
 
 export const add = styledComponents.button`

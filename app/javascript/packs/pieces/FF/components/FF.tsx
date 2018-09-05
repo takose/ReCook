@@ -11,7 +11,7 @@ import {
   input as Input,
   inputWrapper as InputWrapper,
   add as Add,
-} from '../styles/FF';
+} from '../../style';
 
 interface State {
   power: number;
@@ -56,9 +56,9 @@ export default class FF extends React.Component<Props, State> {
         break;
     }
   }
-  timeOnChange = e => this.setState({ time: e.target.value });
-  powerOnChange = e => this.setState({ power: e.target.value });
-  temperatureOnChange = e => this.setState({ temperature: e.target.value });
+  timeOnChange = e => this.setState({ time: parseInt(e.target.value, 10) });
+  powerOnChange = e => this.setState({ power: parseInt(e.target.value, 10) });
+  temperatureOnChange = e => this.setState({ temperature: parseInt(e.target.value, 10) });
   modeOnChanged = (mode: number) => this.setState({ mode });
 
   render() {
