@@ -43,7 +43,11 @@ sagaMiddleware.run(reCookSaga);
 const node = document.getElementById('main');
 const user: UserState = JSON.parse(node.getAttribute('user'));
 const connectedSideBar = connect(state => ({
-  user,
+  user: {
+    imageUrl: user['image_url'],
+    token: user['consumer_token'],
+    nickname: user['nickname'],
+  },
 }))(SideBar);
 
 ReactDOM.render(

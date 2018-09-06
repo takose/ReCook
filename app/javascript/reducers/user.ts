@@ -4,14 +4,16 @@ import { LOG_IN } from '../constants';
 
 const initialState = {
   nickname: '',
-  image_url: '',
+  imageUrl: '',
+  token: '',
 };
 export const user = (state: UserState = initialState, action: SessionAction): UserState => {
   switch (action.type) {
     case LOG_IN:
       return {
         nickname: state.nickname,
-        image_url: state.image_url,
+        imageUrl: state.imageUrl,
+        token: state.token,
       };
   }
   return state;

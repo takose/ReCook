@@ -22,7 +22,7 @@ class SideBar extends React.Component<Props, object> {
     const account = this.props.user === null ? (
       <Signup href="/auth/twitter">sign up</Signup>
     ) : (
-      <Avatar src={this.props.user.image_url} />
+      <Avatar src={this.props.user.imageUrl} />
     );
     return (
       <ItemList>
