@@ -7,8 +7,8 @@ class Api::RecipesController < ApplicationController
     if body['recipeId']
       recipe = Recipe.find(body['recipeId'])
     else
-      # recipe = Recipe.create(user_id: current_user.id)
-      recipe = Recipe.create(user_id: User.first.id) # TODO
+      user = User.find_by(consumer_token: body['token'])
+      recipe = Recipe.create(user_id: user.id)
     end
     recipe.update_attribute(:title, body['title'])
     render json: recipe 
