@@ -11,8 +11,11 @@ import {
   CREATE_TASTE_STEP,
   CREATE_TASTE_STEP_SUCCEEDED,
   CREATE_RECIPE,
+  UPDATE_TITLE,
+  UPDATE_TITLE_SUCCEEDED,
+  ADD_RECIPE,
 } from '../constants';
-import { createStepsRequest } from './api';
+import { createStepsRequest, updateTitleRequest } from './api';
 function getAction(pieceId) {
   switch (pieceId) {
     case FF_ID:
@@ -44,10 +47,34 @@ function* createStep(action) {
   });
   if (!recipeId) yield put({ type: CREATE_RECIPE, recipeId: step.recipe_id });
 }
+
+function* addRecipe(action) {
+  delete action['type'];
+  const recipe = yield call(updateTitleRequest, action);
+  yield put({
+    type: ADD_RECIPE,
+    id: recipe.id,
+    title: action.title,
+  });
+}
+
+function* updateTitle(action) {
+  const getRecipeId = state => state.current.recipeId;
+  const recipeId = yield select(getRecipeId);
+  yield put({
+    type: UPDATE_TITLE_SUCCEEDED,
+    title: action.title,
+    recipeId: action.id,
+  });
+  if (!recipeId) yield put({ type: CREATE_RECIPE, recipeId: action.recipeId });
+}
+
 function* reCookSaga() {
   yield takeEvery(CREATE_FF_STEP, createStep);
   yield takeEvery(CREATE_TEXT_STEP, createStep);
   yield takeEvery(CREATE_TASTE_STEP, createStep);
+  yield takeEvery(UPDATE_TITLE, addRecipe);
+  yield takeEvery(ADD_RECIPE, updateTitle);
 }
 
 export default reCookSaga;

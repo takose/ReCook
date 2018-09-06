@@ -21,6 +21,7 @@ export const form = styledComponents.div`
 `;
 
 export const input = styledComponents.input`
+  width: 120px;
 `;
 
 export const label = styledComponents.label`

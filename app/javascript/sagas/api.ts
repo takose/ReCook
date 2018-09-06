@@ -29,3 +29,25 @@ export function createStepsRequest(payload) {
       };
     });
 }
+
+export function updateTitleRequest(action) {
+  const options = {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      ContentType: 'application/json',
+      credentials: 'include',
+    },
+    body: JSON.stringify({
+      recipeId: action.recipeId,
+      title: action.title,
+    }),
+  };
+  return fetch('/api/recipes', options)
+    .then(res => res.json())
+    .then((res) => {
+      return {
+        ...res,
+      };
+    });
+}

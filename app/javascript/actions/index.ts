@@ -76,6 +76,14 @@ export function createStep(pieceId: number, stepId: number) {
   };
 }
 
+export function updateTitle(recipeId: number, title: string) {
+  return {
+    recipeId,
+    title,
+    type: constants.UPDATE_TITLE,
+  };
+}
+
 export function createRecipe(recipeId: number) {
   return {
     recipeId,

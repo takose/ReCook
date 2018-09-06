@@ -8,6 +8,11 @@ export const topPanel = styledComponents.div`
   height: 50%;
 `;
 
+export const input = styledComponents.input`
+  width: 300px;
+  margin-bottom: 100px;
+`;
+
 export const bottomPanel = styledComponents.div`
   height: 50%;
   overflow: scroll;

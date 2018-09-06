@@ -5,6 +5,7 @@ import {
   bottomPanel as BottomPanel,
   stepWrapper as StepWrapper,
   stepList as StepList,
+  input as Input,
 } from '../styles/MainPanel';
 import { StepState, CurrentState, FFState, TextState, TasteState } from '../../../types';
 import FF from '../../pieces/FF/containers/FF';
@@ -21,9 +22,22 @@ export interface Props {
   ffSteps: FFState[];
   textSteps: TextState[];
   tasteSteps: TasteState[];
+  updateTitle(recipeId: number, title: string): void;
 }
 
-class MainPanel extends React.Component<Props, object> {
+interface State {
+  title: string;
+}
+
+class MainPanel extends React.Component<Props, State> {
+  state = {
+    title: '',
+  };
+
+  titleOnChange = e => this.setState({ title: e.target.value });
+  titleOnFocusout = (e) => {
+    this.props.updateTitle(this.props.current.recipeId, this.state.title);
+  }
   render() {
     const selectPiece = () => {
       switch (this.props.current.pieceId) {
@@ -69,6 +83,12 @@ class MainPanel extends React.Component<Props, object> {
     return (
       <Main>
         <TopPanel>
+          <Input
+            placeholder="タイトル"
+            type="text"
+            onChange={this.titleOnChange}
+            onBlur={this.titleOnFocusout}
+            value={this.state.title} />
           {currentPiece}
         </TopPanel>
         <BottomPanel>

@@ -6,6 +6,12 @@ export interface StoreState {
   taste: TasteState[];
   steps: StepState[];
   text: TextState[];
+  recipes: RecipeState[];
+}
+
+export interface RecipeState {
+  id: number;
+  title?: string;
 }
 
 export interface PieceState {

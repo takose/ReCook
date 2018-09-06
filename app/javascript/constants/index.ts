@@ -13,6 +13,9 @@ export const CREATE_TASTE_STEP_SUCCEEDED = 'CREATE_TEXT_STEP_SUCCEEDED';
 
 export const CREATE_STEP = 'CREATE_STEP';
 export const CREATE_RECIPE = 'CREATE_RECIPE';
+export const UPDATE_TITLE = 'UPDATE_TITLE';
+export const ADD_RECIPE = 'ADD_RECIPE';
+export const UPDATE_TITLE_SUCCEEDED = 'UPDATE_TITLE_SUCCEEDED';
 
 export const FF_ID = 1;
 export const TEXT_ID = 2;

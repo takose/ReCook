@@ -26,8 +26,8 @@ injectGlobal`
     padding: 0;
     appearance: none;
   }
-  input[type='number'] {
-    width: 120px;
+  input[type='number'],
+  input[type='text'] {
     margin: 0 10px;
     height: 34px;
     font-size: 18px;
@@ -36,7 +36,8 @@ injectGlobal`
     padding: 8px;
     outline: 0;
   }
-  input[type='number']:focus {
+  input[type='number']:focus,
+  input[type='text']:focus {
     border-bottom: solid 1px #141B23;
   }
   p {
