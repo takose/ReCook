@@ -1,7 +1,7 @@
 import { FF_ID } from '../constants';
 
 export function createStepsRequest(payload) {
-  const { action, recipeId, pieceId } = payload;
+  const { action, recipeId, pieceId, token } = payload;
   delete action['type'];
   const content = JSON.stringify({
     ...action,
@@ -17,6 +17,7 @@ export function createStepsRequest(payload) {
       recipeId,
       content,
       pieceId,
+      token,
     }),
   };
   return fetch('/api/steps', options)
@@ -30,7 +31,8 @@ export function createStepsRequest(payload) {
     });
 }
 
-export function updateTitleRequest(action) {
+export function updateTitleRequest(payload) {
+  const { action, token } = payload;
   const options = {
     method: 'POST',
     headers: {
@@ -39,6 +41,7 @@ export function updateTitleRequest(action) {
       credentials: 'include',
     },
     body: JSON.stringify({
+      token,
       recipeId: action.recipeId,
       title: action.title,
     }),

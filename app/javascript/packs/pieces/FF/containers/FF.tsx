@@ -1,8 +1,7 @@
 import { connect } from 'react-redux';
 import * as actions from '../../../../actions';
-import { StoreState, StepState, FFState } from '../../../../types';
+import { StoreState } from '../../../../types';
 import  FF from '../components/FF';
-import { FF_ID } from '../../../../constants';
 
 export function mapStateToProps(state: StoreState) {
   return {

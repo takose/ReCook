@@ -34,7 +34,9 @@ function* createStep(action) {
   const recipeId = yield select(getRecipeId);
   const getPieceId = state => state.current.pieceId;
   const pieceId = yield select(getPieceId);
-  const step = yield call(createStepsRequest, { action, recipeId, pieceId });
+  const getToken = state => state.user.token;
+  const token = yield select(getToken);
+  const step = yield call(createStepsRequest, { action, recipeId, pieceId, token });
   const type = getAction(step.piece_id);
   yield put({
     ...step,
@@ -50,7 +52,9 @@ function* createStep(action) {
 
 function* addRecipe(action) {
   delete action['type'];
-  const recipe = yield call(updateTitleRequest, action);
+  const getToken = state => state.user.token;
+  const token = yield select(getToken);
+  const recipe = yield call(updateTitleRequest, { action, token });
   yield put({
     type: ADD_RECIPE,
     id: recipe.id,
