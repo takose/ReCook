@@ -6,7 +6,7 @@ import {
   input as Input,
   add as Add,
   form as Form,
-  inputWrapper as InputWrapper,
+  itemWrapper as ItemWrapper,
   label as Label,
 } from '../../style';
 
@@ -55,7 +55,7 @@ export default class EditorTaste extends React.Component<Props, State> {
     return (
       <Main>
         <Form>
-          <InputWrapper>
+          <ItemWrapper>
             <Label>醤油</Label>
             <Input
               type="number" min={0}
@@ -63,8 +63,8 @@ export default class EditorTaste extends React.Component<Props, State> {
               value={this.state.soysauce}
               innerRef={e => this.soysauceDom = e} />
             CC
-          </InputWrapper>
-          <InputWrapper>
+          </ItemWrapper>
+          <ItemWrapper>
             <Label>みりん</Label>
             <Input
               type="number" min={0}
@@ -72,8 +72,8 @@ export default class EditorTaste extends React.Component<Props, State> {
               value={this.state.mirin}
               innerRef={e => this.mirinDom = e} />
             CC
-          </InputWrapper>
-          <InputWrapper>
+          </ItemWrapper>
+          <ItemWrapper>
             <Label>酒</Label>
             <Input
               type="number" min={0}
@@ -81,8 +81,8 @@ export default class EditorTaste extends React.Component<Props, State> {
               value={this.state.sake}
               innerRef={e => this.sakeDom = e} />
             CC
-          </InputWrapper>
-          <InputWrapper>
+          </ItemWrapper>
+          <ItemWrapper>
             <Label>酢</Label>
             <Input
               type="number" min={0}
@@ -90,7 +90,7 @@ export default class EditorTaste extends React.Component<Props, State> {
               value={this.state.vinegar}
               innerRef={e => this.vinegarDom = e} />
             CC
-          </InputWrapper>
+          </ItemWrapper>
         </Form>
         <Add
           onClick={() => {

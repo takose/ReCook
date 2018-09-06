@@ -4,6 +4,7 @@ import {
   topPanel as TopPanel,
   bottomPanel as BottomPanel,
   stepWrapper as StepWrapper,
+  stepList as StepList,
 } from '../styles/MainPanel';
 import { StepState, CurrentState, FFState, TextState, TasteState } from '../../../types';
 import FF from '../../pieces/FF/containers/FF';
@@ -71,7 +72,10 @@ class MainPanel extends React.Component<Props, object> {
           {currentPiece}
         </TopPanel>
         <BottomPanel>
-          {stepListDom}
+          Steps
+          <StepList>
+            {stepListDom}
+          </StepList>
         </BottomPanel>
       </Main>
     );

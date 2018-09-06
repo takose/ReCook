@@ -10,6 +10,12 @@ export const topPanel = styledComponents.div`
 
 export const bottomPanel = styledComponents.div`
   height: 50%;
+  overflow: scroll;
+  background: #E6DFC9;
+  padding: 8px;
+`;
+
+export const stepList = styledComponents.div`
   display: flex;
   flex-wrap: wrap;
 `;
@@ -21,4 +27,5 @@ export const stepWrapper = styledComponents.div`
   border: solid 1px #ccc;
   padding: 10px;
   margin: 5px;
+  background: #FFF;
 `;

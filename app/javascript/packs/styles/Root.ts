@@ -7,6 +7,7 @@ export const root = styledComponents.div`
 `;
 
 injectGlobal`
+  @import url('https://fonts.googleapis.com/css?family=Muli:300,400,600');
   * {
     box-sizing: border-box;
     font-family: 'Muli', sans-serif;
@@ -27,6 +28,19 @@ injectGlobal`
   }
   input[type='number'] {
     width: 120px;
+    margin: 0 10px;
+    height: 34px;
+    font-size: 18px;
+    border: none;
+    background: #F5F5F5;
+    padding: 8px;
+    outline: 0;
+  }
+  input[type='number']:focus {
+    border-bottom: solid 1px #141B23;
+  }
+  p {
+    margin: 0;
   }
   textarea {
     appearance: none;

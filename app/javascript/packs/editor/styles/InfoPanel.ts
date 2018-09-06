@@ -8,6 +8,7 @@ export const main = styledComponents.div`
   height: 100%;
   background: #EBF1F6;
   margin-right: solod 1px #BDBDBD;
+  box-shadow: 0 10px 0 0 rgba(0, 0, 0, 0.4);
 `;
 
 export const title = styledComponents.div`

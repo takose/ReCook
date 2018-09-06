@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
-  main as Main,
+  itemWrapper as ItemWrapper,
+  label as Label,
 } from '../../style';
 import { FFState } from '../../../../types';
 
@@ -15,22 +16,40 @@ class FFStep extends React.Component<Props, object> {
       case 0:
         return (
           <div>
-            <p>{step.temperature}℃</p>
-            <p>{step.time}sec</p>
+            <ItemWrapper>
+              <Label>温度&nbsp;</Label>
+              <p>{step.temperature}℃</p>
+            </ItemWrapper>
+            <ItemWrapper>
+              <Label>時間&nbsp;</Label>
+              <p>{step.time}sec</p>
+            </ItemWrapper>
           </div>
         );
       case 1:
         return (
           <div>
-            <p>{step.temperature}℃</p>
-            <p>{step.power}</p>
+            <ItemWrapper>
+              <Label>温度&nbsp;</Label>
+              <p>{step.temperature}℃</p>
+            </ItemWrapper>
+            <ItemWrapper>
+              <Label>火力&nbsp;</Label>
+              <p>{step.power}</p>
+            </ItemWrapper>
           </div>
         );
       case 2:
         return (
           <div>
-            <p>{step.power}</p>
-            <p>{step.time}sec</p>
+            <ItemWrapper>
+              <Label>火力&nbsp;</Label>
+              <p>{step.power}</p>
+            </ItemWrapper>
+            <ItemWrapper>
+              <Label>時間&nbsp;</Label>
+              <p>{step.time}sec</p>
+            </ItemWrapper>
           </div>
         );
       default:

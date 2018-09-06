@@ -9,8 +9,9 @@ import {
   modeSelectorList as ModeSelectorList,
   form as Form,
   input as Input,
-  inputWrapper as InputWrapper,
+  itemWrapper as ItemWrapper,
   add as Add,
+  label as Label,
 } from '../../style';
 
 interface State {
@@ -68,7 +69,8 @@ export default class FF extends React.Component<Props, State> {
     } = this.props;
     const form = () => {
       const temp = (
-        <InputWrapper>
+        <ItemWrapper>
+          <Label>温度</Label>
           <Input
             type="number" min={0} max={200}
             placeholder="Temperature"
@@ -76,10 +78,11 @@ export default class FF extends React.Component<Props, State> {
             onChange={this.temperatureOnChange}
             innerRef={e => this.temperatureDom = e}
           /> ℃
-        </InputWrapper>
+        </ItemWrapper>
       );
       const power = (
-        <InputWrapper>
+        <ItemWrapper>
+          <Label>火力</Label>
           <Input
             type="number" min={0} max={6}
             placeholder="Power"
@@ -87,10 +90,11 @@ export default class FF extends React.Component<Props, State> {
             onChange={this.powerOnChange}
             innerRef={e => this.powerDom = e}
           />
-        </InputWrapper>
+        </ItemWrapper>
       );
       const time = (
-        <InputWrapper>
+        <ItemWrapper>
+          <Label>時間</Label>
           <Input
             type="number" min={0}
             placeholder="Time"
@@ -98,7 +102,7 @@ export default class FF extends React.Component<Props, State> {
             onChange={this.timeOnChange}
             innerRef={e => this.timeDom = e}
           /> sec
-        </InputWrapper>
+        </ItemWrapper>
       );
       switch (this.state.mode) {
         case 0:
@@ -118,17 +122,17 @@ export default class FF extends React.Component<Props, State> {
           <ModeSelector
             primary={this.state.mode === 0}
             onClick={() => this.modeOnChanged(0)}>
-            Temperature & Time
+            温度 & 時間
           </ModeSelector>
           <ModeSelector
             primary={this.state.mode === 1}
             onClick={() => this.modeOnChanged(1)}>
-            Temperature & Power
+            温度 & 火力
           </ModeSelector>
           <ModeSelector
             primary={this.state.mode === 2}
             onClick={() => this.modeOnChanged(2)}>
-            Power & Time
+            火力 & 時間
           </ModeSelector>
         </ModeSelectorList>
         {form()}

@@ -8,36 +8,38 @@ export const main = styledComponents.div`
 export const modeSelectorList = styledComponents.div`
   display: flex;
   flex-direction: column;
+  margin: 0 40px 0 16px;
 `;
 
 export const modeSelector = styledComponents.button`
   padding: 4px;
-  font-size: 12px;
+  font-size: 14px;
   background: ${(props: {primary: boolean}) => props.primary ? GRAY : 'none'};
 `;
 
 export const form = styledComponents.div`
-  margin-left: 80px;
 `;
 
 export const input = styledComponents.input`
-  margin: 0 10px;
 `;
 
 export const label = styledComponents.label`
-  width: 50px;
+  width: 60px;
   text-align: right;
 `;
 
-export const inputWrapper = styledComponents.div`
-  margin-bottom: 12px;
+export const itemWrapper = styledComponents.div`
+  margin-top: 18px;
   display: flex;
+  align-items: flex-end;
 `;
 
 export const textbox = styledComponents.textarea`
   width: 200px;
   height: 150px;
   font-size: 18px;
+  padding: 8px;
+  margin: 16px 16px 0;
 `;
 
 export const add = styledComponents.button`
@@ -46,12 +48,14 @@ export const add = styledComponents.button`
   padding: 0 18px;
   color: #fff;
   height: 36px;
-  width: 100px;
+  width: 105px;
   letter-spacing: 4px;
   display: flex;
   align-items: center;
   justify-content: space-around;
   border-radius: 3px;
+  font-size: 14px;
+  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.1);
 `;
 
 ///////// old
