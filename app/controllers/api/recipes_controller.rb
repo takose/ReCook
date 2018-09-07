@@ -1,6 +1,15 @@
 class Api::RecipesController < ApplicationController
   protect_from_forgery with: :null_session
 
+  def index
+    render json: Recipe.all.to_json({
+      only: [:id, :title],
+      include: {
+        user: { only: [:nickname, :image_url] }
+      }
+    })
+  end
+
   def create
     recipe = ''
     body = JSON.parse(request.body.read)
