@@ -52,10 +52,11 @@ function* createStep(action) {
 
 function* addRecipe(action) {
   delete action['type'];
-  const getToken = state => state.user.token;
-  const token = yield select(getToken);
-  const recipe = yield call(updateTitleRequest, { action, token });
+  const getUser = state => state.user;
+  const user = yield select(getUser);
+  const recipe = yield call(updateTitleRequest, { action, token: user.token });
   yield put({
+    user,
     type: ADD_RECIPE,
     id: recipe.id,
     title: action.title,

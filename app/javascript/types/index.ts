@@ -12,6 +12,7 @@ export interface StoreState {
 export interface RecipeState {
   id: number;
   title?: string;
+  user: UserState;
 }
 
 export interface PieceState {
@@ -22,7 +23,7 @@ export interface PieceState {
 export interface UserState {
   nickname: string;
   imageUrl: string;
-  token: string;
+  token?: string;
 }
 
 export interface CurrentState {

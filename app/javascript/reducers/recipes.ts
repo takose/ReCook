@@ -7,6 +7,7 @@ export const recipes =
       case ADD_RECIPE:
         const addedState = state.concat({
           id: action.id,
+          user: action.user,
         });
         return addedState;
       case UPDATE_TITLE_SUCCEEDED:
