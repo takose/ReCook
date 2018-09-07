@@ -23,6 +23,6 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :steps, only: [:create]
-    resources :recipes, only: [:create]
+    resources :recipes, only: [:index, :create]
   end
 end
