@@ -1,4 +1,5 @@
 import styledComponents from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const main = styledComponents.div`
   width: calc(100vw - 60px);
@@ -12,7 +13,7 @@ export const recipeList = styledComponents.div`
   flex-wrap: wrap;
 `;
 
-export const recipeItem = styledComponents.div`
+export const recipeItem = styledComponents(Link)`
   width: 200px;
   height: 200px;
   border-radius: 3px;

@@ -22,7 +22,7 @@ class Explore extends React.Component<Props, object> {
   render() {
     const recipeList = this.props.recipes.map((recipe) => {
       return (
-        <RecipeItem>
+        <RecipeItem to={`/recipes/player/${recipe.id}`}>
           {recipe.title}
         </RecipeItem>
       );
