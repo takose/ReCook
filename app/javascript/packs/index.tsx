@@ -20,6 +20,7 @@ import SideBar from './sideBar/containers/SideBar';
 import Editor from './editor/containers/Editor';
 import Explore from './explore/containers/Explore';
 import Player from './player/containers/Player';
+import RealtimePlayer from './player/components/RealtimePlayer';
 
 const history = createBrowserHistory();
 
