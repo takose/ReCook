@@ -1,4 +1,5 @@
 import * as constants from '../constants';
+import { RecipeState } from '../types';
 
 export interface SwitchPiece {
   type: constants.SWITCH_PIECE;
@@ -88,5 +89,12 @@ export function createRecipe(recipeId: number) {
   return {
     recipeId,
     type: constants.CREATE_RECIPE,
+  };
+}
+
+export function setRecipes(recipes: RecipeState[]) {
+  return {
+    recipes,
+    type: constants.SET_RECIPES,
   };
 }

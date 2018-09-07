@@ -17,6 +17,8 @@ export const UPDATE_TITLE = 'UPDATE_TITLE';
 export const ADD_RECIPE = 'ADD_RECIPE';
 export const UPDATE_TITLE_SUCCEEDED = 'UPDATE_TITLE_SUCCEEDED';
 
+export const SET_RECIPES = 'SET_RECIPES';
+
 export const FF_ID = 1;
 export const TEXT_ID = 2;
 export const TASTE_ID = 3;

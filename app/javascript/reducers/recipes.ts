@@ -1,5 +1,5 @@
 import { RecipeState } from '../types';
-import { UPDATE_TITLE_SUCCEEDED, ADD_RECIPE } from '../constants';
+import { UPDATE_TITLE_SUCCEEDED, ADD_RECIPE, SET_RECIPES } from '../constants';
 
 export const recipes =
   (state: RecipeState[] = [], action): RecipeState[] => {
@@ -20,6 +20,8 @@ export const recipes =
           return recipe;
         });
         return newState;
+      case SET_RECIPES:
+        return state.concat(action.recipes);
     }
     return state;
   };
