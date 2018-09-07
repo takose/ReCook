@@ -5,9 +5,9 @@ import { LOG_IN } from '../constants';
 const node = document.getElementById('main');
 const currentUser: UserState = JSON.parse(node.getAttribute('user'));
 const initialState = {
-  imageUrl: currentUser['image_url'],
-  token: currentUser['consumer_token'],
-  nickname: currentUser['nickname'],
+  imageUrl: currentUser ? currentUser['image_url'] : null,
+  token: currentUser ? currentUser['consumer_token'] : null,
+  nickname: currentUser ? currentUser['nickname'] : null,
 };
 export const user = (state: UserState = initialState, action: SessionAction): UserState => {
   switch (action.type) {

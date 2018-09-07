@@ -3,8 +3,9 @@ import { StoreState } from '../../../types';
 import SideBar from '../components/SideBar';
 
 export function mapStateToProps(state: StoreState) {
+  const user = state.user.token ? state.user : null;
   return {
-    user: state.user,
+    user,
   };
 }
 
