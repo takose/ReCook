@@ -22,7 +22,7 @@ export const recipes =
         });
         return newState;
       case SET_RECIPES:
-        return state.concat(action.recipes);
+        return action.recipes;
     }
     return state;
   };

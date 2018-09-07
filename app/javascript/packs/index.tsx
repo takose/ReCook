@@ -6,7 +6,6 @@ import { Provider, connect } from 'react-redux';
 import createBrowserHistory from 'history/createBrowserHistory';
 import { Route } from 'react-router';
 import { root as Root } from './styles/Root';
-import { UserState } from '../types';
 import reCookSaga from '../sagas'; // tslint:disable-line:import-name
 
 import {
