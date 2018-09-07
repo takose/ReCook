@@ -1,5 +1,9 @@
 class Api::StepsController < ApplicationController
   protect_from_forgery with: :null_session
+  def index
+    recipe = Recipe.find(params[:recipe_id])
+    render json: recipe.steps.to_json(only: [:id, :piece_id, :content])
+  end
 
   def create
     recipe = ''

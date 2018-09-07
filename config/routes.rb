@@ -5,8 +5,10 @@
 #                      root GET  /                                                                                        recipes#index
 #                           GET  /recipes/*path(.:format)                                                                 recipes#index
 #     auth_twitter_callback GET  /auth/twitter/callback(.:format)                                                         sessions#create
-#                 api_steps POST /api/steps(.:format)                                                                     api/steps#create
-#               api_recipes POST /api/recipes(.:format)                                                                   api/recipes#create
+#                 api_steps GET  /api/steps(.:format)                                                                     api/steps#index
+#                           POST /api/steps(.:format)                                                                     api/steps#create
+#               api_recipes GET  /api/recipes(.:format)                                                                   api/recipes#index
+#                           POST /api/recipes(.:format)                                                                   api/recipes#create
 #        rails_service_blob GET  /rails/active_storage/blobs/:signed_id/*filename(.:format)                               active_storage/blobs#show
 # rails_blob_representation GET  /rails/active_storage/representations/:signed_blob_id/:variation_key/*filename(.:format) active_storage/representations#show
 #        rails_disk_service GET  /rails/active_storage/disk/:encoded_key/*filename(.:format)                              active_storage/disk#show
@@ -22,7 +24,7 @@ Rails.application.routes.draw do
   get 'auth/twitter/callback', to: 'sessions#create'
 
   namespace :api do
-    resources :steps, only: [:create]
+    resources :steps, only: [:index, :create]
     resources :recipes, only: [:index, :create]
   end
 end
