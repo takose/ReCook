@@ -1,28 +1,38 @@
 import 'babel-polyfill';
 import * as React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { CurrentState, StepState, FFState } from '../../../types';
+import { StepState } from '../../../types';
+import { RouteComponentProps } from 'react-router';
+import StepsPanel from '../../common/StepsPanel/components/StepsPanel';
 import {
   main as Main,
+  topPanel as TopPanel,
 } from '../styles/Player';
 
 export interface Props {
-  steps: StepState[];
 }
 
-export default class FF extends React.Component<Props, object> {
-  modeOnChanged = (mode: number) => {
-    this.setState({ mode });
-  }
-  render() {
-    const {
-      steps,
-    } = this.props;
+export default class Player extends React.Component<RouteComponentProps<any>, object> {
+  state = {
+    steps: [],
+  };
 
+  componentWillMount() {
+    const { id } = this.props.match.params;
+    fetch(`/api/steps?recipe_id=${id}`)
+      .then(res => res.json())
+      .then((res) => {
+        this.setState({ steps: res });
+      });
+  }
+
+  render() {
     return (
-      <Main>
-      </Main>
+      <div>
+        <Main>
+          <TopPanel></TopPanel>
+          <StepsPanel steps={this.state.steps} />
+        </Main>
+      </div>
     );
   }
 }
