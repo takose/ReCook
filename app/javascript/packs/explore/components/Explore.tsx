@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faPlay, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { RecipeState } from '../../../types';
 import {
   main as Main,
@@ -8,6 +8,12 @@ import {
   recipeList as RecipeList,
   trash as Trash,
   playButton as PlayButton,
+  playIcon as PlayIcon,
+  editButton as EditButton,
+  buttonWrapper as ButtonWrapper,
+  iconWrapper as IconWrapper,
+  user as User,
+  userIcon as UserIcon,
 } from '../styles/Explore';
 
 export interface Props {
@@ -28,10 +34,25 @@ class Explore extends React.Component<Props, object> {
       return (
         <RecipeItem key={recipe.id}>
           {recipe.title}
-          <PlayButton to={`/recipes/player/${recipe.id}`}>Play</PlayButton>
-          <Trash>
-            <FontAwesomeIcon icon={faTrash} />
-          </Trash>
+          <ButtonWrapper>
+            <PlayButton to={`/recipes/player/${recipe.id}`}>
+              <PlayIcon icon={faPlay} />
+              Play
+            </PlayButton>
+            <EditButton to={`/recipes/player/${recipe.id}`}>
+              <PlayIcon icon={faEdit} />
+              Edit
+            </EditButton>
+          </ButtonWrapper>
+          <IconWrapper>
+            <User>
+              <UserIcon src={recipe.user.imageUrl} />
+              {recipe.user.nickname}
+            </User>
+            <Trash>
+              <FontAwesomeIcon icon={faTrash} />
+            </Trash>
+          </IconWrapper>
         </RecipeItem>
       );
     });
