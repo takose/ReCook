@@ -17,6 +17,7 @@ injectGlobal`
   }
   a {
     text-decoration: none;
+    color: #141B23;
   }
   button {
     background-color: transparent;

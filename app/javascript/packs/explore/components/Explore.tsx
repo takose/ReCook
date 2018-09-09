@@ -1,9 +1,13 @@
 import * as React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { RecipeState } from '../../../types';
 import {
   main as Main,
   recipeItem as RecipeItem,
   recipeList as RecipeList,
+  trash as Trash,
+  playButton as PlayButton,
 } from '../styles/Explore';
 
 export interface Props {
@@ -22,8 +26,12 @@ class Explore extends React.Component<Props, object> {
   render() {
     const recipeList = this.props.recipes.map((recipe) => {
       return (
-        <RecipeItem to={`/recipes/player/${recipe.id}`}>
+        <RecipeItem key={recipe.id}>
           {recipe.title}
+          <PlayButton to={`/recipes/player/${recipe.id}`}>Play</PlayButton>
+          <Trash>
+            <FontAwesomeIcon icon={faTrash} />
+          </Trash>
         </RecipeItem>
       );
     });
