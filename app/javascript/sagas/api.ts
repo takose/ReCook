@@ -49,8 +49,15 @@ export function updateTitleRequest(payload) {
   return fetch('/api/recipes', options)
     .then(res => res.json())
     .then((res) => {
+      const recipes = res.map(recipe => ({
+        ...recipe,
+        user: {
+          ...recipe.user,
+          imageUrl: recipe.user.image_url,
+        },
+      }));
       return {
-        ...res,
+        ...recipes,
       };
     });
 }

@@ -26,7 +26,14 @@ class Explore extends React.Component<Props, object> {
     fetch('/api/recipes')
       .then(res => res.json())
       .then((res) => {
-        this.props.setRecipes(res);
+        const recipes = res.map(recipe => ({
+          ...recipe,
+          user: {
+            nickname: recipe.user.nickname,
+            imageUrl: recipe.user.image_url,
+          },
+        }));
+        this.props.setRecipes(recipes);
       });
   }
   render() {
