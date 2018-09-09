@@ -31,7 +31,6 @@ class Explore extends React.Component<Props, object> {
     return (
       <div>
         <Main>
-          here is explore
           <RecipeList>
             {recipeList}
           </RecipeList>
