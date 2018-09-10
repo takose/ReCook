@@ -46,7 +46,7 @@ class Explore extends React.Component<Props, object> {
               <PlayIcon icon={faPlay} />
               Play
             </PlayButton>
-            <EditButton to={`/recipes/player/${recipe.id}`}>
+            <EditButton to={`/recipes/edit/${recipe.id}`}>
               <PlayIcon icon={faEdit} />
               Edit
             </EditButton>

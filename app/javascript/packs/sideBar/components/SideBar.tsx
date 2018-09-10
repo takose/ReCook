@@ -35,7 +35,7 @@ class SideBar extends React.Component<Props, object> {
             </NavLink>
           </Item>
           <Item>
-            <NavLink to="/recipes/editor" style={{ opacity: 0.5 }} activeStyle={{ opacity: 1 }}>
+            <NavLink to="/recipes/new" style={{ opacity: 0.5 }} activeStyle={{ opacity: 1 }}>
               <Icon>
                 <FontAwesomeIcon icon={faEdit} />
               </Icon>
