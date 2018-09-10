@@ -1,5 +1,6 @@
 import * as constants from '../constants';
 import { RecipeState } from '../types';
+import { isContext } from 'vm';
 
 export interface SwitchPiece {
   type: constants.SWITCH_PIECE;
@@ -45,10 +46,24 @@ export function updateTitle(recipeId: number, title: string) {
   };
 }
 
-export function createRecipe(recipeId: number) {
+export function getPlayRecipe(id: number) {
+  return {
+    id,
+    type: constants.GET_PLAY_RECIPE,
+  };
+}
+
+export function getEditRecipe(id: number) {
+  return {
+    id,
+    type: constants.GET_EDIT_RECIPE,
+  };
+}
+
+export function setRecipe(recipeId: number) {
   return {
     recipeId,
-    type: constants.CREATE_RECIPE,
+    type: constants.SET_RECIPE,
   };
 }
 

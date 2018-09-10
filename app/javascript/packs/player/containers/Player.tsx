@@ -6,12 +6,17 @@ import Player from '../components/Player';
 
 export function mapStateToProps(state: StoreState) {
   return {
+    steps: state.current.playSteps,
   };
 }
 
 export function mapDispatchToProps(dispatch) {
   return {
+    getRecipe: (id: number) => {
+      dispatch(actions.setRecipe(id));
+      dispatch(actions.getPlayRecipe(id));
+    },
   };
 }
 
-export default connect()(Player);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Player));

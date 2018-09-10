@@ -1,10 +1,10 @@
 import { RecipeState } from '../types';
-import { UPDATE_TITLE_SUCCEEDED, ADD_RECIPE, SET_RECIPES } from '../constants';
+import { UPDATE_TITLE_SUCCEEDED, CREATE_RECIPE, SET_RECIPES } from '../constants';
 
 export const recipes =
   (state: RecipeState[] = [], action): RecipeState[] => {
     switch (action.type) {
-      case ADD_RECIPE:
+      case CREATE_RECIPE:
         const addedState = state.concat({
           id: action.id,
           user: action.user,

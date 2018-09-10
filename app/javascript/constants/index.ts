@@ -6,10 +6,14 @@ export type LOG_IN = typeof LOG_IN;
 
 export const CREATE_STEP = 'CREATE_STEP';
 export const CREATE_STEP_SUCCEEDED = 'CREATE_STEP_SUCCEEDED';
-export const CREATE_RECIPE = 'CREATE_RECIPE';
+export const SET_RECIPE = 'SET_RECIPE';
 export const UPDATE_TITLE = 'UPDATE_TITLE';
-export const ADD_RECIPE = 'ADD_RECIPE';
+export const CREATE_RECIPE = 'CREATE_RECIPE';
+export const SET_EDIT_STEPS = 'SET_EDIT_STEPS';
+export const SET_PLAY_STEPS = 'SET_PLAY_STEPS';
 export const UPDATE_TITLE_SUCCEEDED = 'UPDATE_TITLE_SUCCEEDED';
+export const GET_EDIT_RECIPE = 'GET_EDIT_RECIPE';
+export const GET_PLAY_RECIPE = 'GET_PLAY_RECIPE';
 
 export const SET_RECIPES = 'SET_RECIPES';
 

@@ -2,35 +2,39 @@ import * as React from 'react';
 import {
   main as Main,
   topPanel as TopPanel,
-  bottomPanel as BottomPanel,
-  stepWrapper as StepWrapper,
-  stepList as StepList,
   input as Input,
 } from '../styles/MainPanel';
-import { StepState, CurrentState, FFState, TextState, TasteState } from '../../../types';
+import { StepState, CurrentState, RecipeState } from '../../../types';
+import { RouteComponentProps } from 'react-router';
 import FF from '../../pieces/FF/containers/FF';
 import EditorText from '../../pieces/Text/containers/EditorText';
 import EditorTaste from '../../pieces/Taste/containers/EditorTaste';
 import { FF_ID, TEXT_ID, TASTE_ID } from '../../../constants';
-import FFStep from '../../pieces/FF/components/FFStep';
-import TextStep from '../../pieces/Text/components/TextStep';
-import TasteStep from '../../pieces/Taste/components/TasteStep';
 import StepsPanel from '../../common/StepsPanel/containers/StepsPanel';
 
 export interface Props {
   steps: StepState[];
   current: CurrentState;
+  recipes: RecipeState[];
   updateTitle(recipeId: number, title: string): void;
+  getRecipe(id: number): void;
 }
 
 interface State {
   title: string;
 }
 
-class MainPanel extends React.Component<Props, State> {
+class MainPanel extends React.Component<RouteComponentProps<any> & Props, State> {
   state = {
     title: '',
   };
+
+  componentWillMount() {
+    const { id } = this.props.match.params;
+    if (id) {
+      this.props.getRecipe(parseInt(id, 10));
+    }
+  }
 
   titleOnChange = e => this.setState({ title: e.target.value });
   titleOnFocusout = (e) => {
@@ -49,27 +53,6 @@ class MainPanel extends React.Component<Props, State> {
           break;
       }
     };
-    const stepListDom = this.props.steps.map((step) => {
-      let dom;
-      switch (step.pieceId) {
-        case FF_ID:
-          dom = <FFStep step={step.content} />;
-          break;
-        case TEXT_ID:
-          dom = <TextStep step={step.content} />;
-          break;
-        case TASTE_ID:
-          dom = <TasteStep step={step.content} />;
-          break;
-        default:
-          break;
-      }
-      return (
-        <StepWrapper key={step.id}>
-          {dom}
-        </StepWrapper>
-      );
-    });
     const currentPiece = selectPiece();
     return (
       <Main>
@@ -82,7 +65,7 @@ class MainPanel extends React.Component<Props, State> {
             value={this.state.title} />
           {currentPiece}
         </TopPanel>
-        <StepsPanel />
+        <StepsPanel steps={this.props.steps} />
       </Main>
     );
   }
