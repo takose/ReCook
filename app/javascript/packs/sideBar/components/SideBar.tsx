@@ -18,6 +18,13 @@ export interface Props {
 }
 
 class SideBar extends React.Component<Props, object> {
+  oddEvent = (match, location) => {
+    if (location.pathname.match(/\/recipes\/new/i) ||
+        location.pathname.match(/\/recipes\/edit/i)) {
+      return true;
+    }
+    return false;
+  }
   render() {
     const account = this.props.user === null ? (
       <Signup href="/auth/twitter">sign up</Signup>
@@ -35,7 +42,11 @@ class SideBar extends React.Component<Props, object> {
             </NavLink>
           </Item>
           <Item>
-            <NavLink to="/recipes/new" style={{ opacity: 0.5 }} activeStyle={{ opacity: 1 }}>
+            <NavLink
+              to="/recipes/new"
+              isActive={this.oddEvent}
+              style={{ opacity: 0.5 }}
+              activeStyle={{ opacity: 1 }}>
               <Icon>
                 <FontAwesomeIcon icon={faEdit} />
               </Icon>
