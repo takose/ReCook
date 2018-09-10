@@ -10,8 +10,8 @@ export function mapStateToProps(state: StoreState) {
 
 export function mapDispatchToProps(dispatch) {
   return {
-    createTextStep: (body: string) => {
-      dispatch(actions.createTextStep(body));
+    createStep: (body: any) => {
+      dispatch(actions.createStep({ body }));
     },
   };
 }

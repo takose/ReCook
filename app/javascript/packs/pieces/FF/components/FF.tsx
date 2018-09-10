@@ -25,7 +25,7 @@ export interface Props {
   current: CurrentState;
   steps: StepState[];
   ffSteps: FFState[];
-  createFFStep(power: number, temperature: number, time: number, mode: number): void;
+  createStep(power: number, temperature: number, time: number, mode: number): void;
 }
 
 export default class FF extends React.Component<Props, State> {
@@ -65,7 +65,7 @@ export default class FF extends React.Component<Props, State> {
   render() {
     const {
       current,
-      createFFStep,
+      createStep,
     } = this.props;
     const form = () => {
       const temp = (
@@ -139,7 +139,7 @@ export default class FF extends React.Component<Props, State> {
         <Add
           onClick={() => {
             const { power, temperature, time, mode } = this.state;
-            createFFStep(power, temperature, time, mode);
+            createStep(power, temperature, time, mode);
             this.setState({
               temperature: 0,
               power: 0,

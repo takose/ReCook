@@ -13,8 +13,8 @@ export function mapStateToProps(state: StoreState) {
 
 export function mapDispatchToProps(dispatch) {
   return {
-    createFFStep: (power: number, temperature: number, time: number, mode: number) => {
-      dispatch(actions.createFFStep(power, temperature, time, mode));
+    createStep: (power: number, temperature: number, time: number, mode: number) => {
+      dispatch(actions.createStep({ power, temperature, time, mode }));
     },
   };
 }

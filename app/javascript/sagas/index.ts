@@ -1,33 +1,13 @@
 import { call, put, takeEvery, select } from 'redux-saga/effects';
 import {
-  FF_ID,
-  TEXT_ID,
-  TASTE_ID,
   CREATE_STEP,
-  CREATE_FF_STEP,
-  CREATE_FF_STEP_SUCCEEDED,
-  CREATE_TEXT_STEP,
-  CREATE_TEXT_STEP_SUCCEEDED,
-  CREATE_TASTE_STEP,
-  CREATE_TASTE_STEP_SUCCEEDED,
+  CREATE_STEP_SUCCEEDED,
   CREATE_RECIPE,
   UPDATE_TITLE,
   UPDATE_TITLE_SUCCEEDED,
   ADD_RECIPE,
 } from '../constants';
 import { createStepsRequest, updateTitleRequest } from './api';
-function getAction(pieceId) {
-  switch (pieceId) {
-    case FF_ID:
-      return CREATE_FF_STEP_SUCCEEDED;
-    case TEXT_ID:
-      return CREATE_TEXT_STEP_SUCCEEDED;
-    case TASTE_ID:
-      return CREATE_TASTE_STEP_SUCCEEDED;
-    default:
-      break;
-  }
-}
 
 function* createStep(action) {
   const getRecipeId = state => state.current.recipeId;
@@ -36,16 +16,10 @@ function* createStep(action) {
   const pieceId = yield select(getPieceId);
   const getToken = state => state.user.token;
   const token = yield select(getToken);
-  const step = yield call(createStepsRequest, { action, recipeId, pieceId, token });
-  const type = getAction(step.piece_id);
+  const step = yield call(createStepsRequest, { recipeId, pieceId, token, action: action.content });
   yield put({
     ...step,
-    type,
-  });
-  yield put({
-    type: CREATE_STEP,
-    pieceId: step.piece_id,
-    stepId: step.id,
+    type: CREATE_STEP_SUCCEEDED,
   });
   if (!recipeId) yield put({ type: CREATE_RECIPE, recipeId: step.recipe_id });
 }
@@ -75,9 +49,7 @@ function* updateTitle(action) {
 }
 
 function* reCookSaga() {
-  yield takeEvery(CREATE_FF_STEP, createStep);
-  yield takeEvery(CREATE_TEXT_STEP, createStep);
-  yield takeEvery(CREATE_TASTE_STEP, createStep);
+  yield takeEvery(CREATE_STEP, createStep);
   yield takeEvery(UPDATE_TITLE, addRecipe);
   yield takeEvery(ADD_RECIPE, updateTitle);
 }

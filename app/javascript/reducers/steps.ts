@@ -1,15 +1,16 @@
 import { StepState } from '../types';
 import {
-  CREATE_STEP,
+  CREATE_STEP_SUCCEEDED,
 } from '../constants';
 
 export const steps =
   (state: StepState[] = [], action): StepState[] => {
     switch (action.type) {
-      case CREATE_STEP:
+      case CREATE_STEP_SUCCEEDED:
         const newSteps = state.concat({
-          stepId: action.stepId,
-          pieceId: action.pieceId,
+          id: action.id,
+          pieceId: action.piece_id,
+          content: action.content,
         });
         return newSteps;
     }

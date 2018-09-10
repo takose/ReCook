@@ -30,49 +30,9 @@ export function login(nickname: string, imageUrl: string): Session {
   };
 }
 
-// tslint:disable-next-line:max-line-length
-export function createFFStepSucceeded(id: number, power: number, temperature: number, time: number, mode: number) {
+export function createStep(content: any) {
   return {
-    id,
-    power,
-    temperature,
-    time,
-    mode,
-    type: constants.CREATE_FF_STEP_SUCCEEDED,
-  };
-}
-
-export function createFFStep(power: number, temperature: number, time: number, mode: number) {
-  return {
-    power,
-    temperature,
-    time,
-    mode,
-    type: constants.CREATE_FF_STEP,
-  };
-}
-
-export function createTextStep(body: string) {
-  return {
-    body,
-    type: constants.CREATE_TEXT_STEP,
-  };
-}
-
-export function createTasteStep(soysauce: number, mirin: number, sake: number, vinegar: number) {
-  return {
-    soysauce,
-    mirin,
-    sake,
-    vinegar,
-    type: constants.CREATE_FF_STEP,
-  };
-}
-
-export function createStep(pieceId: number, stepId: number) {
-  return {
-    pieceId,
-    stepId,
+    content,
     type: constants.CREATE_STEP,
   };
 }

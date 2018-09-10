@@ -19,9 +19,6 @@ import TasteStep from '../../pieces/Taste/components/TasteStep';
 export interface Props {
   steps: StepState[];
   current: CurrentState;
-  ffSteps: FFState[];
-  textSteps: TextState[];
-  tasteSteps: TasteState[];
   updateTitle(recipeId: number, title: string): void;
 }
 
@@ -53,28 +50,21 @@ class MainPanel extends React.Component<Props, State> {
     };
     const stepListDom = this.props.steps.map((step) => {
       let dom;
-      let id;
       switch (step.pieceId) {
         case FF_ID:
-          const ffStep = this.props.ffSteps.find(s => s.id === step.stepId);
-          dom = <FFStep step={ffStep} />;
-          id = ffStep.id;
+          dom = <FFStep step={step.content} />;
           break;
         case TEXT_ID:
-          const textStep = this.props.textSteps.find(s => s.id === step.stepId);
-          dom = <TextStep step={textStep} />;
-          id = textStep.id;
+          dom = <TextStep step={step.content} />;
           break;
         case TASTE_ID:
-          const tasteStep = this.props.tasteSteps.find(s => s.id === step.stepId);
-          dom = <TasteStep step={tasteStep} />;
-          id = tasteStep.id;
+          dom = <TasteStep step={step.content} />;
           break;
         default:
           break;
       }
       return (
-        <StepWrapper key={id}>
+        <StepWrapper key={step.id}>
           {dom}
         </StepWrapper>
       );

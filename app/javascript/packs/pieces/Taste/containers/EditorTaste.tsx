@@ -10,8 +10,8 @@ export function mapStateToProps(state: StoreState) {
 
 export function mapDispatchToProps(dispatch) {
   return {
-    createTasteStep: (sake: number, soysauce: number, mirin: number, vinegar: number) => {
-      dispatch(actions.createTasteStep(sake, soysauce, mirin, vinegar));
+    createStep: (sake: number, soysauce: number, mirin: number, vinegar: number) => {
+      dispatch(actions.createStep({ sake, soysauce, mirin, vinegar }));
     },
   };
 }

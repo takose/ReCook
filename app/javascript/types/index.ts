@@ -53,6 +53,7 @@ export interface TasteState {
 }
 
 export interface StepState {
+  id: number;
   pieceId: number;
-  stepId: number;
+  content: any;
 }
