@@ -4,26 +4,45 @@ import {
   stepList as StepList,
   main as Main,
 } from '../styles/StepsPanel';
-import { StepState, CurrentState, FFState, TextState, TasteState } from '../../../../types';
+import { RouteComponentProps } from 'react-router';
+import { StepState } from '../../../../types';
 import { FF_ID, TEXT_ID, TASTE_ID } from '../../../../constants';
 import FFStep from '../../../pieces/FF/components/FFStep';
 import TextStep from '../../../pieces/Text/components/TextStep';
 import TasteStep from '../../../pieces/Taste/components/TasteStep';
 
 export interface Props {
-  steps: { id: number, piece_id: number, content: string }[];
 }
 
 interface State {
-  title: string;
+  steps: StepState[];
 }
 
-class StepsPanel extends React.Component<Props, State> {
+class StepsPanel extends React.Component<RouteComponentProps<any>, State> {
+  state = {
+    steps: [],
+  };
+
+  componentWillMount() {
+    const { id } = this.props.match.params;
+    if (id) {
+      fetch(`/api/steps?recipe_id=${id}`)
+        .then(res => res.json())
+        .then((res) => {
+          const steps = res.map(step => ({
+            ...step,
+            pieceId: step.piece_id,
+          }));
+          this.setState({ steps });
+        });
+    }
+  }
+
   render () {
-    const stepListDom = this.props.steps.map((step) => {
+    const stepListDom = this.state.steps.map((step) => {
       let dom;
       const content = JSON.parse(step.content);
-      switch (step.piece_id) {
+      switch (step.pieceId) {
         case FF_ID:
           dom = <FFStep step={...content} />;
           break;

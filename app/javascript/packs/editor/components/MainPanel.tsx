@@ -15,6 +15,7 @@ import { FF_ID, TEXT_ID, TASTE_ID } from '../../../constants';
 import FFStep from '../../pieces/FF/components/FFStep';
 import TextStep from '../../pieces/Text/components/TextStep';
 import TasteStep from '../../pieces/Taste/components/TasteStep';
+import StepsPanel from '../../common/StepsPanel/containers/StepsPanel';
 
 export interface Props {
   steps: StepState[];
@@ -81,12 +82,7 @@ class MainPanel extends React.Component<Props, State> {
             value={this.state.title} />
           {currentPiece}
         </TopPanel>
-        <BottomPanel>
-          Steps
-          <StepList>
-            {stepListDom}
-          </StepList>
-        </BottomPanel>
+        <StepsPanel />
       </Main>
     );
   }
