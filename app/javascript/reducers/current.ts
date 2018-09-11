@@ -10,8 +10,8 @@ import {
 const initialState = {
   pieceId: 1,
   recipeId: null,
-  editSteps: [],
-  playSteps: [],
+  playRecipe: { id: null, title: '', steps: [] },
+  editRecipe: { id: null, title: '', steps: [] },
 };
 
 export const current =
@@ -30,22 +30,29 @@ export const current =
       case SET_PLAY_STEPS:
         return {
           ...state,
-          playSteps: action.steps,
+          playRecipe: {
+            ...action,
+          },
         };
       case SET_EDIT_STEPS:
         return {
           ...state,
-          editSteps: action.steps,
+          editRecipe: {
+            ...action.recipe,
+          },
         };
       case CREATE_STEP_SUCCEEDED:
-        const newEditSteps = state.editSteps.concat({
+        const newEditSteps = state.editRecipe.steps.concat({
           id: action.id,
           pieceId: action.piece_id,
           content: action.content,
         });
         return {
           ...state,
-          editSteps: newEditSteps,
+          editRecipe: {
+            ...state.editRecipe,
+            steps: newEditSteps,
+          },
         };
     }
     return state;
