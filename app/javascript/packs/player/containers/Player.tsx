@@ -6,7 +6,7 @@ import Player from '../components/Player';
 
 export function mapStateToProps(state: StoreState) {
   return {
-    steps: state.current.playSteps,
+    steps: state.current.playRecipe.steps,
   };
 }
 

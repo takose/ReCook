@@ -6,9 +6,8 @@ import  MainPanel from '../components/MainPanel';
 
 export function mapStateToProps(state: StoreState) {
   return {
-    steps: state.current.editSteps,
+    steps: state.current.editRecipe.steps,
     current: state.current,
-    recipes: state.recipes,
   };
 }
 

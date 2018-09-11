@@ -28,17 +28,21 @@ function* createStep(action) {
   if (!recipeId) yield put({ type: SET_RECIPE, recipeId: step.recipe_id });
 }
 
-function* createRecipe(action) {
+function* findOrCreateRecipe(action) {
   delete action['type'];
   const getUser = state => state.user;
   const user = yield select(getUser);
+  const getCurrentEditRecipeId = state => state.current.editRecipe.id;
+  const currentEditRecipeId = yield select(getCurrentEditRecipeId);
   const recipe = yield call(updateTitleRequest, { action, token: user.token });
-  yield put({
-    user,
-    type: CREATE_RECIPE,
-    id: recipe.id,
-    title: action.title,
-  });
+  if (!currentEditRecipeId) {
+    yield put({
+      user,
+      type: CREATE_RECIPE,
+      id: recipe.id,
+      title: action.title,
+    });
+  }
 }
 
 function* updateTitle(action) {
@@ -55,7 +59,9 @@ function* updateTitle(action) {
 function* getEditRecipe(action) {
   const recipe = yield call(getRecipeRequest, action);
   yield put({
-    steps: recipe.steps,
+    recipe: {
+      ...recipe,
+    },
     type: SET_EDIT_STEPS,
   });
 }
@@ -70,7 +76,7 @@ function* getPlayRecipe(action) {
 
 function* reCookSaga() {
   yield takeEvery(CREATE_STEP, createStep);
-  yield takeEvery(UPDATE_TITLE, createRecipe);
+  yield takeEvery(UPDATE_TITLE, findOrCreateRecipe);
   yield takeEvery(CREATE_RECIPE, updateTitle);
   yield takeEvery(GET_EDIT_RECIPE, getEditRecipe);
   yield takeEvery(GET_PLAY_RECIPE, getPlayRecipe);
