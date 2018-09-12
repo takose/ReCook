@@ -9,6 +9,7 @@
 #  updated_at         :datetime         not null
 #  content            :jsonb
 #  piece_id           :integer
+#  next_id            :integer
 #
 
 class Step < ApplicationRecord
