@@ -19,6 +19,7 @@ import {
 export interface Props {
   recipes: RecipeState[];
   setRecipes(recipes: RecipeState[]): void;
+  deleteRecipe(id: number): void;
 }
 
 class Explore extends React.Component<Props, object> {
@@ -56,7 +57,7 @@ class Explore extends React.Component<Props, object> {
               <UserIcon src={recipe.user.imageUrl} />
               {recipe.user.nickname}
             </User>
-            <Trash>
+            <Trash onClick={() => this.props.deleteRecipe(recipe.id)}>
               <FontAwesomeIcon icon={faTrash} />
             </Trash>
           </IconWrapper>

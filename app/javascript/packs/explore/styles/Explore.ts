@@ -42,6 +42,7 @@ export const buttonWrapper = styledComponents.div`
 export const trash = styledComponents.div`
   text-align: right;
   color: #9E9E9E;
+  cursor : pointer;
   transition: all 300ms;
   opacity: 0;
   &:hover {

@@ -1,5 +1,10 @@
 import { RecipeState } from '../types';
-import { UPDATE_TITLE_SUCCEEDED, CREATE_RECIPE, SET_RECIPES } from '../constants';
+import {
+  UPDATE_TITLE_SUCCEEDED,
+  CREATE_RECIPE,
+  SET_RECIPES,
+  DELETE_RECIPE_SUCCEEDED,
+} from '../constants';
 
 export const recipes =
   (state: RecipeState[] = [], action): RecipeState[] => {
@@ -23,6 +28,9 @@ export const recipes =
         return newState;
       case SET_RECIPES:
         return action.recipes;
+      case DELETE_RECIPE_SUCCEEDED:
+        const deletedState = state.filter(recipe => recipe.id !== action.id);
+        return deletedState;
     }
     return state;
   };

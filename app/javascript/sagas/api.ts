@@ -69,3 +69,10 @@ export function getRecipeRequest(action) {
       };
     });
 }
+
+export function deleteRecipeRequest(action) {
+  return fetch(`/api/recipes/${action.id}`, { method: 'DELETE' })
+    .then(() => {
+      return true;
+    });
+}

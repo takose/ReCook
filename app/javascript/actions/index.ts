@@ -78,3 +78,10 @@ export function resetRecipe() {
     type: constants.RESET_EDIT_RECIPE,
   };
 }
+
+export function deleteRecipe(id: number) {
+  return {
+    id,
+    type: constants.DELETE_RECIPE,
+  };
+}

@@ -14,6 +14,9 @@ export function mapDispatchToProps(dispatch) {
     setRecipes: (recipes: RecipeState[]) => {
       dispatch(actions.setRecipes(recipes));
     },
+    deleteRecipe: (id: number) => {
+      dispatch(actions.deleteRecipe(id));
+    },
   };
 }
 
