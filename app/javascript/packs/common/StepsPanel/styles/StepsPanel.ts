@@ -5,6 +5,8 @@ export const main = styledComponents.div`
   overflow: scroll;
   background: #E6DFC9;
   padding: 8px;
+  border-radius: 3px;
+  border: solid 1px #ccc;
 `;
 
 export const stepList = styledComponents.div`
@@ -17,7 +19,9 @@ export const stepWrapper = styledComponents.div`
   height: 200px;
   border-radius: 3px;
   border: solid 1px #ccc;
-  padding: 10px;
+  padding: 20px;
   margin: 5px;
   background: #FFF;
+  letter-spacing: 1.1px;
+  line-height: 1.4;
 `;

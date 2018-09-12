@@ -3,6 +3,7 @@ const GRAY = '#EEE';
 export const main = styledComponents.div`
   display: flex;
   align-items: flex-end;
+  margin-top: 30px;
 `;
 
 export const modeSelectorList = styledComponents.div`
@@ -30,9 +31,12 @@ export const label = styledComponents.label`
 `;
 
 export const itemWrapper = styledComponents.div`
-  margin-top: 18px;
+  margin-bottom: 18px;
   display: flex;
   align-items: flex-end;
+  &:last-child {
+    margin-bottom: 0;
+  }
 `;
 
 export const textbox = styledComponents.textarea`
