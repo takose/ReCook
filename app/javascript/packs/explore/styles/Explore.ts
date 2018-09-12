@@ -9,6 +9,16 @@ export const main = styledComponents.div`
   padding: 10px 10px 0;
 `;
 
+export const titleWrapper = styledComponents.div`
+  height: 60px;
+`;
+
+export const titleIcon = styledComponents(FontAwesomeIcon)`
+  margin-left: 6px;
+  color: #9E9E9E;
+  font-size: 14px;
+`;
+
 export const playIcon = styledComponents(FontAwesomeIcon)`
   font-size: 14px;
   margin-right: 6px;
@@ -85,7 +95,7 @@ export const recipeItem = styledComponents.div`
   height: 220px;
   border-radius: 3px;
   padding: 20px;
-  margin: 10px;
+  margin: 15px;
   background: #FFF;
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.07);
   display: flex;

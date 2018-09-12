@@ -13,6 +13,7 @@ export interface RecipeState {
   id: number;
   title?: string;
   user: UserState;
+  originId: number;
 }
 
 export interface PieceState {

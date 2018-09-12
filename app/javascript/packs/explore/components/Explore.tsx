@@ -1,12 +1,14 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faPlay, faEdit, faCodeBranch } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faPlay, faEdit, faCodeBranch, faCode } from '@fortawesome/free-solid-svg-icons';
 import { RecipeState, UserState } from '../../../types';
 import {
   main as Main,
   recipeItem as RecipeItem,
   recipeList as RecipeList,
+  titleWrapper as TitleWrapper,
+  titleIcon as TitleIcon,
   icon as Icon,
   playButton as PlayButton,
   playIcon as PlayIcon,
@@ -32,6 +34,7 @@ class Explore extends React.Component<RouteComponentProps<any> & Props, object> 
       .then((res) => {
         const recipes = res.map(recipe => ({
           ...recipe,
+          originId: recipe.origin_id,
           user: {
             nickname: recipe.user.nickname,
             imageUrl: recipe.user.image_url,
@@ -62,9 +65,10 @@ class Explore extends React.Component<RouteComponentProps<any> & Props, object> 
 
   render() {
     const recipeList = this.props.recipes.map((recipe) => {
+      const fork = recipe.originId ? <TitleIcon icon={faCodeBranch} /> : null;
       return (
         <RecipeItem key={recipe.id}>
-          {recipe.title}
+          <TitleWrapper>{recipe.title}{fork}</TitleWrapper>
           <ButtonWrapper>
             <PlayButton to={`/recipes/player/${recipe.id}`}>
               <PlayIcon icon={faPlay} />

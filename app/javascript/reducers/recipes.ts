@@ -12,6 +12,7 @@ export const recipes =
       case CREATE_RECIPE:
         const addedState = state.concat({
           id: action.id,
+          originId: null,
           user: action.user,
         });
         return addedState;
