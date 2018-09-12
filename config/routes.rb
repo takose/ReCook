@@ -10,6 +10,7 @@
 #                           POST   /api/recipes(.:format)                                                                   api/recipes#create
 #           edit_api_recipe GET    /api/recipes/:id/edit(.:format)                                                          api/recipes#edit
 #                api_recipe DELETE /api/recipes/:id(.:format)                                                               api/recipes#destroy
+#                       api POST   /api/recipes/:id/fork(.:format)                                                          api/recipes#fork
 #        rails_service_blob GET    /rails/active_storage/blobs/:signed_id/*filename(.:format)                               active_storage/blobs#show
 # rails_blob_representation GET    /rails/active_storage/representations/:signed_blob_id/:variation_key/*filename(.:format) active_storage/representations#show
 #        rails_disk_service GET    /rails/active_storage/disk/:encoded_key/*filename(.:format)                              active_storage/disk#show
@@ -27,5 +28,6 @@ Rails.application.routes.draw do
   namespace :api do
     resources :steps, only: [:create]
     resources :recipes, only: [:index, :create, :edit, :destroy]
+    post '/recipes/:id/fork', to: 'recipes#fork'
   end
 end
