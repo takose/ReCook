@@ -29,6 +29,8 @@ export interface UserState {
 export interface CurrentState {
   pieceId: number;
   recipeId: number;
+  editRecipe: { id: number, title: string, steps: StepState[] };
+  playRecipe: { id: number, title: string, steps: StepState[] };
 }
 
 export interface FFState {
@@ -53,6 +55,7 @@ export interface TasteState {
 }
 
 export interface StepState {
+  id: number;
   pieceId: number;
-  stepId: number;
+  content: any;
 }

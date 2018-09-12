@@ -10,6 +10,16 @@ class Api::RecipesController < ApplicationController
     })
   end
 
+  def edit
+    recipe = Recipe.find(params[:id])
+    render json: recipe.to_json({
+      only: [:id, :title],
+      include: {
+        steps: { only: [:id, :piece_id, :content] }
+      }
+    })
+  end
+
   def create
     recipe = ''
     body = JSON.parse(request.body.read)

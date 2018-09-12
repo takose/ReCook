@@ -18,7 +18,7 @@ interface State {
 }
 
 export interface Props {
-  createTasteStep(sake: number, soysauce: number, mirin: number, vinegar: number): void;
+  createStep(sake: number, soysauce: number, mirin: number, vinegar: number): void;
 }
 
 export default class EditorTaste extends React.Component<Props, State> {
@@ -51,7 +51,7 @@ export default class EditorTaste extends React.Component<Props, State> {
   vinegarOnChange = e => this.setState({ vinegar: parseInt(e.target.value, 10) });
 
   render() {
-    const { createTasteStep } = this.props;
+    const { createStep } = this.props;
     return (
       <Main>
         <Form>
@@ -95,7 +95,7 @@ export default class EditorTaste extends React.Component<Props, State> {
         <Add
           onClick={() => {
             const { soysauce, mirin, sake, vinegar } = this.state;
-            createTasteStep(sake, soysauce, mirin, vinegar);
+            createStep(sake, soysauce, mirin, vinegar);
             this.reset();
           }}>
           <FontAwesomeIcon icon={faPlus} />&nbsp; Add

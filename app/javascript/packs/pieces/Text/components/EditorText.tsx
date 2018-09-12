@@ -12,7 +12,7 @@ interface State {
 }
 
 export interface Props {
-  createTextStep(body: string): void;
+  createStep(content: any): void;
 }
 
 export default class EditorText extends React.Component<Props, State> {
@@ -28,7 +28,7 @@ export default class EditorText extends React.Component<Props, State> {
   bodyOnChange = e => this.setState({ body: e.target.value });
 
   render() {
-    const { createTextStep } = this.props;
+    const { createStep } = this.props;
     return (
       <Main>
         <Textbox
@@ -38,7 +38,7 @@ export default class EditorText extends React.Component<Props, State> {
         <Add
           onClick={() => {
             const { body } = this.state;
-            createTextStep(body);
+            createStep(body);
             this.reset();
           }}>
           <FontAwesomeIcon icon={faPlus} />&nbsp; Add

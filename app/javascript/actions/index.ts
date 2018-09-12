@@ -1,5 +1,6 @@
 import * as constants from '../constants';
 import { RecipeState } from '../types';
+import { isContext } from 'vm';
 
 export interface SwitchPiece {
   type: constants.SWITCH_PIECE;
@@ -30,49 +31,9 @@ export function login(nickname: string, imageUrl: string): Session {
   };
 }
 
-// tslint:disable-next-line:max-line-length
-export function createFFStepSucceeded(id: number, power: number, temperature: number, time: number, mode: number) {
+export function createStep(content: any) {
   return {
-    id,
-    power,
-    temperature,
-    time,
-    mode,
-    type: constants.CREATE_FF_STEP_SUCCEEDED,
-  };
-}
-
-export function createFFStep(power: number, temperature: number, time: number, mode: number) {
-  return {
-    power,
-    temperature,
-    time,
-    mode,
-    type: constants.CREATE_FF_STEP,
-  };
-}
-
-export function createTextStep(body: string) {
-  return {
-    body,
-    type: constants.CREATE_TEXT_STEP,
-  };
-}
-
-export function createTasteStep(soysauce: number, mirin: number, sake: number, vinegar: number) {
-  return {
-    soysauce,
-    mirin,
-    sake,
-    vinegar,
-    type: constants.CREATE_FF_STEP,
-  };
-}
-
-export function createStep(pieceId: number, stepId: number) {
-  return {
-    pieceId,
-    stepId,
+    content,
     type: constants.CREATE_STEP,
   };
 }
@@ -85,10 +46,24 @@ export function updateTitle(recipeId: number, title: string) {
   };
 }
 
-export function createRecipe(recipeId: number) {
+export function getPlayRecipe(id: number) {
+  return {
+    id,
+    type: constants.GET_PLAY_RECIPE,
+  };
+}
+
+export function getEditRecipe(id: number) {
+  return {
+    id,
+    type: constants.GET_EDIT_RECIPE,
+  };
+}
+
+export function setRecipe(recipeId: number) {
   return {
     recipeId,
-    type: constants.CREATE_RECIPE,
+    type: constants.SET_RECIPE,
   };
 }
 
@@ -96,5 +71,11 @@ export function setRecipes(recipes: RecipeState[]) {
   return {
     recipes,
     type: constants.SET_RECIPES,
+  };
+}
+
+export function resetRecipe() {
+  return {
+    type: constants.RESET_EDIT_RECIPE,
   };
 }

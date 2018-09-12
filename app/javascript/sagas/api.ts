@@ -25,8 +25,8 @@ export function createStepsRequest(payload) {
     .then((res) => {
       const content = JSON.parse(res.content);
       return {
-        ...content,
         ...res,
+        content,
       };
     });
 }
@@ -49,15 +49,23 @@ export function updateTitleRequest(payload) {
   return fetch('/api/recipes', options)
     .then(res => res.json())
     .then((res) => {
-      const recipes = res.map(recipe => ({
-        ...recipe,
-        user: {
-          ...recipe.user,
-          imageUrl: recipe.user.image_url,
-        },
+      return {
+        ...res,
+      };
+    });
+}
+
+export function getRecipeRequest(action) {
+  return fetch(`/api/recipes/${action.id}/edit`)
+    .then(res => res.json())
+    .then((res) => {
+      const steps = res.steps.map(step => ({
+        ...step,
+        pieceId: step.piece_id,
       }));
       return {
-        ...recipes,
+        ...res,
+        steps,
       };
     });
 }

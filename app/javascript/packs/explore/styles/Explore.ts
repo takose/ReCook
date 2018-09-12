@@ -53,11 +53,12 @@ export const iconWrapper = styledComponents.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-size: 16px;
 `;
 
 export const userIcon = styledComponents.img`
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   border-radius: 50%;
   margin-right: 6px;
 `;

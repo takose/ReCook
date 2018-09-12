@@ -45,7 +45,8 @@ ReactDOM.render(
     <ConnectedRouter history={history}>
       <Root>
         <Route path="/recipes" component={SideBar} />
-        <Route path="/recipes/editor" component={Editor} />
+        <Route path="/recipes/new" component={Editor} />
+        <Route path="/recipes/edit/:id" component={Editor} />
         <Route path="/recipes/explore" component={Explore} />
         <Route exact path="/recipes/player" component={RealtimePlayer} />
         <Route path="/recipes/player/:id" component={Player} />
