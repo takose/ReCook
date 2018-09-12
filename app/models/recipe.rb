@@ -14,4 +14,7 @@
 class Recipe < ApplicationRecord
   belongs_to :user
   has_many :steps
+
+  belongs_to :origin_recipe, class_name: 'Recipe', foreign_key: 'origin_id', optional: true
+  has_many :forked_recipes, class_name: 'Recipe'
 end
