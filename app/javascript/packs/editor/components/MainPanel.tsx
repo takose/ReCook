@@ -17,6 +17,7 @@ export interface Props {
   current: CurrentState;
   updateTitle(recipeId: number, title: string): void;
   getRecipe(id: number): void;
+  resetRecipe(): void;
 }
 
 interface State {
@@ -35,6 +36,8 @@ class MainPanel extends React.Component<RouteComponentProps<any> & Props, State>
     const { id } = this.props.match.params;
     if (id) {
       this.props.getRecipe(parseInt(id, 10));
+    } else {
+      this.props.resetRecipe();
     }
   }
 

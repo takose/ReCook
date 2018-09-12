@@ -5,6 +5,7 @@ import {
   SET_PLAY_STEPS,
   SET_EDIT_STEPS,
   CREATE_STEP_SUCCEEDED,
+  RESET_EDIT_RECIPE,
 } from '../constants';
 
 const initialState = {
@@ -53,6 +54,11 @@ export const current =
             ...state.editRecipe,
             steps: newEditSteps,
           },
+        };
+      case RESET_EDIT_RECIPE:
+        return {
+          ...state,
+          editRecipe: { id: null, title: '', steps: [] },
         };
     }
     return state;

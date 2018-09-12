@@ -73,3 +73,9 @@ export function setRecipes(recipes: RecipeState[]) {
     type: constants.SET_RECIPES,
   };
 }
+
+export function resetRecipe() {
+  return {
+    type: constants.RESET_EDIT_RECIPE,
+  };
+}

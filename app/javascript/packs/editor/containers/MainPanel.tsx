@@ -20,6 +20,9 @@ export function mapDispatchToProps(dispatch) {
       dispatch(actions.setRecipe(id));
       dispatch(actions.getEditRecipe(id));
     },
+    resetRecipe: () => {
+      dispatch(actions.resetRecipe());
+    },
   };
 }
 
