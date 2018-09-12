@@ -1,5 +1,3 @@
-import { FF_ID } from '../constants';
-
 export function createStepsRequest(payload) {
   const { action, recipeId, pieceId, token } = payload;
   delete action['type'];

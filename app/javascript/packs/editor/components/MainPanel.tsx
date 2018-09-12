@@ -4,7 +4,7 @@ import {
   topPanel as TopPanel,
   input as Input,
 } from '../styles/MainPanel';
-import { StepState, CurrentState, RecipeState } from '../../../types';
+import { StepState, CurrentState } from '../../../types';
 import { RouteComponentProps } from 'react-router';
 import FF from '../../pieces/FF/containers/FF';
 import EditorText from '../../pieces/Text/containers/EditorText';

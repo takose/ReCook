@@ -64,7 +64,6 @@ export default class FF extends React.Component<Props, State> {
 
   render() {
     const {
-      current,
       createStep,
     } = this.props;
     const form = () => {
