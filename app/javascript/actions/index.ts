@@ -1,6 +1,5 @@
 import * as constants from '../constants';
 import { RecipeState } from '../types';
-import { isContext } from 'vm';
 
 export interface SwitchPiece {
   type: constants.SWITCH_PIECE;
