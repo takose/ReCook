@@ -58,7 +58,7 @@ export function getRecipeRequest(action) {
   return fetch(`/api/recipes/${action.id}/edit`)
     .then(res => res.json())
     .then((res) => {
-      const steps = res.steps.map(step => ({
+      const steps = res.sorted_steps.map(step => ({
         ...step,
         pieceId: step.piece_id,
       }));
