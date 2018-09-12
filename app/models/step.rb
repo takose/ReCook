@@ -17,4 +17,6 @@ class Step < ApplicationRecord
   belongs_to :piece
   has_many :step_ingredients
   has_many :steps, through: :step_ingredients
+  belongs_to :next_step, class_name: 'Step', foreign_key: 'next_id', optional: true
+  has_many :before_step, class_name: 'Step'
 end
