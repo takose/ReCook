@@ -9,8 +9,10 @@ class Api::StepsController < ApplicationController
       user = User.find_by(consumer_token: body['token'])
       recipe = Recipe.create(user_id: user.id)
     end
+    last_step = recipe.steps.find_by(next_id: nil)
     step = Step.new({piece_id: body['pieceId'], content: body['content']})
     step.update_attribute(:recipe_id, recipe.id)
+    last_step.update_attributes!(next_id: step.id) if last_step
     render json: step
   end
 end
