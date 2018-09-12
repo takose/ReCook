@@ -32,4 +32,9 @@ class Api::RecipesController < ApplicationController
     recipe.update_attribute(:title, body['title'])
     render json: recipe 
   end
+
+  def destroy
+    Recipe.find(params[:id]).destroy
+    head :ok
+  end
 end
