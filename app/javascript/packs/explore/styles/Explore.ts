@@ -39,7 +39,8 @@ export const buttonWrapper = styledComponents.div`
   display: flex;
 `;
 
-export const trash = styledComponents.div`
+export const icon = styledComponents.div`
+  margin-left: 8px;
   text-align: right;
   color: #9E9E9E;
   cursor : pointer;
@@ -51,6 +52,10 @@ export const trash = styledComponents.div`
 `;
 
 export const iconWrapper = styledComponents.div`
+  display: flex;
+`;
+
+export const bottomBlock = styledComponents.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -90,7 +95,7 @@ export const recipeItem = styledComponents.div`
   &:hover {
     box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.1);
     transform: translateY(-4px);
-    ${trash} {
+    ${icon} {
       opacity: 1;
     }
   }

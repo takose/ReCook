@@ -23,7 +23,6 @@ export function createStepsRequest(payload) {
   return fetch('/api/steps', options)
     .then(res => res.json())
     .then((res) => {
-      const content = JSON.parse(res.content);
       return {
         ...res,
         content,

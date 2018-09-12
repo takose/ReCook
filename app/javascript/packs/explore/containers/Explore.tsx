@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { StoreState, RecipeState } from '../../../types';
 import * as actions from '../../../actions';
 import Explore from '../components/Explore';
@@ -6,6 +7,7 @@ import Explore from '../components/Explore';
 export function mapStateToProps(state: StoreState) {
   return {
     recipes: state.recipes,
+    user: state.user,
   };
 }
 
@@ -20,4 +22,4 @@ export function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Explore);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Explore));
