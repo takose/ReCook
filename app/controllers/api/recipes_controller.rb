@@ -14,9 +14,7 @@ class Api::RecipesController < ApplicationController
     recipe = Recipe.find(params[:id])
     render json: recipe.to_json({
       only: [:id, :title, :origin_id],
-      include: {
-        steps: { only: [:id, :piece_id, :content] }
-      }
+      methods: :sorted_steps
     })
   end
 
