@@ -17,11 +17,10 @@ export function mapDispatchToProps(dispatch) {
       dispatch(actions.updateTitle(recipeId, title));
     },
     getRecipe: (id: number) => {
-      dispatch(actions.setRecipe(id));
       dispatch(actions.getEditRecipe(id));
     },
     resetRecipe: () => {
-      dispatch(actions.resetRecipe());
+      dispatch(actions.resetEditRecipe());
     },
   };
 }

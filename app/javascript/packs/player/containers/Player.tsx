@@ -13,7 +13,6 @@ export function mapStateToProps(state: StoreState) {
 export function mapDispatchToProps(dispatch) {
   return {
     getRecipe: (id: number) => {
-      dispatch(actions.setRecipe(id));
       dispatch(actions.getPlayRecipe(id));
     },
   };

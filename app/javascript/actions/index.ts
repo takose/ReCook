@@ -9,13 +9,6 @@ export interface SwitchPiece {
 export type SwitchPieceAction = SwitchPiece;
 export type SessionAction = Session;
 
-export function switchPiece(pieceId: number): SwitchPiece {
-  return {
-    pieceId,
-    type: constants.SWITCH_PIECE,
-  };
-}
-
 export interface Session {
   type: constants.LOG_IN;
   nickname: string;
@@ -27,6 +20,14 @@ export function login(nickname: string, imageUrl: string): Session {
     nickname,
     imageUrl,
     type: constants.LOG_IN,
+  };
+}
+
+// FOR EDITOR
+export function switchPiece(pieceId: number): SwitchPiece {
+  return {
+    pieceId,
+    type: constants.SWITCH_PIECE,
   };
 }
 
@@ -45,10 +46,16 @@ export function updateTitle(recipeId: number, title: string) {
   };
 }
 
-export function getPlayRecipe(id: number) {
+// FOR EDITOR & PLAYER
+export function resetPlayRecipe() {
   return {
-    id,
-    type: constants.GET_PLAY_RECIPE,
+    type: constants.RESET_PLAY_RECIPE,
+  };
+}
+
+export function resetEditRecipe() {
+  return {
+    type: constants.RESET_EDIT_RECIPE,
   };
 }
 
@@ -59,23 +66,32 @@ export function getEditRecipe(id: number) {
   };
 }
 
-export function setRecipe(recipeId: number) {
+export function getPlayRecipe(id: number) {
   return {
-    recipeId,
-    type: constants.SET_RECIPE,
+    id,
+    type: constants.GET_PLAY_RECIPE,
   };
 }
 
+export function setPlayRecipe(recipe: RecipeState) {
+  return {
+    recipe,
+    type: constants.SET_EDIT_RECIPE,
+  };
+}
+
+export function setEditRecipe(recipe: RecipeState) {
+  return {
+    recipe,
+    type: constants.SET_PLAY_RECIPE,
+  };
+}
+
+// FOR EXPLORE
 export function setRecipes(recipes: RecipeState[]) {
   return {
     recipes,
     type: constants.SET_RECIPES,
-  };
-}
-
-export function resetRecipe() {
-  return {
-    type: constants.RESET_EDIT_RECIPE,
   };
 }
 
