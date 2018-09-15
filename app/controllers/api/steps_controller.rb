@@ -13,6 +13,6 @@ class Api::StepsController < ApplicationController
     step = Step.new({piece_id: body['pieceId'], content: body['content']})
     step.update_attribute(:recipe_id, recipe.id)
     last_step.update_attributes!(next_id: step.id) if last_step
-    render json: step
+    render json: recipe
   end
 end

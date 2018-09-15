@@ -12,10 +12,7 @@ class Api::RecipesController < ApplicationController
 
   def edit
     recipe = Recipe.find(params[:id])
-    render json: recipe.to_json({
-      only: [:id, :title, :origin_id],
-      methods: :sorted_steps
-    })
+    render json: recipe
   end
 
   def create
