@@ -45,10 +45,68 @@ class FFPlay extends React.Component<Props, State> {
           const color = ctx.getImageData(measureCoordinateX, measureCoordinateY, 1, 1).data[0];
           const temp = min + (max - min) / 255 * color;
           console.log(`min: ${min}, max: ${max}, temp: ${temp}`);
+          this.setState({ temperature: temp });
         },
         1000,
       );
     }
+    let state;
+    const { mode } = this.props.step;
+    switch (mode) {
+      case 0:
+        state = { power: 6 };
+        break;
+      case 1:
+        state = { power: this.props.step.power };
+        break;
+      case 2:
+        state = { power: this.props.step.power, time: this.props.step.time };
+        break;
+      default:
+        break;
+    }
+    this.sendCommand(state)
+      .then((res) => {
+        const { forwardStep } = this.props;
+        switch (mode) {
+          case 0:
+            let progressSec = 0;
+            setInterval(
+              () => {
+                progressSec += 1;
+                if (progressSec >= this.props.step.time) {
+                  forwardStep();
+                } else if (this.state.temperature > this.props.step.temperature) {
+                  this.sendCommand({ power: -1 });
+                } else if (this.state.temperature < this.props.step.temperature) {
+                  this.sendCommand({ power: 6 });
+                }
+              },
+              1000,
+            );
+            break;
+          case 1:
+            let intervalSign = null;
+            setInterval(
+              () => {
+                const newIntervalSign =
+                  Math.sign(this.props.step.temperature - this.state.temperature);
+                if (!intervalSign) intervalSign = newIntervalSign;
+                if (newIntervalSign !== intervalSign) {
+                  forwardStep();
+                }
+                intervalSign = newIntervalSign;
+              },
+              1000,
+            );
+            break;
+          case 2:
+            forwardStep();
+            break;
+          default:
+            break;
+        }
+      });
   }
   componentWillMount() {
     this.setState({
@@ -73,6 +131,25 @@ class FFPlay extends React.Component<Props, State> {
         return;
       });
   }
+
+  sendCommand = (step) => {
+    const { socket } = this.props;
+    const device = {
+      deviceId: 'ff',
+      states: step,
+    };
+    socket.emit('users/state:update', device);
+    socket.once('users/state:update/return', () => {
+      console.log('sent command');
+    });
+    return new Promise((resolve) => {
+      socket.once('users/ff/done', () => {
+        socket.emit('users/ff/done/return');
+        resolve();
+      });
+    });
+  }
+
   setCoordinate = (e) => {
     const rect = e.target.getBoundingClientRect();
     this.setState({
