@@ -12,6 +12,7 @@ import TasteStep from '../../../pieces/Taste/components/TasteStep';
 
 export interface Props {
   steps: StepState[];
+  stepOnClick(id: number, pieceId: number): void;
 }
 
 interface State {
@@ -36,7 +37,7 @@ class StepsPanel extends React.Component<Props, State> {
           break;
       }
       return (
-        <StepWrapper key={step.id}>
+        <StepWrapper key={step.id} onClick={() => this.props.stepOnClick(step.id, step.pieceId)}>
           {dom}
         </StepWrapper>
       );

@@ -22,6 +22,13 @@ export function mapDispatchToProps(dispatch) {
     resetRecipe: () => {
       dispatch(actions.resetEditRecipe());
     },
+    switchStep: (id: number, pieceId: number) => {
+      dispatch(actions.switchStep(id));
+      dispatch(actions.switchPiece(pieceId));
+    },
+    resetStepId: () => {
+      dispatch(actions.switchStep(null));
+    },
   };
 }
 

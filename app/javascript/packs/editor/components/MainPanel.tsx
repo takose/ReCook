@@ -18,6 +18,8 @@ export interface Props {
   updateTitle(recipeId: number, title: string): void;
   getRecipe(id: number): void;
   resetRecipe(): void;
+  switchStep(id): void;
+  resetStepId(): void;
 }
 
 interface State {
@@ -31,6 +33,10 @@ class MainPanel extends React.Component<RouteComponentProps<any> & Props, State>
     title: '',
     titleIsActive: false,
   };
+
+  componentWillUnmount() {
+    this.props.resetStepId();
+  }
 
   componentWillMount() {
     const { id } = this.props.match.params;
@@ -53,13 +59,19 @@ class MainPanel extends React.Component<RouteComponentProps<any> & Props, State>
   }
   render() {
     const selectPiece = () => {
+      let step;
+      if (this.props.current.stepId) {
+        step = JSON.parse(
+          this.props.current.editRecipe.steps.find(s => s.id === this.props.current.stepId).content
+        );
+      }
       switch (this.props.current.pieceId) {
         case FF_ID:
-          return <FF />;
+          return <FF step={step} />;
         case TEXT_ID:
-          return <EditorText />;
+          return <EditorText step={step} />;
         case TASTE_ID:
-          return <EditorTaste />;
+          return <EditorTaste step={step} />;
         default:
           break;
       }
@@ -80,7 +92,7 @@ class MainPanel extends React.Component<RouteComponentProps<any> & Props, State>
             value={title} />
           {currentPiece}
         </TopPanel>
-        <StepsPanel steps={this.props.steps} />
+        <StepsPanel stepOnClick={this.props.switchStep} steps={this.props.steps} />
       </Main>
     );
   }

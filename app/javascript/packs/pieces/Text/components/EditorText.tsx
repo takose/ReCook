@@ -13,6 +13,7 @@ interface State {
 
 export interface Props {
   createStep(content: any): void;
+  step?: TextState;
 }
 
 export default class EditorText extends React.Component<Props, State> {
@@ -20,6 +21,12 @@ export default class EditorText extends React.Component<Props, State> {
   state = {
     body: '',
   };
+
+  componentDidMount() {
+    if (this.props.step) {
+      this.setState({ ...this.props.step });
+    }
+  }
 
   reset() {
     this.setState({ body: '' });

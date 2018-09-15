@@ -35,7 +35,7 @@ export interface CurrentState {
 }
 
 export interface FFState {
-  id: number;
+  id?: number;
   mode: number;
   time?: number;
   power?: number;
@@ -43,12 +43,12 @@ export interface FFState {
 }
 
 export interface TextState {
-  id: number;
+  id?: number;
   body: string;
 }
 
 export interface TasteState {
-  id: number;
+  id?: number;
   soysauce: number;
   sake: number;
   mirin: number;

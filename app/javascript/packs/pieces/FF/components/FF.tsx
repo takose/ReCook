@@ -26,6 +26,7 @@ export interface Props {
   steps: StepState[];
   ffSteps: FFState[];
   createStep(power: number, temperature: number, time: number, mode: number): void;
+  step?: FFState;
 }
 
 export default class FF extends React.Component<Props, State> {
@@ -38,6 +39,12 @@ export default class FF extends React.Component<Props, State> {
     time: 0,
     temperature: 0,
   };
+
+  componentDidMount() {
+    if (this.props.step) {
+      this.setState({ ...this.props.step });
+    }
+  }
 
   reset = () => {
     switch (this.state.mode) {

@@ -45,6 +45,13 @@ export default class EditorTaste extends React.Component<Props, State> {
     this.mirinDom.value = '';
     this.vinegarDom.value = '';
   }
+
+  componentDidMount() {
+    if (this.props.step) {
+      this.setState({ ...this.props.step });
+    }
+  }
+
   sakeOnChange = e => this.setState({ sake: parseInt(e.target.value, 10) });
   soysauceOnChange = e => this.setState({ soysauce: parseInt(e.target.value, 10) });
   mirinOnChange = e => this.setState({ mirin: parseInt(e.target.value, 10) });

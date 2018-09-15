@@ -21,7 +21,7 @@ export const current =
       case SWITCH_STEP:
         return {
           ...state,
-          stepId: action.stepId,
+          stepId: action.id,
         };
       case SWITCH_PIECE:
         return {

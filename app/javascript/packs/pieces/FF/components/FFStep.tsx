@@ -15,7 +15,7 @@ class FFStep extends React.Component<Props, object> {
     switch (step.mode) {
       case 0:
         return (
-          <div>
+          <button>
             <ItemWrapper>
               <Label>温度&nbsp;</Label>
               <p>{step.temperature}℃</p>
@@ -24,11 +24,11 @@ class FFStep extends React.Component<Props, object> {
               <Label>時間&nbsp;</Label>
               <p>{step.time}sec</p>
             </ItemWrapper>
-          </div>
+          </button>
         );
       case 1:
         return (
-          <div>
+          <button>
             <ItemWrapper>
               <Label>温度&nbsp;</Label>
               <p>{step.temperature}℃</p>
@@ -37,11 +37,11 @@ class FFStep extends React.Component<Props, object> {
               <Label>火力&nbsp;</Label>
               <p>{step.power}</p>
             </ItemWrapper>
-          </div>
+          </button>
         );
       case 2:
         return (
-          <div>
+          <button>
             <ItemWrapper>
               <Label>火力&nbsp;</Label>
               <p>{step.power}</p>
@@ -50,7 +50,7 @@ class FFStep extends React.Component<Props, object> {
               <Label>時間&nbsp;</Label>
               <p>{step.time}sec</p>
             </ItemWrapper>
-          </div>
+          </button>
         );
       default:
         break;
