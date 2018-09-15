@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { TextState } from '../../../../types';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import {
   main as Main,
@@ -7,16 +8,12 @@ import {
   add as Add,
 } from '../../style';
 
-interface State {
-  body: string;
-}
-
 export interface Props {
   createStep(content: any): void;
   step?: TextState;
 }
 
-export default class EditorText extends React.Component<Props, State> {
+export default class EditorText extends React.Component<Props, TextState> {
   private textDom;
   state = {
     body: '',

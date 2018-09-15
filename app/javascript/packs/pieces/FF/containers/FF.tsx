@@ -5,8 +5,6 @@ import  FF from '../components/FF';
 
 export function mapStateToProps(state: StoreState) {
   return {
-    ffSteps: state.ff, // TODO
-    steps: state.steps,
     current: state.current,
   };
 }

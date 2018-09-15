@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { TasteState } from '../../../../types';
 import {
   main as Main,
   input as Input,
@@ -10,18 +11,12 @@ import {
   label as Label,
 } from '../../style';
 
-interface State {
-  sake: number;
-  soysauce: number;
-  mirin: number;
-  vinegar: number;
-}
-
 export interface Props {
   createStep(sake: number, soysauce: number, mirin: number, vinegar: number): void;
+  step: TasteState;
 }
 
-export default class EditorTaste extends React.Component<Props, State> {
+export default class EditorTaste extends React.Component<Props, TasteState> {
   private sakeDom;
   private soysauceDom;
   private mirinDom;

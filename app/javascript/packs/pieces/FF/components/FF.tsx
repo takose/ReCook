@@ -2,7 +2,7 @@ import 'babel-polyfill';
 import * as React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { CurrentState, StepState, FFState } from '../../../../types';
+import { CurrentState, FFState } from '../../../../types';
 import {
   main as Main,
   modeSelector as ModeSelector,
@@ -14,22 +14,13 @@ import {
   label as Label,
 } from '../../style';
 
-interface State {
-  power: number;
-  temperature: number;
-  time: number;
-  mode: number;
-}
-
 export interface Props {
   current: CurrentState;
-  steps: StepState[];
-  ffSteps: FFState[];
   createStep(power: number, temperature: number, time: number, mode: number): void;
   step?: FFState;
 }
 
-export default class FF extends React.Component<Props, State> {
+export default class FF extends React.Component<Props, FFState> {
   private timeDom;
   private temperatureDom;
   private powerDom;

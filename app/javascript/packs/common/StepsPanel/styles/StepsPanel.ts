@@ -24,4 +24,5 @@ export const stepWrapper = styledComponents.div`
   background: #FFF;
   letter-spacing: 1.1px;
   line-height: 1.4;
+  font-size: 18px;
 `;
