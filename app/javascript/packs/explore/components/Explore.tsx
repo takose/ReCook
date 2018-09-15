@@ -59,7 +59,7 @@ class Explore extends React.Component<RouteComponentProps<any> & Props, object> 
     fetch(`/api/recipes/${recipe.id}/fork`, options)
     .then(res => res.json())
     .then((res) => {
-      this.props.history.push(`/recipes/edit/${res.id}`);
+      this.props.history.push(`/recipes/edit/${res.recipe.id}`);
     });
   }
 

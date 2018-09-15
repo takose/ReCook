@@ -49,7 +49,7 @@ class MainPanel extends React.Component<RouteComponentProps<any> & Props, State>
     });
   }
   titleOnFocusout = (e) => {
-    this.props.updateTitle(this.props.current.recipeId, this.state.title);
+    this.props.updateTitle(this.props.current.editRecipe.id, this.state.title);
   }
   render() {
     const selectPiece = () => {

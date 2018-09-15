@@ -1,4 +1,4 @@
-export function createStepsRequest(payload) {
+export function createStepRequest(payload) {
   const { action, recipeId, pieceId, token } = payload;
   delete action['type'];
   const content = JSON.stringify({
@@ -22,14 +22,13 @@ export function createStepsRequest(payload) {
     .then(res => res.json())
     .then((res) => {
       return {
-        ...res,
-        content,
+        ...res.recipe,
       };
     });
 }
 
 export function updateTitleRequest(payload) {
-  const { action, token } = payload;
+  const { recipeId, title, token } = payload;
   const options = {
     method: 'POST',
     headers: {
@@ -39,15 +38,15 @@ export function updateTitleRequest(payload) {
     },
     body: JSON.stringify({
       token,
-      recipeId: action.recipeId,
-      title: action.title,
+      recipeId,
+      title,
     }),
   };
   return fetch('/api/recipes', options)
     .then(res => res.json())
     .then((res) => {
       return {
-        ...res,
+        ...res.recipe,
       };
     });
 }
@@ -56,13 +55,8 @@ export function getRecipeRequest(action) {
   return fetch(`/api/recipes/${action.id}/edit`)
     .then(res => res.json())
     .then((res) => {
-      const steps = res.sorted_steps.map(step => ({
-        ...step,
-        pieceId: step.piece_id,
-      }));
       return {
-        ...res,
-        steps,
+        ...res.recipe,
       };
     });
 }
