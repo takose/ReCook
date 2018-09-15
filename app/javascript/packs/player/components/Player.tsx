@@ -11,6 +11,7 @@ import {
 export interface Props {
   steps: StepState[];
   getRecipe(id: number): void;
+  switchStep(id: number): void;
 }
 
 export default class Player extends React.Component<RouteComponentProps<any> & Props, object> {

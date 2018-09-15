@@ -15,6 +15,9 @@ export function mapDispatchToProps(dispatch) {
     getRecipe: (id: number) => {
       dispatch(actions.getPlayRecipe(id));
     },
+    forwardStep: (id: number) => {
+      dispatch(actions.switchStep(id));
+    },
   };
 }
 

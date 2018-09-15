@@ -1,16 +1,21 @@
 import * as React from 'react';
 import { Tesseract } from 'tesseract.ts';
 import { CONFIG } from '../../../../constants';
+import { FFState } from '../../../../types';
 import {
   video as Video,
   canvas as Canvas,
 } from '../styles/FFPlay';
 
 export interface Props {
+  step: FFState;
+  socket: SocketIOClient.Socket;
+  forwardStep(): void;
 }
 
 export interface State {
   stream: any;
+  temperature: number;
   measureCoordinateX: number;
   measureCoordinateY: number;
 }

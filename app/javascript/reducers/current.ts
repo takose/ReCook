@@ -10,6 +10,7 @@ import {
 
 const initialState = {
   pieceId: 1,
+  stepId: null,
   playRecipe: { id: null, title: '', steps: [] },
   editRecipe: { id: null, title: '', steps: [] },
 };
