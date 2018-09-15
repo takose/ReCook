@@ -47,6 +47,13 @@ export function updateTitle(recipeId: number, title: string) {
 }
 
 // FOR EDITOR & PLAYER
+export function switchStep(id: number) {
+  return {
+    id,
+    type: constants.SWITCH_STEP,
+  };
+}
+
 export function resetPlayRecipe() {
   return {
     type: constants.RESET_PLAY_RECIPE,
