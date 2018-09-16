@@ -2,7 +2,7 @@ import 'babel-polyfill';
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import * as io from 'socket.io-client';
-import { StepState } from '../../../types';
+import { StepState, CurrentState } from '../../../types';
 import StepsPanel from '../../common/StepsPanel/containers/StepsPanel';
 import { FF_ID, TEXT_ID, TASTE_ID } from '../../../constants';
 import {
@@ -10,23 +10,36 @@ import {
   topPanel as TopPanel,
 } from '../styles/Player';
 import FFPlay from '../../pieces/FF/components/FFPlay';
+import TastePlay from '../../pieces/Taste/components/TastePlay';
+import TextPlay from '../../pieces/Text/components/TextPlay';
 
 export interface Props {
   steps: StepState[];
+  stepId: number;
   getRecipe(id: number): void;
-  switchStep(id: number): void;
+  switchStep(id: number, pieceId: number): void;
+  resetStepId(): void;
+  resetRecipe(): void;
 }
 
 export interface State {
   socket:  SocketIOClient.Socket;
-  currentStepId: number;
 }
 export default class Player extends React.Component<RouteComponentProps<any> & Props, State> {
   state = {
-    currentStepId: this.props.steps[0].id,
     socket: null,
   };
 
+  componentWillUnmount() {
+    this.props.resetStepId();
+  }
+
+  componentWillUpdate() {
+    if (this.props.steps.length > 0 && this.props.stepId === null) {
+      const step = this.props.steps[0];
+      this.props.switchStep(step.id, step.pieceId);
+    }
+  }
   componentDidMount() {
     this.setState({
       socket: this.connectWebSocket(),
@@ -37,6 +50,8 @@ export default class Player extends React.Component<RouteComponentProps<any> & P
     const { id } = this.props.match.params;
     if (id) {
       this.props.getRecipe(id);
+    } else {
+      this.props.resetRecipe();
     }
   }
 
@@ -49,19 +64,20 @@ export default class Player extends React.Component<RouteComponentProps<any> & P
   )
 
   forwardStep = () => {
-    const id = this.props.steps.find(step => step.id === this.state.currentStepId).nextId;
-    this.setState({ currentStepId: id });
-    this.props.switchStep(id);
+    const step = this.props.steps.find(s => s.id === this.props.stepId);
+    const nextStep = this.props.steps.find(s => step.nextId === s.id);
+    this.props.switchStep(nextStep.id, nextStep.pieceId);
   }
 
   render() {
-    const step = this.props.steps.find(step => step.id === this.state.currentStepId);
+    const step = this.props.steps.find(step => step.id === this.props.stepId);
     const selectPiece = () => {
+      const content = JSON.parse(step.content);
       switch (step.pieceId) {
         case FF_ID:
           return (
             <FFPlay
-              step={JSON.parse(step.content)}
+              step={content}
               socket={this.state.socket}
               forwardStep={this.forwardStep}
             />
@@ -74,12 +90,14 @@ export default class Player extends React.Component<RouteComponentProps<any> & P
           break;
       }
     };
-    const currentPiece = selectPiece();
+    const currentPiece = step ? selectPiece() : null;
     return (
       <div>
         <Main>
           <TopPanel>{currentPiece}</TopPanel>
-          <StepsPanel steps={this.props.steps} stepOnClick={this.props.switchStep} />
+          <StepsPanel
+            steps={this.props.steps}
+            stepOnClick={(stepId, pieceId) => this.props.switchStep(stepId, pieceId)} />
         </Main>
       </div>
     );

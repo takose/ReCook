@@ -81,7 +81,7 @@ export default class FF extends React.Component<Props, FFState> {
         <ItemWrapper>
           <Label>火力</Label>
           <Input
-            type="number" min={0} max={6}
+            type="number" min={-1} max={6}
             placeholder="Power"
             value={this.state.power}
             onChange={this.powerOnChange}

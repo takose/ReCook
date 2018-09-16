@@ -7,6 +7,7 @@ import Player from '../components/Player';
 export function mapStateToProps(state: StoreState) {
   return {
     steps: state.current.playRecipe.steps,
+    stepId: state.current.stepId,
   };
 }
 
@@ -17,6 +18,17 @@ export function mapDispatchToProps(dispatch) {
     },
     forwardStep: (id: number) => {
       dispatch(actions.switchStep(id));
+    },
+    resetRecipe: () => {
+      dispatch(actions.resetEditRecipe());
+    },
+    switchStep: (id: number, pieceId: number) => {
+      console.log(id, pieceId);
+      dispatch(actions.switchStep(id));
+      dispatch(actions.switchPiece(pieceId));
+    },
+    resetStepId: () => {
+      dispatch(actions.switchStep(null));
     },
   };
 }
