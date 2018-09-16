@@ -83,9 +83,9 @@ export default class Player extends React.Component<RouteComponentProps<any> & P
             />
           );
         case TEXT_ID:
-          // return <TextPlay />;
+          return <TextPlay step={content} />;
         case TASTE_ID:
-          // return <TastePlay />;
+          return <TastePlay step={content} />;
         default:
           break;
       }
