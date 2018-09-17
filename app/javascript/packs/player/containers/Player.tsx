@@ -23,7 +23,6 @@ export function mapDispatchToProps(dispatch) {
       dispatch(actions.resetEditRecipe());
     },
     switchStep: (id: number, pieceId: number) => {
-      console.log(id, pieceId);
       dispatch(actions.switchStep(id));
       dispatch(actions.switchPiece(pieceId));
     },

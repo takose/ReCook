@@ -11,6 +11,7 @@ export interface Props {
   step: FFState;
   socket: SocketIOClient.Socket;
   forwardStep(): void;
+  id: number;
 }
 
 export interface State {
@@ -21,21 +22,55 @@ export interface State {
 }
 
 class FFPlay extends React.Component<Props, State> {
+  private updateVideoInterval = null;
+  private measureTempInterval = null;
+  state = {
+    stream: null,
+    temperature: null,
+    measureCoordinateX: 160,
+    measureCoordinateY: 120,
+  };
+  clearIntervals = () => {
+    clearInterval(this.measureTempInterval);
+    clearInterval(this.updateVideoInterval);
+    this.updateVideoInterval = null;
+    this.measureTempInterval = null;
+  }
+
   componentDidMount() {
-    if (this.canvas !== undefined && this.video !== undefined) {
+    if (this.updateVideoInterval !== null) {
+      this.clearIntervals();
+    }
+    this.setupCamera();
+    this.startIntervals();
+    this.playStep();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.id !== this.props.id) {
+      this.playStep();
+    }
+  }
+
+  startIntervals = () => {
+    if (this.canvas !== undefined &&
+        this.video !== undefined &&
+        this.updateVideoInterval === null) {
       const ctx = this.canvas.getContext('2d');
       let min;
       let max;
-      setInterval(
+      this.updateVideoInterval = setInterval(
         () => {
-          const { measureCoordinateX, measureCoordinateY } = this.state;
-          ctx.drawImage(this.video, 0, 0, 320, 240);
-          ctx.rect(measureCoordinateX - 5, measureCoordinateY - 5, 10, 10);
-          ctx.stroke();
+          if (this.video) {
+            const { measureCoordinateX, measureCoordinateY } = this.state;
+            ctx.drawImage(this.video, 0, 0, 320, 240);
+            ctx.rect(measureCoordinateX - 5, measureCoordinateY - 5, 10, 10);
+            ctx.stroke();
+          }
         },
         1000 / 30,
       );
-      setInterval(
+      this.measureTempInterval = setInterval(
         () => {
           const { measureCoordinateX, measureCoordinateY } = this.state;
           Tesseract.recognize(ctx.getImageData(280, 5, 35, 20), CONFIG)
@@ -44,77 +79,14 @@ class FFPlay extends React.Component<Props, State> {
             .then((result) => { min = parseInt(result.text.replace(/\r?\n/g, ''), 10) / 10; });
           const color = ctx.getImageData(measureCoordinateX, measureCoordinateY, 1, 1).data[0];
           const temp = min + (max - min) / 255 * color;
-          console.log(`min: ${min}, max: ${max}, temp: ${temp}`);
           this.setState({ temperature: temp });
         },
         1000,
       );
     }
-    let state;
-    const { mode } = this.props.step;
-    switch (mode) {
-      case 0:
-        state = { power: 6 };
-        break;
-      case 1:
-        state = { power: this.props.step.power };
-        break;
-      case 2:
-        state = { power: this.props.step.power, time: this.props.step.time };
-        break;
-      default:
-        break;
-    }
-    this.sendCommand(state)
-      .then((res) => {
-        const { forwardStep } = this.props;
-        switch (mode) {
-          case 0:
-            let progressSec = 0;
-            setInterval(
-              () => {
-                progressSec += 1;
-                if (progressSec >= this.props.step.time) {
-                  forwardStep();
-                } else if (this.state.temperature > this.props.step.temperature) {
-                  this.sendCommand({ power: -1 });
-                } else if (this.state.temperature < this.props.step.temperature) {
-                  this.sendCommand({ power: 6 });
-                }
-              },
-              1000,
-            );
-            break;
-          case 1:
-            let intervalSign = null;
-            setInterval(
-              () => {
-                const newIntervalSign =
-                  Math.sign(this.props.step.temperature - this.state.temperature);
-                if (!intervalSign) intervalSign = newIntervalSign;
-                if (newIntervalSign !== intervalSign) {
-                  forwardStep();
-                }
-                intervalSign = newIntervalSign;
-              },
-              1000,
-            );
-            break;
-          case 2:
-            forwardStep();
-            break;
-          default:
-            break;
-        }
-      });
   }
-  componentWillMount() {
-    this.setState({
-      stream: '',
-      measureCoordinateX: 160,
-      measureCoordinateY: 120,
-    });
-    this.setState({ stream: '' });
+
+  setupCamera = () => {
     navigator.mediaDevices.getUserMedia({
       video: {
         width: 320,
@@ -132,6 +104,69 @@ class FFPlay extends React.Component<Props, State> {
       });
   }
 
+  playStep = () => {
+    let state;
+    const { mode } = this.props.step;
+    switch (mode) {
+      case 0:
+        state = { power: 6 };
+        break;
+      case 1:
+        state = { power: this.props.step.power };
+        break;
+      case 2:
+        state = { power: this.props.step.power, time: this.props.step.time };
+        break;
+      default:
+        break;
+    }
+
+    this.sendCommand(state)
+      .then((res) => {
+        const { forwardStep } = this.props;
+        switch (mode) {
+          case 0:
+            let progressSec = 0;
+            const timer = setInterval(
+              () => {
+                progressSec += 1;
+                if (progressSec >= this.props.step.time) {
+                  clearInterval(timer);
+                  forwardStep();
+                } else if (this.state.temperature > this.props.step.temperature) {
+                  this.sendCommand({ power: -1 });
+                } else if (this.state.temperature < this.props.step.temperature) {
+                  this.sendCommand({ power: 6 });
+                }
+              },
+              1000,
+            );
+            break;
+          case 1:
+            let intervalSign = null;
+            const wait = setInterval(
+              () => {
+                const newIntervalSign =
+                  Math.sign(this.props.step.temperature - this.state.temperature);
+                if (!intervalSign) intervalSign = newIntervalSign;
+                if (newIntervalSign !== intervalSign) {
+                  clearInterval(wait);
+                  forwardStep();
+                }
+                intervalSign = newIntervalSign;
+              },
+              1000,
+            );
+            break;
+          case 2:
+            forwardStep();
+            break;
+          default:
+            break;
+        }
+      });
+  }
+
   sendCommand = (step) => {
     const { socket } = this.props;
     const device = {
@@ -140,7 +175,7 @@ class FFPlay extends React.Component<Props, State> {
     };
     socket.emit('users/state:update', device);
     socket.once('users/state:update/return', () => {
-      console.log('sent command');
+      console.log(`requested power: ${step.power}, time: ${step.time}`);
     });
     return new Promise((resolve) => {
       socket.once('users/ff/done', () => {
@@ -175,6 +210,7 @@ class FFPlay extends React.Component<Props, State> {
           width={320}
           height={240}
         />
+        {this.state.temperature}
       </div>
     );
   }

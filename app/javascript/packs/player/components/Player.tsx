@@ -80,6 +80,7 @@ export default class Player extends React.Component<RouteComponentProps<any> & P
               step={content}
               socket={this.state.socket}
               forwardStep={this.forwardStep}
+              id={step.id}
             />
           );
         case TEXT_ID:
