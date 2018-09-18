@@ -14,6 +14,7 @@ import {
 export interface Props {
   createOrUpdate({}): void;
   step: TasteState;
+  id: number;
 }
 
 export default class EditorTaste extends React.Component<Props, TasteState> {

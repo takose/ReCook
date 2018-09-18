@@ -11,6 +11,7 @@ import {
 export interface Props {
   createOrUpdate(content: any): void;
   step?: TextState;
+  id: number;
 }
 
 export default class EditorText extends React.Component<Props, TextState> {
@@ -21,6 +22,12 @@ export default class EditorText extends React.Component<Props, TextState> {
 
   componentDidMount() {
     if (this.props.step) {
+      this.setState({ ...this.props.step });
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.id !== this.props.id) {
       this.setState({ ...this.props.step });
     }
   }

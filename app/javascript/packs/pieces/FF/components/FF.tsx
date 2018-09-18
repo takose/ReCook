@@ -18,6 +18,7 @@ export interface Props {
   current: CurrentState;
   createOrUpdate({}): void;
   step?: FFState;
+  id: number;
 }
 
 export default class FF extends React.Component<Props, FFState> {
@@ -33,6 +34,12 @@ export default class FF extends React.Component<Props, FFState> {
 
   componentDidMount() {
     if (this.props.step) {
+      this.setState({ ...this.props.step });
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.id !== this.props.id) {
       this.setState({ ...this.props.step });
     }
   }
