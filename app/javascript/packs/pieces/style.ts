@@ -53,7 +53,6 @@ export const add = styledComponents.button`
   padding: 0 18px;
   color: #fff;
   height: 36px;
-  width: 105px;
   letter-spacing: 4px;
   display: flex;
   align-items: center;

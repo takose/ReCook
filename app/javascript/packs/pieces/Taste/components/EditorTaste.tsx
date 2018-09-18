@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { TasteState } from '../../../../types';
 import {
   main as Main,
@@ -60,7 +60,17 @@ export default class EditorTaste extends React.Component<Props, TasteState> {
   vinegarOnChange = e => this.setState({ vinegar: parseInt(e.target.value, 10) });
 
   render() {
-    const { createOrUpdate } = this.props;
+    const { createOrUpdate, id } = this.props;
+    const text = id ? (
+      <div>
+        <FontAwesomeIcon icon={faCheck} /> &nbsp; Update
+      </div>
+    ) : (
+      <div>
+        <FontAwesomeIcon icon={faPlus} /> &nbsp; Add
+      </div>
+    );
+
     return (
       <Main>
         <Form>
@@ -107,7 +117,7 @@ export default class EditorTaste extends React.Component<Props, TasteState> {
             createOrUpdate({ sake, soysauce, mirin, vinegar });
             this.reset();
           }}>
-          <FontAwesomeIcon icon={faPlus} />&nbsp; Add
+          {text}
         </Add>
       </Main>
     );

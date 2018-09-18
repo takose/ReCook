@@ -1,7 +1,7 @@
 import 'babel-polyfill';
 import * as React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { CurrentState, FFState } from '../../../../types';
 import {
   main as Main,
@@ -70,7 +70,18 @@ export default class FF extends React.Component<Props, FFState> {
   render() {
     const {
       createOrUpdate,
+      id,
     } = this.props;
+    const text = id ? (
+      <div>
+        <FontAwesomeIcon icon={faCheck} /> &nbsp; Update
+      </div>
+    ) : (
+      <div>
+        <FontAwesomeIcon icon={faPlus} /> &nbsp; Add
+      </div>
+    );
+
     const form = () => {
       const temp = (
         <ItemWrapper>
@@ -151,7 +162,7 @@ export default class FF extends React.Component<Props, FFState> {
             });
             this.reset();
           }}>
-          <FontAwesomeIcon icon={faPlus} />&nbsp; Add
+          {text}
         </Add>
       </Main>
     );

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { TextState } from '../../../../types';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faCheck } from '@fortawesome/free-solid-svg-icons';
 import {
   main as Main,
   textbox as Textbox,
@@ -39,7 +39,17 @@ export default class EditorText extends React.Component<Props, TextState> {
   bodyOnChange = e => this.setState({ body: e.target.value });
 
   render() {
-    const { createOrUpdate } = this.props;
+    const { createOrUpdate, id } = this.props;
+    const text = id ? (
+      <div>
+        <FontAwesomeIcon icon={faCheck} /> &nbsp; Update
+      </div>
+    ) : (
+      <div>
+        <FontAwesomeIcon icon={faPlus} /> &nbsp; Add
+      </div>
+    );
+
     return (
       <Main>
         <Textbox
@@ -52,7 +62,7 @@ export default class EditorText extends React.Component<Props, TextState> {
             createOrUpdate({ body });
             this.reset();
           }}>
-          <FontAwesomeIcon icon={faPlus} />&nbsp; Add
+          {text}
         </Add>
       </Main>
     );
