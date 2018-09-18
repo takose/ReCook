@@ -15,7 +15,7 @@ class Api::StepsController < ApplicationController
     else
       last_step = recipe.steps.find_by(next_id: nil)
       step = Step.new({piece_id: body['pieceId'], content: body['content']})
-      step.update_attributes!(:recipe_id, recipe.id)
+      step.update_attributes!(recipe_id: recipe.id)
       last_step.update_attributes!(next_id: step.id) if last_step
     end
     render json: recipe
