@@ -25,14 +25,12 @@ export interface Props {
 
 interface State {
   title?: string;
-  titleIsActive: boolean;
 }
 
 class MainPanel extends React.Component<RouteComponentProps<any> & Props, State> {
   private titleDom;
   state = {
     title: '',
-    titleIsActive: false,
   };
 
   componentWillUnmount() {
@@ -49,14 +47,13 @@ class MainPanel extends React.Component<RouteComponentProps<any> & Props, State>
   }
 
   titleOnChange = e => this.setState({ title: e.target.value });
-  titleOnFocus = (e) => {
-    this.setState({
-      title: e.target.value,
-      titleIsActive: true,
-    });
-  }
   titleOnFocusout = (e) => {
     this.props.updateTitle(this.props.current.editRecipe.id, this.state.title);
+  }
+  componentDidUpdate(prevProps) {
+    if (prevProps.current.editRecipe.title !== this.props.current.editRecipe.title) {
+      this.setState({ title: this.props.current.editRecipe.title });
+    }
   }
   render() {
     const { current, createOrUpdate } = this.props;
@@ -79,9 +76,6 @@ class MainPanel extends React.Component<RouteComponentProps<any> & Props, State>
           break;
       }
     };
-    const currentPiece = selectPiece();
-    const title = this.state.titleIsActive ?
-      this.state.title : current.editRecipe.title;
     return (
       <Main>
         <TopPanel>
@@ -89,11 +83,10 @@ class MainPanel extends React.Component<RouteComponentProps<any> & Props, State>
             placeholder="タイトル"
             type="text"
             onChange={this.titleOnChange}
-            onFocus={this.titleOnFocus}
             onBlur={this.titleOnFocusout}
             innerRef={e => this.titleDom = e}
-            value={title} />
-          {currentPiece}
+            value={this.state.title} />
+          {selectPiece()}
         </TopPanel>
         <StepsPanel stepOnClick={this.props.switchStep} steps={this.props.steps} />
       </Main>

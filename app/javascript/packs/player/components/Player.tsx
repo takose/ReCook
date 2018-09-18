@@ -2,7 +2,7 @@ import 'babel-polyfill';
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import * as io from 'socket.io-client';
-import { StepState, CurrentState } from '../../../types';
+import { StepState } from '../../../types';
 import StepsPanel from '../../common/StepsPanel/containers/StepsPanel';
 import { FF_ID, TEXT_ID, TASTE_ID } from '../../../constants';
 import {
