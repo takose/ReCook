@@ -62,12 +62,10 @@ class MainPanel extends React.Component<RouteComponentProps<any> & Props, State>
     const { current, createOrUpdate } = this.props;
     const selectPiece = () => {
       let step;
-      if (this.props.current.stepId) {
-        step = JSON.parse(
-          this.props.current.editRecipe.steps.find(s => s.id === this.props.current.stepId).content
-        );
+      if (current.stepId) {
+        step = JSON.parse(current.editRecipe.steps.find(s => s.id === current.stepId).content);
       }
-      switch (this.props.current.pieceId) {
+      switch (current.pieceId) {
         case FF_ID:
           return <FF step={step} id={current.stepId}
                      createOrUpdate={content => createOrUpdate(content)} />;
@@ -83,7 +81,7 @@ class MainPanel extends React.Component<RouteComponentProps<any> & Props, State>
     };
     const currentPiece = selectPiece();
     const title = this.state.titleIsActive ?
-      this.state.title : this.props.current.editRecipe.title;
+      this.state.title : current.editRecipe.title;
     return (
       <Main>
         <TopPanel>
