@@ -10,7 +10,7 @@ import {
   DELETE_RECIPE_SUCCEEDED,
 } from '../constants';
 import {
-  createStepRequest,
+  createOrUpdateStepRequest,
   updateTitleRequest,
   getRecipeRequest,
   deleteRecipeRequest,
@@ -21,8 +21,9 @@ function* createStep(action) {
   const current = yield select(getCurrent);
   const getToken = state => state.user.token;
   const token = yield select(getToken);
-  const recipe = yield call(createStepRequest, {
+  const recipe = yield call(createOrUpdateStepRequest, {
     token,
+    stepId: action.stepId,
     recipeId: current.editRecipe.id,
     pieceId: current.pieceId,
     action: action.content,

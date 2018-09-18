@@ -31,8 +31,9 @@ export function switchPiece(pieceId: number): SwitchPiece {
   };
 }
 
-export function createStep(content: any) {
+export function createStep(stepId: number, content: any) {
   return {
+    stepId,
     content,
     type: constants.CREATE_STEP,
   };

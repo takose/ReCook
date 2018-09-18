@@ -1,5 +1,5 @@
-export function createStepRequest(payload) {
-  const { action, recipeId, pieceId, token } = payload;
+export function createOrUpdateStepRequest(payload) {
+  const { action, recipeId, stepId, pieceId, token } = payload;
   delete action['type'];
   const content = JSON.stringify({
     ...action,
@@ -12,6 +12,7 @@ export function createStepRequest(payload) {
       credentials: 'include',
     },
     body: JSON.stringify({
+      stepId,
       recipeId,
       content,
       pieceId,
