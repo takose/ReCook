@@ -5,7 +5,6 @@ import  FF from '../components/FF';
 
 export function mapStateToProps(state: StoreState) {
   return {
-    current: state.current,
   };
 }
 

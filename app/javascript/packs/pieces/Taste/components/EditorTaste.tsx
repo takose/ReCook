@@ -18,29 +18,12 @@ export interface Props {
 }
 
 export default class EditorTaste extends React.Component<Props, TasteState> {
-  private sakeDom;
-  private soysauceDom;
-  private mirinDom;
-  private vinegarDom;
   state = {
     sake: 0,
     soysauce: 0,
     mirin: 0,
     vinegar: 0,
   };
-
-  reset() {
-    this.setState({
-      sake: 0,
-      soysauce: 0,
-      mirin: 0,
-      vinegar: 0,
-    });
-    this.sakeDom.value = '';
-    this.soysauceDom.value = '';
-    this.mirinDom.value = '';
-    this.vinegarDom.value = '';
-  }
 
   componentDidMount() {
     if (this.props.step) {
@@ -61,61 +44,39 @@ export default class EditorTaste extends React.Component<Props, TasteState> {
 
   render() {
     const { createOrUpdate, id } = this.props;
-    const text = id ? (
-      <div>
-        <FontAwesomeIcon icon={faCheck} /> &nbsp; Update
-      </div>
-    ) : (
-      <div>
-        <FontAwesomeIcon icon={faPlus} /> &nbsp; Add
-      </div>
+    const { soysauce, mirin, sake, vinegar } = this.state;
+    const text = id ?
+      <div><FontAwesomeIcon icon={faCheck} /> &nbsp; Update</div> :
+      <div><FontAwesomeIcon icon={faPlus} /> &nbsp; Add</div>;
+    const formItem = (label, onChange, value) => (
+      <ItemWrapper>
+        <Label>{label}</Label>
+        <Input
+          type="number" min={0}
+          onChange={onChange}
+          value={value} />
+        CC
+      </ItemWrapper>
     );
 
     return (
       <Main>
         <Form>
-          <ItemWrapper>
-            <Label>醤油</Label>
-            <Input
-              type="number" min={0}
-              onChange={this.soysauceOnChange}
-              value={this.state.soysauce}
-              innerRef={e => this.soysauceDom = e} />
-            CC
-          </ItemWrapper>
-          <ItemWrapper>
-            <Label>みりん</Label>
-            <Input
-              type="number" min={0}
-              onChange={this.mirinOnChange}
-              value={this.state.mirin}
-              innerRef={e => this.mirinDom = e} />
-            CC
-          </ItemWrapper>
-          <ItemWrapper>
-            <Label>酒</Label>
-            <Input
-              type="number" min={0}
-              onChange={this.sakeOnChange}
-              value={this.state.sake}
-              innerRef={e => this.sakeDom = e} />
-            CC
-          </ItemWrapper>
-          <ItemWrapper>
-            <Label>酢</Label>
-            <Input
-              type="number" min={0}
-              onChange={this.vinegarOnChange}
-              value={this.state.vinegar}
-              innerRef={e => this.vinegarDom = e} />
-            CC
-          </ItemWrapper>
+          {formItem('醤油', this.soysauceOnChange, soysauce)}
+          {formItem('みりん', this.mirinOnChange, mirin)}
+          {formItem('酒', this.sakeOnChange, sake)}
+          {formItem('酢', this.vinegarOnChange, vinegar)}
         </Form>
         <Add
           onClick={() => {
             const { soysauce, mirin, sake, vinegar } = this.state;
             createOrUpdate({ sake, soysauce, mirin, vinegar });
-            this.reset();
+            this.setState({
+              sake: 0,
+              soysauce: 0,
+              mirin: 0,
+              vinegar: 0,
+            });
           }}>
           {text}
         </Add>

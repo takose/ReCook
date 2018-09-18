@@ -2,7 +2,7 @@ import 'babel-polyfill';
 import * as React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faCheck } from '@fortawesome/free-solid-svg-icons';
-import { CurrentState, FFState } from '../../../../types';
+import { FFState } from '../../../../types';
 import {
   main as Main,
   modeSelector as ModeSelector,
@@ -15,16 +15,12 @@ import {
 } from '../../style';
 
 export interface Props {
-  current: CurrentState;
   createOrUpdate({}): void;
   step?: FFState;
   id: number;
 }
 
 export default class FF extends React.Component<Props, FFState> {
-  private timeDom;
-  private temperatureDom;
-  private powerDom;
   state = {
     mode: 0,
     power: 0,
@@ -44,88 +40,38 @@ export default class FF extends React.Component<Props, FFState> {
     }
   }
 
-  reset = () => {
-    switch (this.state.mode) {
-      case 0:
-        this.temperatureDom.value = 0;
-        this.timeDom.value = 0;
-        break;
-      case 1:
-        this.temperatureDom.value = 0;
-        this.powerDom.value = 0;
-        break;
-      case 2:
-        this.powerDom.value = 0;
-        this.timeDom.value = 0;
-        break;
-      default:
-        break;
-    }
-  }
   timeOnChange = e => this.setState({ time: parseInt(e.target.value, 10) });
   powerOnChange = e => this.setState({ power: parseInt(e.target.value, 10) });
   temperatureOnChange = e => this.setState({ temperature: parseInt(e.target.value, 10) });
   modeOnChanged = (mode: number) => this.setState({ mode });
 
   render() {
-    const {
-      createOrUpdate,
-      id,
-    } = this.props;
-    const text = id ? (
-      <div>
-        <FontAwesomeIcon icon={faCheck} /> &nbsp; Update
-      </div>
-    ) : (
-      <div>
-        <FontAwesomeIcon icon={faPlus} /> &nbsp; Add
-      </div>
+    const { createOrUpdate, id } = this.props;
+    const text = id ?
+      <div><FontAwesomeIcon icon={faCheck} /> &nbsp; Update</div> :
+      <div><FontAwesomeIcon icon={faPlus} /> &nbsp; Add</div>;
+    const formItem = (title, min, max, value, unit) => (
+      <ItemWrapper>
+        <Label>{title}</Label>
+        <Input
+          type="number" min={min} max={max}
+          value={value}
+          onChange={this.temperatureOnChange}
+        />{unit}
+        </ItemWrapper>
     );
-
     const form = () => {
-      const temp = (
-        <ItemWrapper>
-          <Label>温度</Label>
-          <Input
-            type="number" min={0} max={200}
-            placeholder="Temperature"
-            value={this.state.temperature}
-            onChange={this.temperatureOnChange}
-            innerRef={e => this.temperatureDom = e}
-          /> ℃
-        </ItemWrapper>
-      );
-      const power = (
-        <ItemWrapper>
-          <Label>火力</Label>
-          <Input
-            type="number" min={-1} max={6}
-            placeholder="Power"
-            value={this.state.power}
-            onChange={this.powerOnChange}
-            innerRef={e => this.powerDom = e}
-          />
-        </ItemWrapper>
-      );
-      const time = (
-        <ItemWrapper>
-          <Label>時間</Label>
-          <Input
-            type="number" min={0}
-            placeholder="Time"
-            value={this.state.time}
-            onChange={this.timeOnChange}
-            innerRef={e => this.timeDom = e}
-          /> sec
-        </ItemWrapper>
-      );
+      const { temperature, power, time } = this.state;
+      const tempDom = formItem('温度', 0, 200, temperature, '℃');
+      const powerDom = formItem('火力', -1, 6, power, '');
+      const timeDom = formItem('時間', 0, null, time, 'sec');
       switch (this.state.mode) {
         case 0:
-          return <Form>{temp}{time}</Form>;
+          return <Form>{tempDom}{timeDom}</Form>;
         case 1:
-          return <Form>{temp}{power}</Form>;
+          return <Form>{tempDom}{powerDom}</Form>;
         case 2:
-          return <Form>{power}{time}</Form>;
+          return <Form>{powerDom}{timeDom}</Form>;
         default:
           break;
       }
@@ -160,7 +106,6 @@ export default class FF extends React.Component<Props, FFState> {
               power: 0,
               time: 0,
             });
-            this.reset();
           }}>
           {text}
         </Add>

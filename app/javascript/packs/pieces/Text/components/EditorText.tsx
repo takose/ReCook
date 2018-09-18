@@ -15,7 +15,6 @@ export interface Props {
 }
 
 export default class EditorText extends React.Component<Props, TextState> {
-  private textDom;
   state = {
     body: '',
   };
@@ -32,35 +31,24 @@ export default class EditorText extends React.Component<Props, TextState> {
     }
   }
 
-  reset() {
-    this.setState({ body: '' });
-    this.textDom.value = '';
-  }
   bodyOnChange = e => this.setState({ body: e.target.value });
 
   render() {
     const { createOrUpdate, id } = this.props;
-    const text = id ? (
-      <div>
-        <FontAwesomeIcon icon={faCheck} /> &nbsp; Update
-      </div>
-    ) : (
-      <div>
-        <FontAwesomeIcon icon={faPlus} /> &nbsp; Add
-      </div>
-    );
+    const text = id ?
+      <div><FontAwesomeIcon icon={faCheck} /> &nbsp; Update</div> :
+      <div><FontAwesomeIcon icon={faPlus} /> &nbsp; Add</div>;
 
     return (
       <Main>
         <Textbox
           onChange={this.bodyOnChange}
-          value={this.state.body}
-          innerRef={e => this.textDom = e} />
+          value={this.state.body} />
         <Add
           onClick={() => {
             const { body } = this.state;
             createOrUpdate({ body });
-            this.reset();
+            this.setState({ body: '' });
           }}>
           {text}
         </Add>
