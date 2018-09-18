@@ -12,7 +12,7 @@ import {
 } from '../../style';
 
 export interface Props {
-  createStep(sake: number, soysauce: number, mirin: number, vinegar: number): void;
+  createOrUpdate({}): void;
   step: TasteState;
 }
 
@@ -47,13 +47,19 @@ export default class EditorTaste extends React.Component<Props, TasteState> {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.id !== this.props.id) {
+      this.setState({ ...this.props.step });
+    }
+  }
+
   sakeOnChange = e => this.setState({ sake: parseInt(e.target.value, 10) });
   soysauceOnChange = e => this.setState({ soysauce: parseInt(e.target.value, 10) });
   mirinOnChange = e => this.setState({ mirin: parseInt(e.target.value, 10) });
   vinegarOnChange = e => this.setState({ vinegar: parseInt(e.target.value, 10) });
 
   render() {
-    const { createStep } = this.props;
+    const { createOrUpdate } = this.props;
     return (
       <Main>
         <Form>
@@ -97,7 +103,7 @@ export default class EditorTaste extends React.Component<Props, TasteState> {
         <Add
           onClick={() => {
             const { soysauce, mirin, sake, vinegar } = this.state;
-            createStep(sake, soysauce, mirin, vinegar);
+            createOrUpdate({ sake, soysauce, mirin, vinegar });
             this.reset();
           }}>
           <FontAwesomeIcon icon={faPlus} />&nbsp; Add

@@ -11,9 +11,6 @@ export function mapStateToProps(state: StoreState) {
 
 export function mapDispatchToProps(dispatch) {
   return {
-    createStep: (power: number, temperature: number, time: number, mode: number) => {
-      dispatch(actions.createStep({ power, temperature, time, mode }));
-    },
   };
 }
 

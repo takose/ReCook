@@ -9,7 +9,7 @@ import {
 } from '../../style';
 
 export interface Props {
-  createStep(content: any): void;
+  createOrUpdate(content: any): void;
   step?: TextState;
 }
 
@@ -32,7 +32,7 @@ export default class EditorText extends React.Component<Props, TextState> {
   bodyOnChange = e => this.setState({ body: e.target.value });
 
   render() {
-    const { createStep } = this.props;
+    const { createOrUpdate } = this.props;
     return (
       <Main>
         <Textbox
@@ -42,7 +42,7 @@ export default class EditorText extends React.Component<Props, TextState> {
         <Add
           onClick={() => {
             const { body } = this.state;
-            createStep(body);
+            createOrUpdate({ body });
             this.reset();
           }}>
           <FontAwesomeIcon icon={faPlus} />&nbsp; Add

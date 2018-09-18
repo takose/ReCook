@@ -10,9 +10,6 @@ export function mapStateToProps(state: StoreState) {
 
 export function mapDispatchToProps(dispatch) {
   return {
-    createStep: (body: any) => {
-      dispatch(actions.createStep({ body }));
-    },
   };
 }
 

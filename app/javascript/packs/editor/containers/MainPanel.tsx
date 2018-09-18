@@ -29,6 +29,9 @@ export function mapDispatchToProps(dispatch) {
     resetStepId: () => {
       dispatch(actions.switchStep(null));
     },
+    createOrUpdate: (content) => {
+      dispatch(actions.createStep({ ...content }));
+    },
   };
 }
 

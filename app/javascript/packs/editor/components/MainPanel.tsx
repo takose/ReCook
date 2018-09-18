@@ -20,6 +20,7 @@ export interface Props {
   resetRecipe(): void;
   switchStep(id): void;
   resetStepId(): void;
+  createOrUpdate({}): void;
 }
 
 interface State {
@@ -58,6 +59,7 @@ class MainPanel extends React.Component<RouteComponentProps<any> & Props, State>
     this.props.updateTitle(this.props.current.editRecipe.id, this.state.title);
   }
   render() {
+    const { current, createOrUpdate } = this.props;
     const selectPiece = () => {
       let step;
       if (this.props.current.stepId) {
@@ -67,11 +69,14 @@ class MainPanel extends React.Component<RouteComponentProps<any> & Props, State>
       }
       switch (this.props.current.pieceId) {
         case FF_ID:
-          return <FF step={step} />;
+          return <FF step={step} id={current.stepId}
+                     createOrUpdate={content => createOrUpdate(content)} />;
         case TEXT_ID:
-          return <EditorText step={step} />;
+          return <EditorText step={step} id={current.stepId}
+                             createOrUpdate={content => createOrUpdate(content)} />;
         case TASTE_ID:
-          return <EditorTaste step={step} />;
+          return <EditorTaste step={step} id={current.stepId}
+                              createOrUpdate={content => createOrUpdate(content)} />;
         default:
           break;
       }
