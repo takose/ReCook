@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faPlay, faEdit, faCodeBranch, faCode } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faPlay, faEdit, faCodeBranch } from '@fortawesome/free-solid-svg-icons';
 import { RecipeState, UserState } from '../../../types';
 import {
   main as Main,
