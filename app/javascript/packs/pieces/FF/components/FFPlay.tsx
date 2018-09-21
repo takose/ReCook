@@ -109,7 +109,8 @@ class FFPlay extends React.Component<Props, State> {
     const { mode } = this.props.step;
     switch (mode) {
       case 0:
-        state = { power: 6 };
+        const p = this.props.step.temperature < this.state.temperature ? 0 : 6;
+        state = { power: p };
         break;
       case 1:
         state = { power: this.props.step.power };

@@ -50,21 +50,21 @@ export default class FF extends React.Component<Props, FFState> {
     const text = id ?
       <div><FontAwesomeIcon icon={faCheck} /> &nbsp; Update</div> :
       <div><FontAwesomeIcon icon={faPlus} /> &nbsp; Add</div>;
-    const formItem = (title, min, max, value, unit) => (
+    const formItem = (title, min, max, value, onChange, unit) => (
       <ItemWrapper>
         <Label>{title}</Label>
         <Input
           type="number" min={min} max={max}
           value={value}
-          onChange={this.temperatureOnChange}
+          onChange={onChange}
         />{unit}
         </ItemWrapper>
     );
     const form = () => {
       const { temperature, power, time } = this.state;
-      const tempDom = formItem('温度', 0, 200, temperature, '℃');
-      const powerDom = formItem('火力', -1, 6, power, '');
-      const timeDom = formItem('時間', 0, null, time, 'sec');
+      const tempDom = formItem('温度', 0, 200, temperature, this.temperatureOnChange, '℃');
+      const powerDom = formItem('火力', -1, 6, power, this.powerOnChange, '');
+      const timeDom = formItem('時間', 0, null, time, this.timeOnChange, 'sec');
       switch (this.state.mode) {
         case 0:
           return <Form>{tempDom}{timeDom}</Form>;
