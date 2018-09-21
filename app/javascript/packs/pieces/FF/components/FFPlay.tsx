@@ -22,6 +22,7 @@ export interface Props {
 export interface State {
   stream: any;
   temperature: number;
+  restTime: number;
   measureCoordinateX: number;
   measureCoordinateY: number;
 }
@@ -32,6 +33,7 @@ class FFPlay extends React.Component<Props, State> {
   state = {
     stream: null,
     temperature: null,
+    restTime: null,
     measureCoordinateX: 160,
     measureCoordinateY: 120,
   };
@@ -144,6 +146,7 @@ class FFPlay extends React.Component<Props, State> {
                 } else if (this.state.temperature < this.props.step.temperature) {
                   this.sendCommand({ power: 6 });
                 }
+                this.setState({ restTime: this.props.step.time - progressSec });
               },
               1000,
             );
