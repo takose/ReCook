@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { TextState } from '../../../../types';
-import TextStep from './TextStep';
 export interface Props {
   step: TextState;
 }
+import {
+  textPlayMain as TextPlayMain,
+} from '../../style';
 
 export interface State {
 }
@@ -11,7 +13,7 @@ export interface State {
 class TextPlay extends React.Component<Props, State> {
   render() {
     return (
-      <TextStep step={this.props.step} />
+      <TextPlayMain>{this.props.step.body}</TextPlayMain>
     );
   }
 }

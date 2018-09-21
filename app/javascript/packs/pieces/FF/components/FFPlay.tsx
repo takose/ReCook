@@ -2,10 +2,15 @@ import * as React from 'react';
 import { Tesseract } from 'tesseract.ts';
 import { CONFIG } from '../../../../constants';
 import { FFState } from '../../../../types';
+import FFStep from './FFStep';
 import {
   video as Video,
   canvas as Canvas,
+  ffMain as FFMain,
+  currentState as CurrentState,
+  itemWrapper as ItemWrapper,
 } from '../styles/FFPlay';
+import { itemWrapper } from '../../style';
 
 export interface Props {
   step: FFState;
@@ -197,8 +202,16 @@ class FFPlay extends React.Component<Props, State> {
   private canvas;
   private video: HTMLVideoElement;
   render() {
+    const temp = this.state.temperature ? `${this.state.temperature.toPrecision(4)}℃` : '認識中..';
+    const time = this.props.step.mode === 0 ?
+      (
+        <ItemWrapper>
+          <label>残り時間:</label>
+          <p>${this.state.restTime} sec</p>
+        </ItemWrapper>
+      ) : '';
     return (
-      <div>
+      <FFMain>
         <Video
           innerRef={(e: HTMLVideoElement) => { this.video = e; }}
           autoPlay
@@ -211,8 +224,15 @@ class FFPlay extends React.Component<Props, State> {
           width={320}
           height={240}
         />
-        {this.state.temperature}
-      </div>
+        <CurrentState>
+          <ItemWrapper>
+            <label>現在温度:</label>
+            <p>{temp}</p>
+          </ItemWrapper>
+          {time}
+        </CurrentState>
+        <FFStep step={this.props.step} />
+      </FFMain>
     );
   }
 }

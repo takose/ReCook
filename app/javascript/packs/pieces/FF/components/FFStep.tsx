@@ -2,6 +2,7 @@ import * as React from 'react';
 import {
   itemWrapper as ItemWrapper,
   label as Label,
+  ffStepMain as FFStepMain,
 } from '../../style';
 import { FFState } from '../../../../types';
 
@@ -58,7 +59,11 @@ class FFStep extends React.Component<Props, object> {
   }
   render() {
     const step = this.switchViewByMode();
-    return (step);
+    return (
+      <FFStepMain>
+        {step}
+      </FFStepMain>
+    );
   }
 }
 

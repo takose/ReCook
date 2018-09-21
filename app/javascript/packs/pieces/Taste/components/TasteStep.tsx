@@ -16,19 +16,19 @@ class TextStep extends React.Component<Props, object> {
       <div>
         <ItemWrapper>
           <Label>醤油&nbsp;</Label>
-          {this.props.step.soysauce}CC
+          <p>{this.props.step.soysauce}CC</p>
         </ItemWrapper>
         <ItemWrapper>
           <Label>みりん&nbsp;</Label>
-          {this.props.step.mirin}CC
+          <p>{this.props.step.mirin}CC</p>
         </ItemWrapper>
         <ItemWrapper>
           <Label>酒&nbsp;</Label>
-          {this.props.step.sake}CC
+          <p>{this.props.step.sake}CC</p>
         </ItemWrapper>
         <ItemWrapper>
           <Label>酢&nbsp;</Label>
-          {this.props.step.vinegar}CC
+          <p>{this.props.step.vinegar}CC</p>
         </ItemWrapper>
       </div>
     );
