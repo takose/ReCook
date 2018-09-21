@@ -55,6 +55,7 @@ class FFPlay extends React.Component<Props, State> {
 
   componentDidUpdate(prevProps) {
     if (prevProps.id !== this.props.id) {
+      this.clearIntervals();
       this.playStep();
     }
   }
