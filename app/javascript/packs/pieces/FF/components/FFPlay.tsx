@@ -10,7 +10,6 @@ import {
   currentState as CurrentState,
   itemWrapper as ItemWrapper,
 } from '../styles/FFPlay';
-import { itemWrapper } from '../../style';
 
 export interface Props {
   step: FFState;
@@ -124,7 +123,7 @@ class FFPlay extends React.Component<Props, State> {
         state = { power: this.props.step.power };
         break;
       case 2:
-        state = { power: this.props.step.power, time: this.props.step.time };
+        state = { power: this.props.step.power, time: 1 };
         break;
       default:
         break;
@@ -169,7 +168,20 @@ class FFPlay extends React.Component<Props, State> {
             );
             break;
           case 2:
-            forwardStep();
+            let pastSec = 0;
+            const timerByPower = setInterval(
+              () => {
+                pastSec += 1;
+                if (pastSec >= this.props.step.time) {
+                  clearInterval(timerByPower);
+                  forwardStep();
+                } else {
+                  this.sendCommand({ power: this.props.step.power, time: 1 });
+                }
+                this.setState({ restTime: this.props.step.time - pastSec });
+              },
+              1000,
+            );
             break;
           default:
             break;
@@ -207,11 +219,11 @@ class FFPlay extends React.Component<Props, State> {
   private video: HTMLVideoElement;
   render() {
     const temp = this.state.temperature ? `${this.state.temperature.toPrecision(4)}℃` : '認識中..';
-    const time = this.props.step.mode === 0 ?
+    const time = this.props.step.mode !== 1 ?
       (
         <ItemWrapper>
           <label>残り時間:</label>
-          <p>${this.state.restTime} sec</p>
+          <p>{this.state.restTime} sec</p>
         </ItemWrapper>
       ) : '';
     return (
