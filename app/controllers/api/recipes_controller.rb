@@ -34,9 +34,11 @@ class Api::RecipesController < ApplicationController
     origin_recipe = Recipe.find(params[:id])
     new_recipe = origin_recipe.dup
     new_recipe.update_attributes!(user_id: user.id, origin_id: params[:id])
-    origin_recipe.steps.each do |step|
+    next_id = nil
+    origin_recipe.sorted_steps.reverse.each do |step|
       newStep = step.dup
-      newStep.update_attributes(recipe_id: new_recipe.id)
+      newStep.update_attributes!(recipe_id: new_recipe.id, next_id: next_id)
+      next_id = newStep.id
     end
     render json: new_recipe
   end
