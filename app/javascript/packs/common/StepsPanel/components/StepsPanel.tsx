@@ -12,6 +12,7 @@ import TasteStep from '../../../pieces/Taste/components/TasteStep';
 
 export interface Props {
   steps: StepState[];
+  currentStepId: number;
   stepOnClick(id: number, pieceId: number): void;
 }
 
@@ -37,7 +38,10 @@ class StepsPanel extends React.Component<Props, State> {
           break;
       }
       return (
-        <StepWrapper key={step.id} onClick={() => this.props.stepOnClick(step.id, step.pieceId)}>
+        <StepWrapper
+          key={step.id}
+          onClick={() => this.props.stepOnClick(step.id, step.pieceId)}
+          isActive={this.props.currentStepId === step.id}>
           {dom}
         </StepWrapper>
       );

@@ -4,6 +4,7 @@ import StepsPanel from '../components/StepsPanel';
 
 export function mapStateToProps(state: StoreState) {
   return {
+    currentStepId: state.current.stepId,
   };
 }
 
@@ -12,4 +13,4 @@ export function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect()(StepsPanel);
+export default connect(mapStateToProps)(StepsPanel);
