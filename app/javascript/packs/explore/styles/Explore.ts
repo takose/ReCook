@@ -97,13 +97,13 @@ export const recipeItem = styledComponents.div`
   padding: 20px;
   margin: 15px;
   background: #FFF;
-  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.07);
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   transition: all 300ms;
   &:hover {
-    box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.12);
     transform: translateY(-4px);
     ${icon} {
       opacity: 1;
