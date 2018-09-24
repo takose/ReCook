@@ -6,6 +6,7 @@ import {
   RESET_PLAY_RECIPE,
   SET_EDIT_RECIPE,
   SET_PLAY_RECIPE,
+  DELETE_STEP_SUCCEEDED,
 } from '../constants';
 
 const initialState = {
@@ -51,6 +52,15 @@ export const current =
         return {
           ...state,
           playRecipe: { id: null, title: '', steps: [] },
+        };
+      case DELETE_STEP_SUCCEEDED:
+        const newSteps = state.editRecipe.steps.filter(step => step.id !== action.id);
+        return {
+          ...state,
+          editRecipe: {
+            ...state.editRecipe,
+            steps: newSteps,
+          },
         };
     }
     return state;

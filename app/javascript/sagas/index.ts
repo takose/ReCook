@@ -8,12 +8,16 @@ import {
   GET_PLAY_RECIPE,
   DELETE_RECIPE,
   DELETE_RECIPE_SUCCEEDED,
+  DELETE_STEP,
+  DELETE_STEP_SUCCEEDED,
+  SWITCH_STEP,
 } from '../constants';
 import {
   createOrUpdateStepRequest,
   updateTitleRequest,
   getRecipeRequest,
   deleteRecipeRequest,
+  deleteStepRequest,
 } from './api';
 
 function* createStep(action) {
@@ -72,12 +76,27 @@ function* deleteRecipe(action) {
   }
 }
 
+function* deleteStep(action) {
+  const result = yield call(deleteStepRequest, action);
+  if (result) {
+    yield put({
+      id: null,
+      type: SWITCH_STEP,
+    });
+    yield put({
+      id: action.stepId,
+      type: DELETE_STEP_SUCCEEDED,
+    });
+  }
+}
+
 function* reCookSaga() {
   yield takeEvery(CREATE_STEP, createStep);
   yield takeEvery(UPDATE_TITLE, updateTitle);
   yield takeEvery(GET_EDIT_RECIPE, getEditRecipe);
   yield takeEvery(GET_PLAY_RECIPE, getPlayRecipe);
   yield takeEvery(DELETE_RECIPE, deleteRecipe);
+  yield takeEvery(DELETE_STEP, deleteStep);
 }
 
 export default reCookSaga;

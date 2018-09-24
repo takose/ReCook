@@ -12,10 +12,12 @@ import {
   itemWrapper as ItemWrapper,
   add as Add,
   label as Label,
+  deleteButton as DeleteButton,
 } from '../../style';
 
 export interface Props {
   createOrUpdate({}): void;
+  deleteStep(): void;
   step?: FFState;
   id: number;
 }
@@ -109,6 +111,13 @@ export default class FF extends React.Component<Props, FFState> {
           }}>
           {text}
         </Add>
+        {this.props.id ? (
+          <DeleteButton
+            onClick={this.props.deleteStep}
+          >
+          delete
+          </DeleteButton>
+        ) : ''}
       </Main>
     );
   }

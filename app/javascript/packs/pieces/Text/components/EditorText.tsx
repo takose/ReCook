@@ -6,10 +6,12 @@ import {
   main as Main,
   textbox as Textbox,
   add as Add,
+  deleteButton as DeleteButton,
 } from '../../style';
 
 export interface Props {
   createOrUpdate(content: any): void;
+  deleteStep(): void;
   step?: TextState;
   id: number;
 }
@@ -52,6 +54,13 @@ export default class EditorText extends React.Component<Props, TextState> {
           }}>
           {text}
         </Add>
+        {this.props.id ? (
+          <DeleteButton
+            onClick={this.props.deleteStep}
+          >
+          delete
+          </DeleteButton>
+        ) : ''}
       </Main>
     );
   }

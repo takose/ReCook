@@ -21,6 +21,7 @@ export interface Props {
   switchStep(id): void;
   resetStepId(): void;
   createOrUpdate(stepId, {}): void;
+  deleteStep(stepId: number);
 }
 
 interface State {
@@ -56,7 +57,7 @@ class MainPanel extends React.Component<RouteComponentProps<any> & Props, State>
     }
   }
   render() {
-    const { current, createOrUpdate } = this.props;
+    const { current, createOrUpdate, deleteStep } = this.props;
     const selectPiece = () => {
       let step;
       if (current.stepId) {
@@ -65,13 +66,19 @@ class MainPanel extends React.Component<RouteComponentProps<any> & Props, State>
       switch (current.pieceId) {
         case FF_ID:
           return <FF step={step} id={current.stepId}
-                  createOrUpdate={content => createOrUpdate(current.stepId, content)} />;
+                  createOrUpdate={content => createOrUpdate(current.stepId, content)}
+                  deleteStep={() => deleteStep(current.stepId)}
+                />;
         case TEXT_ID:
           return <EditorText step={step} id={current.stepId}
-                  createOrUpdate={content => createOrUpdate(current.stepId, content)} />;
+                  createOrUpdate={content => createOrUpdate(current.stepId, content)}
+                  deleteStep={() => deleteStep(current.stepId)}
+                />;
         case TASTE_ID:
           return <EditorTaste step={step} id={current.stepId}
-                  createOrUpdate={content => createOrUpdate(current.stepId, content)} />;
+                  createOrUpdate={content => createOrUpdate(current.stepId, content)}
+                  deleteStep={() => deleteStep(current.stepId)}
+                />;
         default:
           break;
       }

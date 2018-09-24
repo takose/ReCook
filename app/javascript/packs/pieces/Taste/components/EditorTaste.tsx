@@ -9,10 +9,12 @@ import {
   form as Form,
   itemWrapper as ItemWrapper,
   label as Label,
+  deleteButton as DeleteButton,
 } from '../../style';
 
 export interface Props {
   createOrUpdate({}): void;
+  deleteStep(): void;
   step: TasteState;
   id: number;
 }
@@ -80,6 +82,13 @@ export default class EditorTaste extends React.Component<Props, TasteState> {
           }}>
           {text}
         </Add>
+        {this.props.id ? (
+          <DeleteButton
+            onClick={this.props.deleteStep}
+          >
+          delete
+          </DeleteButton>
+        ) : ''}
       </Main>
     );
   }

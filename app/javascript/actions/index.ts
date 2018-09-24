@@ -47,6 +47,13 @@ export function updateTitle(recipeId: number, title: string) {
   };
 }
 
+export function deleteStep(stepId: number) {
+  return {
+    stepId,
+    type: constants.DELETE_STEP,
+  };
+}
+
 // FOR EDITOR & PLAYER
 export function switchStep(id: number) {
   return {

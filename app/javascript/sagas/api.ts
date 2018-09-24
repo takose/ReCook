@@ -68,3 +68,10 @@ export function deleteRecipeRequest(action) {
       return true;
     });
 }
+
+export function deleteStepRequest(action) {
+  return fetch(`/api/steps/${action.stepId}`, { method: 'DELETE' })
+    .then(() => {
+      return true;
+    });
+}
