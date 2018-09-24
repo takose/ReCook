@@ -34,8 +34,8 @@ export default class Player extends React.Component<RouteComponentProps<any> & P
     this.props.resetStepId();
   }
 
-  componentWillUpdate() {
-    if (this.props.steps.length > 0 && this.props.stepId === null) {
+  componentDidUpdate(prevProps) {
+    if (prevProps.steps.length <= 0 && this.props.steps.length > 0) {
       const step = this.props.steps[0];
       this.props.switchStep(step.id, step.pieceId);
     }
