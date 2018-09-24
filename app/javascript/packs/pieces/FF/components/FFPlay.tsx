@@ -29,6 +29,9 @@ export interface State {
 class FFPlay extends React.Component<Props, State> {
   private updateVideoInterval = null;
   private measureTempInterval = null;
+  private mode0Interval = null;
+  private mode1Interval = null;
+  private mode2Interval = null;
   state = {
     stream: null,
     temperature: null,
@@ -36,11 +39,18 @@ class FFPlay extends React.Component<Props, State> {
     measureCoordinateX: 160,
     measureCoordinateY: 120,
   };
+
   clearIntervals = () => {
     clearInterval(this.measureTempInterval);
     clearInterval(this.updateVideoInterval);
     this.updateVideoInterval = null;
     this.measureTempInterval = null;
+  }
+
+  clearStepIntervals = () => {
+    clearInterval(this.mode0Interval);
+    clearInterval(this.mode1Interval);
+    clearInterval(this.mode2Interval);
   }
 
   componentDidMount() {
@@ -54,13 +64,14 @@ class FFPlay extends React.Component<Props, State> {
 
   componentDidUpdate(prevProps) {
     if (prevProps.id !== this.props.id) {
-      this.clearIntervals();
+      this.clearStepIntervals();
       this.playStep();
     }
   }
 
   componentWillUnmount() {
     this.clearIntervals();
+    this.clearStepIntervals();
   }
 
   startIntervals = () => {
@@ -116,81 +127,66 @@ class FFPlay extends React.Component<Props, State> {
   }
 
   playStep = () => {
-    let state;
-    const { mode } = this.props.step;
+    const { mode, temperature } = this.props.step;
+    const { forwardStep } = this.props;
     switch (mode) {
       case 0:
-        const p = this.props.step.temperature < this.state.temperature ? 0 : 6;
-        state = { power: p };
+        let progressSec = 0;
+        this.sendCommand({ power: temperature > temperature ? 6 : 0 });
+        this.mode0Interval = setInterval(
+          () => {
+            progressSec += 1;
+            if (progressSec >= this.props.step.time) {
+              clearInterval(this.mode0Interval);
+              forwardStep();
+            } else if (this.state.temperature > this.props.step.temperature) {
+              this.sendCommand({ power: -1 });
+            } else if (this.state.temperature < this.props.step.temperature) {
+              this.sendCommand({ power: 6 });
+            }
+            this.setState({ restTime: this.props.step.time - progressSec });
+          },
+          1000,
+        );
         break;
       case 1:
-        state = { power: this.props.step.power };
+        let intervalSign = null;
+        this.sendCommand({ power: this.props.step.power });
+        this.mode1Interval = setInterval(
+          () => {
+            const newIntervalSign =
+              Math.sign(this.props.step.temperature - this.state.temperature);
+            if (!intervalSign) intervalSign = newIntervalSign;
+            if (newIntervalSign && intervalSign && newIntervalSign !== intervalSign) {
+              console.log(intervalSign, newIntervalSign);
+              clearInterval(this.mode1Interval);
+              forwardStep();
+            }
+            intervalSign = newIntervalSign;
+          },
+          1000,
+        );
         break;
       case 2:
-        state = { power: this.props.step.power, time: 1 };
+        this.sendCommand({ power: this.props.step.power, time: 1 });
+        let pastSec = 0;
+        this.mode2Interval = setInterval(
+          () => {
+            pastSec += 1;
+            if (pastSec >= this.props.step.time) {
+              clearInterval(this.mode2Interval);
+              forwardStep();
+            } else {
+              this.sendCommand({ power: this.props.step.power, time: 1 });
+            }
+            this.setState({ restTime: this.props.step.time - pastSec });
+          },
+          1000,
+        );
         break;
       default:
         break;
     }
-
-    this.sendCommand(state)
-      .then((res) => {
-        const { forwardStep } = this.props;
-        switch (mode) {
-          case 0:
-            let progressSec = 0;
-            const timer = setInterval(
-              () => {
-                progressSec += 1;
-                if (progressSec >= this.props.step.time) {
-                  clearInterval(timer);
-                  forwardStep();
-                } else if (this.state.temperature > this.props.step.temperature) {
-                  this.sendCommand({ power: -1 });
-                } else if (this.state.temperature < this.props.step.temperature) {
-                  this.sendCommand({ power: 6 });
-                }
-                this.setState({ restTime: this.props.step.time - progressSec });
-              },
-              1000,
-            );
-            break;
-          case 1:
-            let intervalSign = null;
-            const wait = setInterval(
-              () => {
-                const newIntervalSign =
-                  Math.sign(this.props.step.temperature - this.state.temperature);
-                if (!intervalSign) intervalSign = newIntervalSign;
-                if (newIntervalSign && intervalSign && newIntervalSign !== intervalSign) {
-                  clearInterval(wait);
-                  forwardStep();
-                }
-                intervalSign = newIntervalSign;
-              },
-              1000,
-            );
-            break;
-          case 2:
-            let pastSec = 0;
-            const timerByPower = setInterval(
-              () => {
-                pastSec += 1;
-                if (pastSec >= this.props.step.time) {
-                  clearInterval(timerByPower);
-                  forwardStep();
-                } else {
-                  this.sendCommand({ power: this.props.step.power, time: 1 });
-                }
-                this.setState({ restTime: this.props.step.time - pastSec });
-              },
-              1000,
-            );
-            break;
-          default:
-            break;
-        }
-      });
   }
 
   sendCommand = (step) => {
