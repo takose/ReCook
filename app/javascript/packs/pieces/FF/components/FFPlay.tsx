@@ -59,6 +59,10 @@ class FFPlay extends React.Component<Props, State> {
     }
   }
 
+  componentWillUnmount() {
+    this.clearIntervals();
+  }
+
   startIntervals = () => {
     if (this.canvas !== undefined &&
         this.video !== undefined &&
@@ -158,7 +162,7 @@ class FFPlay extends React.Component<Props, State> {
                 const newIntervalSign =
                   Math.sign(this.props.step.temperature - this.state.temperature);
                 if (!intervalSign) intervalSign = newIntervalSign;
-                if (newIntervalSign !== intervalSign) {
+                if (newIntervalSign && intervalSign && newIntervalSign !== intervalSign) {
                   clearInterval(wait);
                   forwardStep();
                 }
