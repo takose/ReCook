@@ -11,7 +11,7 @@
 #
 
 class Step < ApplicationRecord
-  belongs_to :recipe, dependent: :destroy
+  belongs_to :recipe
   belongs_to :piece
   # has_many :step_ingredients
   # has_many :ingredients, through: :step_ingredients
