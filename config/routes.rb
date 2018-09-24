@@ -6,6 +6,7 @@
 #                           GET    /recipes/*path(.:format)                                                                 recipes#index
 #     auth_twitter_callback GET    /auth/twitter/callback(.:format)                                                         sessions#create
 #                 api_steps POST   /api/steps(.:format)                                                                     api/steps#create
+#                  api_step DELETE /api/steps/:id(.:format)                                                                 api/steps#destroy
 #               api_recipes GET    /api/recipes(.:format)                                                                   api/recipes#index
 #                           POST   /api/recipes(.:format)                                                                   api/recipes#create
 #           edit_api_recipe GET    /api/recipes/:id/edit(.:format)                                                          api/recipes#edit
@@ -26,7 +27,7 @@ Rails.application.routes.draw do
   get 'auth/twitter/callback', to: 'sessions#create'
 
   namespace :api do
-    resources :steps, only: [:create]
+    resources :steps, only: [:create, :destroy]
     resources :recipes, only: [:index, :create, :edit, :destroy]
     post '/recipes/:id/fork', to: 'recipes#fork'
   end

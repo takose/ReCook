@@ -20,4 +20,12 @@ class Api::StepsController < ApplicationController
     end
     render json: recipe
   end
+
+  def destroy
+    step = Step.find(params[:id])
+    before_step = Step.find_by(next_id: params[:id])
+    before_step.update_attributes!(next_id: step.next_id) if before_step
+    step.destroy!
+    head :ok
+  end
 end
