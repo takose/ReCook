@@ -79,3 +79,7 @@ export const ffStepMain = styledComponents.div`
 export const textPlayMain = styledComponents.div`
   font-size: 40px;
 `;
+
+export const textLine = styledComponents.p`
+  margin-bottom: 8px;
+`;
