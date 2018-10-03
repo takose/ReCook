@@ -5,3 +5,11 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+if Piece.all.count <= 0
+  Piece.create([
+    {name: 'FF'},
+    {name: 'Text'},
+    {name: 'Taste'}
+  ])
+end
