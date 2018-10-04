@@ -56,7 +56,8 @@ export default class Player extends React.Component<RouteComponentProps<any> & P
   }
 
   connectWebSocket = () => (
-    io('https://pi@keitalab-pi01.local:3000', {
+    io.connect('https://pi@keitalab-pi01.local:3000', {
+      secure: true,
       query: {
         type: 'user',
       },
