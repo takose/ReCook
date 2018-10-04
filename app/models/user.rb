@@ -18,6 +18,8 @@ class User < ApplicationRecord
   has_many :pieces, through: :user_pieces
   has_many :recipes
 
+  after_create :set_pieces
+
   def self.find_or_create_by_auth_hash(auth_hash)
     return if auth_hash[:provider] != "twitter"
 
@@ -26,6 +28,12 @@ class User < ApplicationRecord
       user.image_url = auth_hash[:info][:image]
       user.consumer_token = auth_hash[:credentials][:token]
       user.consumer_secret = auth_hash[:credentials][:secret]
+    end
+  end
+
+  def set_pieces
+    Piece.all.each do |piece| ## for test use
+      self.pieces << piece
     end
   end
 end
