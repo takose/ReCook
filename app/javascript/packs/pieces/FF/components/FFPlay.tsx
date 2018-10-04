@@ -27,6 +27,7 @@ export interface State {
 }
 
 class FFPlay extends React.Component<Props, State> {
+  private audioDom;
   private updateVideoInterval = null;
   private measureTempInterval = null;
   private mode0Interval = null;
@@ -97,6 +98,7 @@ class FFPlay extends React.Component<Props, State> {
           const { measureCoordinateX, measureCoordinateY } = this.state;
           Tesseract.recognize(ctx.getImageData(280, 5, 35, 20), CONFIG)
             .then((result) => { max = parseInt(result.text.replace(/\r?\n/g, ''), 10) / 10; });
+          if (max < min) max = max * 10;
           Tesseract.recognize(ctx.getImageData(280, 215, 35, 20), CONFIG)
             .then((result) => { min = parseInt(result.text.replace(/\r?\n/g, ''), 10) / 10; });
           const color = ctx.getImageData(measureCoordinateX, measureCoordinateY, 1, 1).data[0];
@@ -144,6 +146,16 @@ class FFPlay extends React.Component<Props, State> {
             } else if (this.state.temperature < this.props.step.temperature) {
               this.sendCommand({ power: 6 });
             }
+            if (this.props.step.time - progressSec === 8) {
+              this.audioDom = (
+                <audio
+                  autoPlay
+                  src="http://musmus.main.jp/music/st010b.mp3"
+                />
+              );
+            } else if (this.props.step.time - progressSec > 8) {
+              this.audioDom = null;
+            }
             this.setState({ restTime: this.props.step.time - progressSec });
           },
           1000,
@@ -158,11 +170,20 @@ class FFPlay extends React.Component<Props, State> {
               Math.sign(this.props.step.temperature - this.state.temperature);
             if (!intervalSign) intervalSign = newIntervalSign;
             if (newIntervalSign && intervalSign && newIntervalSign !== intervalSign) {
-              console.log(intervalSign, newIntervalSign);
               clearInterval(this.mode1Interval);
               forwardStep();
             }
             intervalSign = newIntervalSign;
+            if (Math.abs(this.props.step.temperature - this.state.temperature) < 5) {
+              this.audioDom = (
+                <audio
+                  autoPlay
+                  src="http://musmus.main.jp/music/st010b.mp3"
+                />
+              );
+            } else {
+              this.audioDom = null;
+            }
           },
           1000,
         );
@@ -178,6 +199,16 @@ class FFPlay extends React.Component<Props, State> {
               forwardStep();
             } else {
               this.sendCommand({ power: this.props.step.power, time: 1 });
+            }
+            if (this.props.step.time - pastSec === 8) {
+              this.audioDom = (
+                <audio
+                  autoPlay
+                  src="http://musmus.main.jp/music/st010b.mp3"
+                />
+              );
+            } else if (this.props.step.time - pastSec > 8) {
+              this.audioDom = null;
             }
             this.setState({ restTime: this.props.step.time - pastSec });
           },
@@ -228,6 +259,7 @@ class FFPlay extends React.Component<Props, State> {
       ) : '';
     return (
       <FFMain>
+        {this.audioDom}
         <Video
           innerRef={(e: HTMLVideoElement) => { this.video = e; }}
           autoPlay
