@@ -101,6 +101,7 @@ class FFPlay extends React.Component<Props, State> {
           if (max < min) max = max * 10;
           Tesseract.recognize(ctx.getImageData(280, 215, 35, 20), CONFIG)
             .then((result) => { min = parseInt(result.text.replace(/\r?\n/g, ''), 10) / 10; });
+          console.log(min, max);
           const color = ctx.getImageData(measureCoordinateX, measureCoordinateY, 1, 1).data[0];
           const temp = min + (max - min) / 255 * color;
           this.setState({ temperature: temp });
