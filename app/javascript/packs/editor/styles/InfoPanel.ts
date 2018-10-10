@@ -29,4 +29,5 @@ export const piece = styledComponents.button`
 `;
 
 export const pieceList = styledComponents.div`
+  margin-bottom: 60px;
 `;
