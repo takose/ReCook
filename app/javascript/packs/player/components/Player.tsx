@@ -8,6 +8,7 @@ import { FF_ID, TEXT_ID, TASTE_ID } from '../../../constants';
 import {
   main as Main,
   topPanel as TopPanel,
+  editLink as EditLink,
 } from '../styles/Player';
 import FFPlay from '../../pieces/FF/components/FFPlay';
 import TastePlay from '../../pieces/Taste/components/TastePlay';
@@ -96,7 +97,10 @@ export default class Player extends React.Component<RouteComponentProps<any> & P
     return (
       <div>
         <Main>
-          <TopPanel>{currentPiece}</TopPanel>
+          <TopPanel>
+            {currentPiece}
+            <EditLink to={`/recipes/edit/${this.props.match.params.id}`}>Edit</EditLink>
+          </TopPanel>
           <StepsPanel
             steps={this.props.steps}
             stepOnClick={(stepId, pieceId) => this.props.switchStep(stepId, pieceId)} />

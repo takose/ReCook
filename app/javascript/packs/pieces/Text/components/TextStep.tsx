@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {
-  main as Main,
   textLine as TextLine,
 } from '../../style';
 import { TextState } from '../../../../types';

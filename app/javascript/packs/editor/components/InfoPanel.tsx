@@ -15,7 +15,11 @@ class InfoPanel extends React.Component<RouteComponentProps<any> & Props, object
     return (
       <Main>
         <PieceList />
-        <PlayLink to={`/recipes/player/${this.props.match.params.id}`}>Play</PlayLink>
+        {
+          (this.props.match.params.id) ?
+            <PlayLink to={`/recipes/player/${this.props.match.params.id}`}>Play</PlayLink>
+            : null
+        }
       </Main>
     );
   }

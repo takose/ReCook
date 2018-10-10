@@ -12,4 +12,9 @@ export const playLink = styledComponents(Link)`
   color: #3497ED;
   border: solid 1px #3497ED;
   border-radius: 16px;
+  transition: all 200ms;
+  &:hover {
+    background-color: #3497ED;
+    color: #fff;
+  }
 `;
