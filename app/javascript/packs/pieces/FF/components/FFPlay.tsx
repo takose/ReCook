@@ -9,6 +9,7 @@ import {
   ffMain as FFMain,
   currentState as CurrentState,
   itemWrapper as ItemWrapper,
+  inspector as Inspector,
 } from '../styles/FFPlay';
 
 export interface Props {
@@ -21,6 +22,8 @@ export interface Props {
 export interface State {
   stream: any;
   temperature: number;
+  min: number;
+  max: number;
   restTime: number;
   measureCoordinateX: number;
   measureCoordinateY: number;
@@ -39,6 +42,8 @@ class FFPlay extends React.Component<Props, State> {
     restTime: null,
     measureCoordinateX: 160,
     measureCoordinateY: 120,
+    min: null,
+    max: null,
   };
 
   clearIntervals = () => {
@@ -97,11 +102,16 @@ class FFPlay extends React.Component<Props, State> {
         () => {
           const { measureCoordinateX, measureCoordinateY } = this.state;
           Tesseract.recognize(ctx.getImageData(280, 5, 35, 20), CONFIG)
-            .then((result) => { max = parseInt(result.text.replace(/\r?\n/g, ''), 10) / 10; });
-          if (max < min) max = max * 10;
+            .then((result) => {
+              max = parseInt(result.text.replace(/\r?\n/g, ''), 10) / 10;
+              if (max < min) max = max * 10;
+              this.setState({ max });
+            });
           Tesseract.recognize(ctx.getImageData(280, 215, 35, 20), CONFIG)
-            .then((result) => { min = parseInt(result.text.replace(/\r?\n/g, ''), 10) / 10; });
-          console.log(min, max);
+            .then((result) => {
+              min = parseInt(result.text.replace(/\r?\n/g, ''), 10) / 10;
+              this.setState({ min });
+            });
           const color = ctx.getImageData(measureCoordinateX, measureCoordinateY, 1, 1).data[0];
           const temp = min + (max - min) / 255 * color;
           this.setState({ temperature: temp });
@@ -273,6 +283,10 @@ class FFPlay extends React.Component<Props, State> {
           width={320}
           height={240}
         />
+        <Inspector>
+          <p>{this.state.max}</p>
+          <p>{this.state.min}</p>
+        </Inspector>
         <CurrentState>
           <ItemWrapper>
             <label>現在温度:</label>

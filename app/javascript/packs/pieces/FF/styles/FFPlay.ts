@@ -2,6 +2,12 @@ import styledComponents from 'styled-components';
 export const canvasWrapper = styledComponents.div`
 `;
 
+export const inspector = styledComponents.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
 export const canvas = styledComponents.canvas`
   width: 320px;
   height: 240px;
