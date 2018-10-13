@@ -7,6 +7,9 @@ import {
   textbox as Textbox,
   add as Add,
   deleteButton as DeleteButton,
+  input as Input,
+  label as Label,
+  itemWrapper as ItemWrapper,
 } from '../../style';
 
 export interface Props {
@@ -19,6 +22,7 @@ export interface Props {
 export default class EditorText extends React.Component<Props, TextState> {
   state = {
     body: '',
+    photoUrl: '',
   };
 
   componentDidMount() {
@@ -34,6 +38,7 @@ export default class EditorText extends React.Component<Props, TextState> {
   }
 
   bodyOnChange = e => this.setState({ body: e.target.value });
+  photoUrlOnChange = e => this.setState({ photoUrl: e.target.value });
 
   render() {
     const { createOrUpdate, id } = this.props;
@@ -43,14 +48,27 @@ export default class EditorText extends React.Component<Props, TextState> {
 
     return (
       <Main>
-        <Textbox
-          onChange={this.bodyOnChange}
-          value={this.state.body} />
+        <div>
+          <ItemWrapper>
+            <Label>テキスト</Label>
+            <Textbox
+              onChange={this.bodyOnChange}
+              value={this.state.body} />
+          </ItemWrapper>
+          <ItemWrapper>
+            <Label>画像 URL</Label>
+            <Input
+              type="text"
+              value={this.state.photoUrl}
+              onChange={this.photoUrlOnChange}
+            />
+          </ItemWrapper>
+        </div>
         <Add
           onClick={() => {
-            const { body } = this.state;
-            createOrUpdate({ body });
-            this.setState({ body: '' });
+            const { body, photoUrl } = this.state;
+            createOrUpdate({ body, photoUrl });
+            this.setState({ body: '', photoUrl: '' });
           }}>
           {text}
         </Add>
