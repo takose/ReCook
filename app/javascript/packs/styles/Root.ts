@@ -33,7 +33,7 @@ injectGlobal`
     height: 34px;
     font-size: 18px;
     border: none;
-    background: #F5F5F5;
+    background: #fafafa;
     padding: 8px;
     outline: 0;
   }
@@ -41,14 +41,18 @@ injectGlobal`
   input[type='text']:focus {
     border-bottom: solid 1px #141B23;
   }
+  textarea:focus {
+    border: solid 1px #141B23;
+  }
   p {
     margin: 0;
   }
   textarea {
+    margin: 0 10px;
     appearance: none;
     padding: 5px;
     resize: none;
-    border: solid 1px #9E9E9E;
+    border: none;
     border-radius: 3px;
     outline: none;
     background: #fafafa;

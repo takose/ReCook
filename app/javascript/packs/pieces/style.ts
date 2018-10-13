@@ -29,14 +29,14 @@ export const label = styledComponents.label`
   width: 60px;
   text-align: right;
   font-size: 14px;
-  margin-right: 8px;
+  margin: 7px 8px 0 0;
   color: #777;
 `;
 
 export const itemWrapper = styledComponents.div`
   margin-bottom: 18px;
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
   p {
     font-size: 18px;
   }
@@ -50,7 +50,6 @@ export const textbox = styledComponents.textarea`
   height: 150px;
   font-size: 18px;
   padding: 8px;
-  margin: 16px 16px 0;
 `;
 
 export const add = styledComponents.button`
@@ -78,8 +77,13 @@ export const ffStepMain = styledComponents.div`
 
 export const textPlayMain = styledComponents.div`
   font-size: 40px;
+  display: flex;
 `;
 
 export const textLine = styledComponents.p`
   margin-bottom: 8px;
+`;
+
+export const textPicture = styledComponents.img`
+  height: 250px;
 `;

@@ -45,6 +45,7 @@ export interface FFState {
 export interface TextState {
   id?: number;
   body: string;
+  photoUrl: string;
 }
 
 export interface TasteState {
