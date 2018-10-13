@@ -6,6 +6,7 @@ export interface Props {
 import {
   textPlayMain as TextPlayMain,
   textLine as TextLine,
+  textPicture as TextPicture,
 } from '../../style';
 
 export interface State {
@@ -13,11 +14,17 @@ export interface State {
 
 class TextPlay extends React.Component<Props, State> {
   render() {
-    const lines = this.props.step.body.split('\n').map((line) => {
-      return <TextLine>{line}</TextLine>;
+    const { body, photoUrl } = this.props.step;
+    const lines = body.split('\n').map((line) => {
+      return <TextLine key={line}>{line}</TextLine>;
     });
     return (
-      <TextPlayMain>{lines}</TextPlayMain>
+      <TextPlayMain>
+        <TextPicture src={photoUrl} />
+        <div>
+          {lines}
+        </div>
+      </TextPlayMain>
     );
   }
 }
