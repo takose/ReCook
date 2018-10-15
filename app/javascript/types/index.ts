@@ -40,6 +40,7 @@ export interface FFState {
   time?: number;
   power?: number;
   temperature?: number;
+  text?: string;
 }
 
 export interface TextState {

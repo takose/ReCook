@@ -3,6 +3,8 @@ import {
   itemWrapper as ItemWrapper,
   label as Label,
   ffStepMain as FFStepMain,
+  textLine as TextLine,
+  ffText as FFText,
 } from '../../style';
 import { FFState } from '../../../../types';
 
@@ -58,10 +60,17 @@ class FFStep extends React.Component<Props, object> {
     }
   }
   render() {
+    const lines = this.props.step.text ?
+    this.props.step.text.split('\n').map((line) => {
+      return <TextLine key={line}>{line}</TextLine>;
+    }) : null;
     const step = this.switchViewByMode();
     return (
       <FFStepMain>
         {step}
+        <FFText>
+          {lines}
+        </FFText>
       </FFStepMain>
     );
   }

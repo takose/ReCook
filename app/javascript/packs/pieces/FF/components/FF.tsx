@@ -13,6 +13,7 @@ import {
   add as Add,
   label as Label,
   deleteButton as DeleteButton,
+  textbox as Textbox,
 } from '../../style';
 
 export interface Props {
@@ -28,6 +29,7 @@ export default class FF extends React.Component<Props, FFState> {
     power: 0,
     time: 0,
     temperature: 0,
+    text: '',
   };
 
   componentDidMount() {
@@ -46,6 +48,7 @@ export default class FF extends React.Component<Props, FFState> {
   powerOnChange = e => this.setState({ power: parseInt(e.target.value, 10) });
   temperatureOnChange = e => this.setState({ temperature: parseInt(e.target.value, 10) });
   modeOnChanged = (mode: number) => this.setState({ mode });
+  textOnChanged = e => this.setState({ text: e.target.value });
 
   render() {
     const { createOrUpdate, id } = this.props;
@@ -60,7 +63,7 @@ export default class FF extends React.Component<Props, FFState> {
           value={value}
           onChange={onChange}
         />{unit}
-        </ItemWrapper>
+      </ItemWrapper>
     );
     const form = () => {
       const { temperature, power, time } = this.state;
@@ -99,14 +102,21 @@ export default class FF extends React.Component<Props, FFState> {
           </ModeSelector>
         </ModeSelectorList>
         {form()}
+        <ItemWrapper>
+          <Label>テキスト</Label>
+          <Textbox
+            onChange={this.textOnChanged}
+            value={this.state.text} />
+        </ItemWrapper>
         <Add
           onClick={() => {
-            const { power, temperature, time, mode } = this.state;
-            createOrUpdate({ power, temperature, time, mode });
+            const { power, temperature, time, mode, text } = this.state;
+            createOrUpdate({ power, temperature, time, mode, text });
             this.setState({
               temperature: 0,
               power: 0,
               time: 0,
+              text: '',
             });
           }}>
           {text}

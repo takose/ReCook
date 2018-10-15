@@ -41,3 +41,7 @@ export const itemWrapper = styledComponents.div`
     color: #777;
   }
 `;
+
+export const textLine = styledComponents.p`
+  margin-bottom: 8px;
+`;

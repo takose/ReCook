@@ -2,14 +2,14 @@ import styledComponents from 'styled-components';
 const GRAY = '#EEE';
 export const main = styledComponents.div`
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
   margin-top: 30px;
 `;
 
 export const modeSelectorList = styledComponents.div`
   display: flex;
   flex-direction: column;
-  margin: 0 40px 0 16px;
+  margin: 0 5px 0 16px;
 `;
 
 export const modeSelector = styledComponents.button`
@@ -19,6 +19,7 @@ export const modeSelector = styledComponents.button`
 `;
 
 export const form = styledComponents.div`
+  margin-right: 40px;
 `;
 
 export const input = styledComponents.input`
@@ -31,12 +32,13 @@ export const label = styledComponents.label`
   font-size: 14px;
   margin: 7px 8px 0 0;
   color: #777;
+  align-self: flex-start;
 `;
 
 export const itemWrapper = styledComponents.div`
   margin-bottom: 18px;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   p {
     font-size: 18px;
   }
@@ -65,9 +67,11 @@ export const add = styledComponents.button`
   border-radius: 3px;
   font-size: 14px;
   box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.1);
+  align-self: flex-end;
 `;
 
 export const deleteButton = styledComponents.button`
+  align-self: flex-end;
 `;
 
 export const ffStepMain = styledComponents.div`
@@ -86,4 +90,8 @@ export const textLine = styledComponents.p`
 
 export const textPicture = styledComponents.img`
   height: 250px;
+`;
+
+export const ffText = styledComponents.div`
+  margin-top: 18px;
 `;
