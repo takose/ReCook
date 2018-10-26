@@ -29,3 +29,6 @@ export const editLink = styledComponents(Link)`
     color: #fff;
   }
 `;
+
+export const ffSelect = styledComponents.select`
+`;

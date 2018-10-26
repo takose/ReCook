@@ -17,6 +17,7 @@ export interface Props {
   socket: SocketIOClient.Socket;
   forwardStep(): void;
   id: number;
+  ffId: string;
 }
 
 export interface State {
@@ -242,7 +243,7 @@ class FFPlay extends React.Component<Props, State> {
   sendCommand = (step) => {
     const { socket } = this.props;
     const device = {
-      deviceId: 'ff',
+      deviceId: this.props.ffId,
       states: step,
     };
     socket.emit('users/state:update', device);

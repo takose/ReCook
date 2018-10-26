@@ -9,6 +9,7 @@ import {
   main as Main,
   topPanel as TopPanel,
   editLink as EditLink,
+  ffSelect as FFSelect,
 } from '../styles/Player';
 import FFPlay from '../../pieces/FF/components/FFPlay';
 import TastePlay from '../../pieces/Taste/components/TastePlay';
@@ -25,10 +26,12 @@ export interface Props {
 
 export interface State {
   socket:  SocketIOClient.Socket;
+  ffId: string;
 }
 export default class Player extends React.Component<RouteComponentProps<any> & Props, State> {
   state = {
     socket: null,
+    ffId: 'ff1',
   };
 
   componentWillUnmount() {
@@ -71,6 +74,10 @@ export default class Player extends React.Component<RouteComponentProps<any> & P
     this.props.switchStep(nextStep.id, nextStep.pieceId);
   }
 
+  ffSelectChanged = (event) => {
+    this.setState({ ffId: event.target.value });
+  }
+
   render() {
     const step = this.props.steps.find(step => step.id === this.props.stepId);
     const selectPiece = () => {
@@ -83,6 +90,7 @@ export default class Player extends React.Component<RouteComponentProps<any> & P
               socket={this.state.socket}
               forwardStep={this.forwardStep}
               id={step.id}
+              ffId={this.state.ffId}
             />
           );
         case TEXT_ID:
@@ -98,6 +106,10 @@ export default class Player extends React.Component<RouteComponentProps<any> & P
       <div>
         <Main>
           <TopPanel>
+            <FFSelect onChange={e => this.ffSelectChanged(e)}>
+              <option value="ff1">FF1</option>
+              <option value="ff2">FF2</option>
+            </FFSelect>
             {currentPiece}
             <EditLink to={`/recipes/edit/${this.props.match.params.id}`}>Edit</EditLink>
           </TopPanel>
