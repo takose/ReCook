@@ -85,40 +85,48 @@ class FFPlay extends React.Component<Props, State> {
         this.video !== undefined &&
         this.updateVideoInterval === null) {
       const ctx = this.canvas.getContext('2d');
-      let min;
-      let max;
-      this.updateVideoInterval = setInterval(
-        () => {
-          if (this.video) {
-            const { measureCoordinateX, measureCoordinateY } = this.state;
-            ctx.drawImage(this.video, 0, 0, 320, 240);
-            ctx.rect(measureCoordinateX - 5, measureCoordinateY - 5, 10, 10);
-            ctx.stroke();
-          }
-        },
-        1000 / 30,
-      );
-      this.measureTempInterval = setInterval(
-        () => {
-          const { measureCoordinateX, measureCoordinateY } = this.state;
-          Tesseract.recognize(ctx.getImageData(280, 5, 35, 20), CONFIG)
-            .then((result) => {
-              max = parseInt(result.text.replace(/\r?\n/g, ''), 10) / 10;
-              if (max < min) max = max * 10;
-              this.setState({ max });
-            });
-          Tesseract.recognize(ctx.getImageData(280, 215, 35, 20), CONFIG)
-            .then((result) => {
-              min = parseInt(result.text.replace(/\r?\n/g, ''), 10) / 10;
-              this.setState({ min });
-            });
-          const color = ctx.getImageData(measureCoordinateX, measureCoordinateY, 1, 1).data[0];
-          const temp = min + (max - min) / 255 * color;
-          this.setState({ temperature: temp });
-        },
-        1000,
-      );
+      this.startUpdateVideoInterval(ctx);
+      this.startMeasureTempInterval(ctx);
     }
+  }
+
+  startUpdateVideoInterval = (ctx) => {
+    this.updateVideoInterval = setInterval(
+      () => {
+        if (this.video) {
+          const { measureCoordinateX, measureCoordinateY } = this.state;
+          ctx.drawImage(this.video, 0, 0, 320, 240);
+          ctx.rect(measureCoordinateX - 5, measureCoordinateY - 5, 10, 10);
+          ctx.stroke();
+        }
+      },
+      1000 / 30,
+    );
+  }
+
+  startMeasureTempInterval = (ctx) => {
+    let min;
+    let max;
+    this.measureTempInterval = setInterval(
+      () => {
+        const { measureCoordinateX, measureCoordinateY } = this.state;
+        Tesseract.recognize(ctx.getImageData(280, 5, 35, 20), CONFIG)
+          .then((result) => {
+            max = parseInt(result.text.replace(/\r?\n/g, ''), 10) / 10;
+            if (max < min) max = max * 10;
+            this.setState({ max });
+          });
+        Tesseract.recognize(ctx.getImageData(280, 215, 35, 20), CONFIG)
+          .then((result) => {
+            min = parseInt(result.text.replace(/\r?\n/g, ''), 10) / 10;
+            this.setState({ min });
+          });
+        const color = ctx.getImageData(measureCoordinateX, measureCoordinateY, 1, 1).data[0];
+        const temp = min + (max - min) / 255 * color;
+        this.setState({ temperature: temp });
+      },
+      1000,
+    );
   }
 
   setupCamera = () => {
