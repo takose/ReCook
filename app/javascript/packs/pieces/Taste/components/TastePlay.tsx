@@ -32,7 +32,7 @@ class TastePlay extends React.Component<Props, State> {
     //        console.log('request succeeded');
     //      });
     //  });
-    fetch(`https://192.168.10.8:3000/taste?${params}`, options)
+    fetch(`https://keitalab-pi01.local:3000/taste?${params}`, options)
       .then((res) => {
         console.log('set done');
       });
