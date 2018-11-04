@@ -24,14 +24,6 @@ class TastePlay extends React.Component<Props, State> {
       method: 'GET',
       secure: true,
     };
-    // fetch(`http://192.168.10.4/prepare?${params}`, options)
-    //  .then((res) => {
-    //    console.log('set done');
-    //    fetch(`http://192.168.10.4/pushbutton`, options)
-    //      .then((res) => {
-    //        console.log('request succeeded');
-    //      });
-    //  });
     fetch(`https://keitalab-pi01.local:3000/taste?${params}`, options)
       .then((res) => {
         console.log('set done');
