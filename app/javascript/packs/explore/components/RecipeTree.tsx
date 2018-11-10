@@ -1,17 +1,30 @@
 import * as React from 'react';
 import { RecipeState } from '../../../types';
-import * as Tree from 'react-tree-graph';
-import 'react-tree-graph/dist/style.css';
+import { Tree } from 'react-d3-tree';
 
 export interface Props {
   recipes: RecipeState[];
 }
 
-class RecipeTree extends React.Component<Props, object> {
+export interface State {
+  result: object;
+}
+
+class RecipeTree extends React.Component<Props, State> {
+  state = {
+    result: [],
+  };
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.recipes.length <= 0 && this.props.recipes.length > 0) {
+      this.buildRecipe();
+    }
+  }
+
   buildRecipe = () => {
     const result = [];
     this.buildTree(null, result);
-    return result;
+    this.setState({ result });
   }
   buildTree = (originId, result) => {
     this.props.recipes.filter(recipe => recipe.originId === originId).forEach((recipe) => {
@@ -20,15 +33,50 @@ class RecipeTree extends React.Component<Props, object> {
     });
   }
   render() {
-    const data = this.buildRecipe();
-    const tree = data.map(recipe => (
-      <Tree
-        data={recipe}
-        height={200}
-        width={800}
-      />
-    ));
-    return tree;
+    if (this.state.result.length !== 0) {
+      const tree = this.state.result.map(r => (
+          <Tree
+            data={r}
+            translate={{ x: 70, y: 80 }}
+            textLayout={{ y: -20, textAnchor: 'middle', size: '10' }}
+            zoomable={false}
+            nodeSize={{ x: 150, y: 30 }}
+            styles={{
+              links: {
+                stroke: '#333',
+              },
+              nodes: {
+                leafNode: {
+                  circle: {
+                    stroke: '#ccc',
+                    fill: '#ccc',
+                  },
+                  name: {
+                    stroke: '#333',
+                    strokeWidth: 0,
+                  },
+                },
+                node: {
+                  circle: {
+                    stroke: '#ccc',
+                    fill: '#ccc',
+                  },
+                  name: {
+                    stroke: '#333',
+                    strokeWidth: 0,
+                  },
+                },
+              },
+            }}
+          />
+      ));
+      return (
+        <div id="treeWrapper" style={{ width: '50em', height: '10em' }}>
+          {tree}
+        </div>
+      );
+    }
+    return null;
   }
 }
 

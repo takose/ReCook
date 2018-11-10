@@ -57,4 +57,8 @@ injectGlobal`
     outline: none;
     background: #fafafa;
   }
+  .nodeNameBase{
+    font-size: 14px;
+    font-weight: 400;
+  }
 `;
