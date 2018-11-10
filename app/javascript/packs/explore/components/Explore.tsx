@@ -19,6 +19,7 @@ import {
   user as User,
   userIcon as UserIcon,
 } from '../styles/Explore';
+import RecipeTree from './RecipeTree';
 
 export interface Props {
   recipes: RecipeState[];
@@ -108,6 +109,7 @@ class Explore extends React.Component<RouteComponentProps<any> & Props, object> 
           <RecipeList>
             {recipeList}
           </RecipeList>
+          <RecipeTree recipes={this.props.recipes} />
         </Main>
       </div>
     );
