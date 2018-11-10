@@ -14,9 +14,9 @@
 
 class RecipeSerializer < ActiveModel::Serializer
   class RecipeSerializer < ActiveModel::Serializer
-    attributes :id, :title
+    attributes :id, :title, :desc
   end
-  attributes :id, :title, :origin_id, :steps
+  attributes :id, :title, :origin_id, :desc, :steps
 
   belongs_to :user
   has_many :steps

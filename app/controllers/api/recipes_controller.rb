@@ -24,7 +24,7 @@ class Api::RecipesController < ApplicationController
       user = User.find_by(consumer_token: body['token'])
       recipe = Recipe.create(user_id: user.id)
     end
-    recipe.update_attribute(:title, body['title'])
+    recipe.update_attributes({ title: body['title'], desc: body['desc'] })
     render json: recipe
   end
 
