@@ -36,6 +36,7 @@ class Explore extends React.Component<RouteComponentProps<any> & Props, object> 
           ...recipe,
           originId: recipe.origin_id,
           user: {
+            id: recipe.user.id,
             nickname: recipe.user.nickname,
             imageUrl: recipe.user.image_url,
           },
@@ -88,9 +89,13 @@ class Explore extends React.Component<RouteComponentProps<any> & Props, object> 
               <Icon onClick={() => this.forkRecipe(recipe)}>
                 <FontAwesomeIcon icon={faCodeBranch} />
               </Icon>
-              <Icon onClick={() => this.props.deleteRecipe(recipe.id)}>
-                <FontAwesomeIcon icon={faTrash} />
-              </Icon>
+              {
+                this.props.user.id === recipe.user.id ? (
+                  <Icon onClick={() => this.props.deleteRecipe(recipe.id)}>
+                    <FontAwesomeIcon icon={faTrash} />
+                  </Icon>
+                ) : null
+              }
             </IconWrapper>
           </BottomBlock>
         </RecipeItem>

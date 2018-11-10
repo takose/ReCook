@@ -5,7 +5,7 @@ class Api::RecipesController < ApplicationController
     render json: Recipe.all.to_json({
       only: [:id, :title, :origin_id],
       include: {
-        user: { only: [:nickname, :image_url] }
+        user: { only: [:id, :nickname, :image_url] }
       }
     })
   end

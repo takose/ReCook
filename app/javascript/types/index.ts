@@ -22,6 +22,7 @@ export interface PieceState {
 }
 
 export interface UserState {
+  id: number;
   nickname: string;
   imageUrl: string;
   token?: string;
