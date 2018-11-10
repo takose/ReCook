@@ -39,11 +39,12 @@ export function createStep(stepId: number, content: any) {
   };
 }
 
-export function updateTitle(recipeId: number, title: string) {
+export function updateRecipe(recipeId: number, title: string, desc: string) {
   return {
     recipeId,
     title,
-    type: constants.UPDATE_TITLE,
+    desc,
+    type: constants.UPDATE_RECIPE,
   };
 }
 

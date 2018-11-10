@@ -12,6 +12,7 @@ export interface StoreState {
 export interface RecipeState {
   id: number;
   title?: string;
+  desc?: string;
   user: UserState;
   originId: number;
 }
@@ -31,8 +32,8 @@ export interface UserState {
 export interface CurrentState {
   pieceId: number;
   stepId: number;
-  editRecipe: { id: number, title: string, steps: StepState[] };
-  playRecipe: { id: number, title: string, steps: StepState[] };
+  editRecipe: { id: number, title: string, steps: StepState[], desc: string };
+  playRecipe: { id: number, title: string, steps: StepState[], desc: string };
 }
 
 export interface FFState {

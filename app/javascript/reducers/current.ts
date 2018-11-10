@@ -12,8 +12,8 @@ import {
 const initialState = {
   pieceId: 1,
   stepId: null,
-  playRecipe: { id: null, title: '', steps: [] },
-  editRecipe: { id: null, title: '', steps: [] },
+  playRecipe: { id: null, title: '', steps: [], desc: '' },
+  editRecipe: { id: null, title: '', steps: [], desc: '' },
 };
 
 export const current =
@@ -46,12 +46,12 @@ export const current =
       case RESET_EDIT_RECIPE:
         return {
           ...state,
-          editRecipe: { id: null, title: '', steps: [] },
+          editRecipe: initialState.editRecipe,
         };
       case RESET_PLAY_RECIPE:
         return {
           ...state,
-          playRecipe: { id: null, title: '', steps: [] },
+          playRecipe: initialState.playRecipe,
         };
       case DELETE_STEP_SUCCEEDED:
         const newSteps = state.editRecipe.steps.filter(step => step.id !== action.id);
