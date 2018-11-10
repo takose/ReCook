@@ -44,7 +44,13 @@ class Api::RecipesController < ApplicationController
   end
 
   def destroy
-    Recipe.find(params[:id]).destroy
+    recipe = Recipe.find(params[:id]);
+    if recipe.origin_id
+      Recipe.where(origin_id: params[:id]).each do |r|
+        r.update!(origin_id: recipe.origin_id)
+      end
+    end
+    recipe.destroy!
     head :ok
   end
 end
