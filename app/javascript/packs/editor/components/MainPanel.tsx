@@ -3,6 +3,7 @@ import {
   main as Main,
   topPanel as TopPanel,
   input as Input,
+  descInput as DescInput,
 } from '../styles/MainPanel';
 import { StepState, CurrentState } from '../../../types';
 import { RouteComponentProps } from 'react-router';
@@ -15,7 +16,7 @@ import StepsPanel from '../../common/StepsPanel/containers/StepsPanel';
 export interface Props {
   steps: StepState[];
   current: CurrentState;
-  updateTitle(recipeId: number, title: string): void;
+  updateRecipe(recipeId: number, title: string, desc: string): void;
   getRecipe(id: number): void;
   resetRecipe(): void;
   switchStep(id): void;
@@ -26,12 +27,15 @@ export interface Props {
 
 interface State {
   title?: string;
+  desc?: string;
 }
 
 class MainPanel extends React.Component<RouteComponentProps<any> & Props, State> {
   private titleDom;
+  private descDom;
   state = {
     title: '',
+    desc: '',
   };
 
   componentWillUnmount() {
@@ -48,12 +52,18 @@ class MainPanel extends React.Component<RouteComponentProps<any> & Props, State>
   }
 
   titleOnChange = e => this.setState({ title: e.target.value });
-  titleOnFocusout = (e) => {
-    this.props.updateTitle(this.props.current.editRecipe.id, this.state.title);
+  descOnChange = e => this.setState({ desc: e.target.value });
+
+  textInputOnFocusout = (e) => {
+    this.props.updateRecipe(this.props.current.editRecipe.id, this.state.title, this.state.desc);
   }
+
   componentDidUpdate(prevProps) {
     if (prevProps.current.editRecipe.title !== this.props.current.editRecipe.title) {
-      this.setState({ title: this.props.current.editRecipe.title });
+      this.setState({
+        title: this.props.current.editRecipe.title,
+        desc: this.props.current.editRecipe.desc,
+      });
     }
   }
   render() {
@@ -90,9 +100,16 @@ class MainPanel extends React.Component<RouteComponentProps<any> & Props, State>
             placeholder="タイトル"
             type="text"
             onChange={this.titleOnChange}
-            onBlur={this.titleOnFocusout}
+            onBlur={this.textInputOnFocusout}
             innerRef={e => this.titleDom = e}
             value={this.state.title} />
+          <DescInput
+            placeholder="レシピ概要 / 変更点"
+            type="text"
+            onChange={this.descOnChange}
+            onBlur={this.textInputOnFocusout}
+            innerRef={e => this.descDom = e}
+            value={this.state.desc} />
           {selectPiece()}
         </TopPanel>
         <StepsPanel stepOnClick={this.props.switchStep} steps={this.props.steps} />

@@ -71,7 +71,7 @@ class RecipeTree extends React.Component<Props, State> {
           />
       ));
       return (
-        <div id="treeWrapper" style={{ width: '50em', height: '10em' }}>
+        <div id="treeWrapper" style={{ width: '100%', height: '10em' }}>
           {tree}
         </div>
       );

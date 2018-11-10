@@ -13,6 +13,11 @@ export const input = styledComponents.input`
   margin-bottom: 100px;
 `;
 
+export const descInput = styledComponents.input`
+  width: 500px;
+  margin-bottom: 100px;
+`;
+
 export const bottomPanel = styledComponents.div`
   height: 50%;
   overflow: scroll;
