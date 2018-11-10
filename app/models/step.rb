@@ -1,5 +1,7 @@
 # == Schema Information
 #
+# Table name: steps
+#
 #  id                 :bigint(8)        not null, primary key
 #  step_ingredient_id :integer
 #  recipe_id          :integer

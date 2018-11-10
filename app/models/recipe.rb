@@ -9,6 +9,7 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  origin_id   :integer
+#  desc        :string
 #
 
 class Recipe < ApplicationRecord
