@@ -28,8 +28,8 @@ export function createOrUpdateStepRequest(payload) {
     });
 }
 
-export function updateTitleRequest(payload) {
-  const { recipeId, title, token } = payload;
+export function updateRequest(payload) {
+  const { recipeId, title, desc, token } = payload;
   const options = {
     method: 'POST',
     headers: {
@@ -41,6 +41,7 @@ export function updateTitleRequest(payload) {
       token,
       recipeId,
       title,
+      desc,
     }),
   };
   return fetch('/api/recipes', options)

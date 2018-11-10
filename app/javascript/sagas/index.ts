@@ -1,7 +1,7 @@
 import { call, put, takeEvery, select } from 'redux-saga/effects';
 import {
   CREATE_STEP,
-  UPDATE_TITLE,
+  UPDATE_RECIPE,
   SET_EDIT_RECIPE,
   SET_PLAY_RECIPE,
   GET_EDIT_RECIPE,
@@ -14,7 +14,7 @@ import {
 } from '../constants';
 import {
   createOrUpdateStepRequest,
-  updateTitleRequest,
+  updateRequest,
   getRecipeRequest,
   deleteRecipeRequest,
   deleteStepRequest,
@@ -38,10 +38,10 @@ function* createStep(action) {
   });
 }
 
-function* updateTitle({ recipeId, title, type }) {
+function* updateRecipe({ recipeId, title, desc, type }) {
   const getToken = state => state.user.token;
   const token = yield select(getToken);
-  const recipe = yield call(updateTitleRequest, { recipeId, title, token });
+  const recipe = yield call(updateRequest, { recipeId, title, desc, token });
   yield put({
     recipe,
     type: SET_EDIT_RECIPE,
@@ -92,7 +92,7 @@ function* deleteStep(action) {
 
 function* reCookSaga() {
   yield takeEvery(CREATE_STEP, createStep);
-  yield takeEvery(UPDATE_TITLE, updateTitle);
+  yield takeEvery(UPDATE_RECIPE, updateRecipe);
   yield takeEvery(GET_EDIT_RECIPE, getEditRecipe);
   yield takeEvery(GET_PLAY_RECIPE, getPlayRecipe);
   yield takeEvery(DELETE_RECIPE, deleteRecipe);
