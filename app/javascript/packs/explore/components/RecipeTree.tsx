@@ -28,7 +28,13 @@ class RecipeTree extends React.Component<Props, State> {
   }
   buildTree = (originId, result) => {
     this.props.recipes.filter(recipe => recipe.originId === originId).forEach((recipe) => {
-      result.push({ id: recipe.id, name: recipe.title, children: [] });
+      const diff = recipe.desc ? { diff: recipe.desc } : null;
+      result.push({
+        id: recipe.id,
+        name: recipe.title,
+        attributes: diff,
+        children: [],
+      });
       this.buildTree(recipe.id, result.find(r => r.id === recipe.id).children);
     });
   }
@@ -37,10 +43,12 @@ class RecipeTree extends React.Component<Props, State> {
       const tree = this.state.result.map(r => (
           <Tree
             data={r}
-            translate={{ x: 70, y: 80 }}
-            textLayout={{ y: -20, textAnchor: 'middle', size: '10' }}
+            key={r.id}
+            translate={{ x: 70, y: 100 }}
+            textLayout={{ y: -30, textAnchor: 'middle', size: '10' }}
             zoomable={false}
-            nodeSize={{ x: 150, y: 30 }}
+            nodeSize={{ x: 150, y: 60 }}
+            nodeSvgShape={{ shape: 'circle', shapeProps: { r: 5 } }}
             styles={{
               links: {
                 stroke: '#333',
@@ -55,6 +63,9 @@ class RecipeTree extends React.Component<Props, State> {
                     stroke: '#333',
                     strokeWidth: 0,
                   },
+                  attributes: {
+                    strokeWidth: 0,
+                  },
                 },
                 node: {
                   circle: {
@@ -63,6 +74,9 @@ class RecipeTree extends React.Component<Props, State> {
                   },
                   name: {
                     stroke: '#333',
+                    strokeWidth: 0,
+                  },
+                  attributes: {
                     strokeWidth: 0,
                   },
                 },
