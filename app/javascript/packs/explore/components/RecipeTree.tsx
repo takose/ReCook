@@ -40,7 +40,7 @@ class RecipeTree extends React.Component<Props, State> {
   }
   render() {
     if (this.state.result.length !== 0) {
-      const tree = this.state.result.map(r => (
+      const tree = this.state.result.filter(r => r.children.length !== 0).map(r => (
           <Tree
             data={r}
             key={r.id}
