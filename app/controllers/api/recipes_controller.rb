@@ -3,7 +3,7 @@ class Api::RecipesController < ApplicationController
 
   def index
     render json: Recipe.all.to_json({
-      only: [:id, :title, :origin_id],
+      only: [:id, :title, :origin_id, :desc],
       include: {
         user: { only: [:id, :nickname, :image_url] }
       }
