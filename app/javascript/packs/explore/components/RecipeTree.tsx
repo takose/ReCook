@@ -44,7 +44,7 @@ class RecipeTree extends React.Component<Props, State> {
           <Tree
             data={r}
             key={r.id}
-            translate={{ x: 70, y: 100 }}
+            translate={{ x: 80, y: 120 }}
             textLayout={{ y: -30, textAnchor: 'middle', size: '10' }}
             zoomable={false}
             nodeSize={{ x: 150, y: 60 }}
@@ -85,7 +85,7 @@ class RecipeTree extends React.Component<Props, State> {
           />
       ));
       return (
-        <div id="treeWrapper" style={{ width: '100%', height: '10em' }}>
+        <div id="treeWrapper" style={{ width: '100%', height: '15em' }}>
           {tree}
         </div>
       );
