@@ -47,7 +47,7 @@ class RecipeTree extends React.Component<Props, State> {
             translate={{ x: 80, y: 160 }}
             textLayout={{ y: -30, textAnchor: 'middle', size: '10' }}
             zoomable={false}
-            nodeSize={{ x: 150, y: 60 }}
+            nodeSize={{ x: 200, y: 60 }}
             nodeSvgShape={{ shape: 'circle', shapeProps: { r: 5 } }}
             styles={{
               links: {
