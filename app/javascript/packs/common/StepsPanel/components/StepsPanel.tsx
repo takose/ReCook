@@ -23,16 +23,20 @@ class StepsPanel extends React.Component<Props, State> {
   render () {
     const stepListDom = this.props.steps.map((step) => {
       let dom;
+      let pieceColor;
       const content = JSON.parse(step.content);
       switch (step.pieceId) {
         case FF_ID:
           dom = <FFStep step={...content} />;
+          pieceColor = 'lightpink';
           break;
         case TEXT_ID:
           dom = <TextStep step={...content} />;
+          pieceColor = 'orange';
           break;
         case TASTE_ID:
           dom = <TasteStep step={...content} />;
+          pieceColor = 'lightblue';
           break;
         default:
           break;
@@ -41,7 +45,9 @@ class StepsPanel extends React.Component<Props, State> {
         <StepWrapper
           key={step.id}
           onClick={() => this.props.stepOnClick(step.id, step.pieceId)}
-          isActive={this.props.currentStepId === step.id}>
+          pieceColor={pieceColor}
+          isActive={this.props.currentStepId === step.id}
+        >
           {dom}
         </StepWrapper>
       );

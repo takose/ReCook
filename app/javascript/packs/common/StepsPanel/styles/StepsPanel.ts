@@ -14,12 +14,17 @@ export const stepList = styledComponents.div`
   flex-wrap: wrap;
 `;
 
+export const colorProps = props => `
+  ${props.pieceColor && `border-bottom: solid 10px ${props.pieceColor}`};
+`;
+
 export const stepWrapper = styledComponents.div`
   width: 200px;
   height: 200px;
   border-radius: 3px;
   border:
     ${(props: {isActive: boolean}) => props.isActive ? 'solid 3px #141B23' : 'solid 1px #ccc'};
+  ${colorProps}
   padding: 20px;
   margin: 5px;
   background: #FFF;
