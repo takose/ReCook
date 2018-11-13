@@ -15,7 +15,7 @@ export const stepList = styledComponents.div`
 `;
 
 export const colorProps = props => `
-  ${props.pieceColor && `border-bottom: solid 10px ${props.pieceColor}`};
+  ${props.pieceColor && `border-bottom: solid ${props.pieceColor}`};
 `;
 
 export const stepWrapper = styledComponents.div`

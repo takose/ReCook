@@ -28,15 +28,15 @@ class StepsPanel extends React.Component<Props, State> {
       switch (step.pieceId) {
         case FF_ID:
           dom = <FFStep step={...content} />;
-          pieceColor = 'lightpink';
+          pieceColor = '5px lightpink';
           break;
         case TEXT_ID:
           dom = <TextStep step={...content} />;
-          pieceColor = 'orange';
+          pieceColor = '10px orange';
           break;
         case TASTE_ID:
           dom = <TasteStep step={...content} />;
-          pieceColor = 'lightblue';
+          pieceColor = '5px lightblue';
           break;
         default:
           break;
