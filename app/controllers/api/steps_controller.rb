@@ -13,10 +13,22 @@ class Api::StepsController < ApplicationController
       step = Step.find(body['stepId'])
       step.update_attributes!(content: body['content'])
     else
-      last_step = recipe.steps.find_by(next_id: nil)
-      step = Step.new({piece_id: body['pieceId'], content: body['content']})
-      step.update_attributes!(recipe_id: recipe.id)
-      last_step.update_attributes!(next_id: step.id) if last_step
+      if body['option']
+        if body['option']['direction'] == 'after'
+          before_step = Step.find(body['option']['stepId'])
+          step = Step.create({recipe_id: recipe.id, piece_id: body['pieceId'], content: body['content'], next_id: before_step.next_id})
+          before_step.update!({next_id: step.id})
+        elsif body['option']['direction'] == 'before'
+          before_step = Step.find_by(next_id: body['option']['stepId'])
+          step = Step.create({recipe_id: recipe.id, piece_id: body['pieceId'], content: body['content'], next_id: body['option']['stepId']})
+          before_step.update!({next_id: step.id}) if before_step
+        end
+      else
+        last_step = recipe.steps.find_by(next_id: nil)
+        step = Step.new({piece_id: body['pieceId'], content: body['content']})
+        step.update_attributes!(recipe_id: recipe.id)
+        last_step.update_attributes!(next_id: step.id) if last_step
+      end
     end
     render json: recipe
   end
