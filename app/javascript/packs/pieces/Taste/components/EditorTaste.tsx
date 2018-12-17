@@ -37,6 +37,14 @@ export default class EditorTaste extends React.Component<Props, TasteState> {
     if (prevProps.id !== this.props.id) {
       this.setState({ ...this.props.step });
     }
+    if (prevProps.id && !this.props.id) {
+      this.setState({
+        sake: 0,
+        soysauce: 0,
+        mirin: 0,
+        vinegar: 0,
+      });
+    }
   }
 
   sakeOnChange = e => this.setState({ sake: parseInt(e.target.value, 10) });

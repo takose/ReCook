@@ -31,3 +31,8 @@ export const stepWrapper = styledComponents.div`
   letter-spacing: 1.1px;
   line-height: 1.4;
 `;
+
+export const temp = styledComponents.div`
+  width: 3px;
+  background-color: #6D4C41;
+`;

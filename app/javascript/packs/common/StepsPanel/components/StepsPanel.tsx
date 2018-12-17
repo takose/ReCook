@@ -3,6 +3,7 @@ import {
   stepWrapper as StepWrapper,
   stepList as StepList,
   main as Main,
+  temp as Temp,
 } from '../styles/StepsPanel';
 import { StepState } from '../../../../types';
 import { FF_ID, TEXT_ID, TASTE_ID } from '../../../../constants';
@@ -22,6 +23,9 @@ interface State {
 class StepsPanel extends React.Component<Props, State> {
   render () {
     const stepListDom = this.props.steps.map((step) => {
+      if (step.id === 0) {
+        return <Temp />;
+      }
       let dom;
       let pieceColor;
       const content = JSON.parse(step.content);

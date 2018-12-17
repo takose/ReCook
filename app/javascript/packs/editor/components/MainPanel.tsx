@@ -94,6 +94,13 @@ class MainPanel extends React.Component<RouteComponentProps<any> & Props, State>
           break;
       }
     };
+    const steps = [...this.props.steps];
+    if (current.editRecipe.option.direction) {
+      const step = (current.editRecipe.steps.find(s => s.id === current.editRecipe.option.stepId));
+      const idx = current.editRecipe.option.direction === 'before' ?
+        current.editRecipe.steps.indexOf(step) : current.editRecipe.steps.indexOf(step) + 1;
+      steps.splice(idx, 0, { id: 0, pieceId: 0, content: '', nextId: 0 });
+    }
     return (
       <Main>
         <TopPanel>
@@ -112,8 +119,9 @@ class MainPanel extends React.Component<RouteComponentProps<any> & Props, State>
             innerRef={e => this.descDom = e}
             value={this.state.desc} />
           {selectPiece()}
+          { current.stepId && !current.editRecipe.option.direction ? <Option /> : null }
         </TopPanel>
-        <StepsPanel stepOnClick={this.props.switchStep} steps={this.props.steps} />
+        <StepsPanel stepOnClick={this.props.switchStep} steps={steps} />
       </Main>
     );
   }

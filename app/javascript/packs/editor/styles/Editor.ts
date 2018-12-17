@@ -18,3 +18,15 @@ export const playLink = styledComponents(Link)`
     color: #fff;
   }
 `;
+
+export const optionButton = styledComponents.button`
+  border: solid 1px #ccc;
+  padding: 4px 8px;
+  width: 100px;
+`;
+
+export const optionWrapper = styledComponents.div`
+  display: flex;
+  width: 300px
+  justify-content: space-between;
+`;

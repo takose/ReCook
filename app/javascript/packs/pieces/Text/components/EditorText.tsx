@@ -35,6 +35,9 @@ export default class EditorText extends React.Component<Props, TextState> {
     if (prevProps.id !== this.props.id) {
       this.setState({ ...this.props.step });
     }
+    if (prevProps.id && !this.props.id) {
+      this.setState({ body: '', photoUrl: '' });
+    }
   }
 
   bodyOnChange = e => this.setState({ body: e.target.value });

@@ -42,6 +42,15 @@ export default class FF extends React.Component<Props, FFState> {
     if (prevProps.id !== this.props.id) {
       this.setState({ ...this.props.step });
     }
+    if (prevProps.id && !this.props.id) {
+      this.setState({
+        mode: 0,
+        power: 0,
+        time: 0,
+        temperature: 0,
+        text: '',
+      });
+    }
   }
 
   timeOnChange = e => this.setState({ time: parseInt(e.target.value, 10) });
