@@ -7,13 +7,16 @@ import {
   SET_EDIT_RECIPE,
   SET_PLAY_RECIPE,
   DELETE_STEP_SUCCEEDED,
+  UPDATE_EDIT_OPTION,
 } from '../constants';
 
 const initialState = {
   pieceId: 1,
   stepId: null,
   playRecipe: { id: null, title: '', steps: [], desc: '' },
-  editRecipe: { id: null, title: '', steps: [], desc: '' },
+  editRecipe: {
+    id: null, title: '', steps: [], desc: '', option: { direction: null, stepId: null },
+  },
 };
 
 export const current =
@@ -23,6 +26,14 @@ export const current =
         return {
           ...state,
           stepId: action.id,
+          editRecipe: {
+            ...state.editRecipe,
+            option: {
+              ...state.editRecipe.option,
+              stepId: null,
+              direction: null,
+            },
+          },
         };
       case SWITCH_PIECE:
         return {
@@ -40,7 +51,21 @@ export const current =
         return {
           ...state,
           editRecipe: {
+            ...state.editRecipe,
             ...action.recipe,
+          },
+        };
+      case UPDATE_EDIT_OPTION:
+        return {
+          ...state,
+          stepId: null,
+          editRecipe: {
+            ...state.editRecipe,
+            option: {
+              ...state.editRecipe.option,
+              direction: action.direction,
+              stepId: state.stepId,
+            },
           },
         };
       case RESET_EDIT_RECIPE:

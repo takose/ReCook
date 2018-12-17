@@ -33,7 +33,6 @@ export function mapDispatchToProps(dispatch) {
       dispatch(actions.createStep(stepId, { ...content }));
     },
     deleteStep: (stepId: number) => {
-      console.log('enter');
       dispatch(actions.deleteStep(stepId));
     },
   };

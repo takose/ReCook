@@ -63,6 +63,13 @@ export function switchStep(id: number) {
   };
 }
 
+export function updateEditOption(direction: string) {
+  return {
+    direction,
+    type: constants.UPDATE_EDIT_OPTION,
+  };
+}
+
 export function resetPlayRecipe() {
   return {
     type: constants.RESET_PLAY_RECIPE,

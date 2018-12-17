@@ -9,6 +9,7 @@ import { StepState, CurrentState } from '../../../types';
 import { RouteComponentProps } from 'react-router';
 import FF from '../../pieces/FF/containers/FF';
 import EditorText from '../../pieces/Text/containers/EditorText';
+import Option from './Option';
 import EditorTaste from '../../pieces/Taste/containers/EditorTaste';
 import { FF_ID, TEXT_ID, TASTE_ID } from '../../../constants';
 import StepsPanel from '../../common/StepsPanel/containers/StepsPanel';
