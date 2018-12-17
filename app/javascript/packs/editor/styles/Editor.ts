@@ -22,11 +22,12 @@ export const playLink = styledComponents(Link)`
 export const optionButton = styledComponents.button`
   border: solid 1px #ccc;
   padding: 4px 8px;
-  width: 100px;
+  width: 120px;
 `;
 
 export const optionWrapper = styledComponents.div`
   display: flex;
-  width: 300px
+  width: 600px
   justify-content: space-between;
+  margin-top: 80px;
 `;
