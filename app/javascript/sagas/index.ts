@@ -24,9 +24,12 @@ function* createStep(action) {
   const getCurrent = state => state.current;
   const current = yield select(getCurrent);
   const getToken = state => state.user.token;
+  const getOption = state => state.current.editRecipe.option;
   const token = yield select(getToken);
+  const option = yield select(getOption);
   const recipe = yield call(createOrUpdateStepRequest, {
     token,
+    option,
     stepId: action.stepId,
     recipeId: current.editRecipe.id,
     pieceId: current.pieceId,

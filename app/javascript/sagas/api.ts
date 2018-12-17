@@ -1,5 +1,5 @@
 export function createOrUpdateStepRequest(payload) {
-  const { action, recipeId, stepId, pieceId, token } = payload;
+  const { action, recipeId, stepId, pieceId, token, option } = payload;
   delete action['type'];
   const content = JSON.stringify({
     ...action,
@@ -17,6 +17,7 @@ export function createOrUpdateStepRequest(payload) {
       content,
       pieceId,
       token,
+      option,
     }),
   };
   return fetch('/api/steps', options)
