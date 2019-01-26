@@ -115,6 +115,7 @@ export default class Player extends React.Component<RouteComponentProps<any> & P
           </TopPanel>
           <StepsPanel
             steps={this.props.steps}
+            currentStepId={this.props.stepId}
             stepOnClick={(stepId, pieceId) => this.props.switchStep(stepId, pieceId)} />
         </Main>
       </div>

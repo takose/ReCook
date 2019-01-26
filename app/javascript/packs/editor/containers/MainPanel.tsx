@@ -6,7 +6,7 @@ import  MainPanel from '../components/MainPanel';
 
 export function mapStateToProps(state: StoreState) {
   return {
-    steps: state.current.editRecipe.steps,
+    steps: state.current.recipe.steps,
     current: state.current,
   };
 }
@@ -17,10 +17,10 @@ export function mapDispatchToProps(dispatch) {
       dispatch(actions.updateRecipe(recipeId, title, desc));
     },
     getRecipe: (id: number) => {
-      dispatch(actions.getEditRecipe(id));
+      dispatch(actions.getRecipe(id));
     },
     resetRecipe: () => {
-      dispatch(actions.resetEditRecipe());
+      dispatch(actions.resetRecipe());
     },
     switchStep: (id: number, pieceId: number) => {
       dispatch(actions.switchStep(id));
@@ -29,8 +29,8 @@ export function mapDispatchToProps(dispatch) {
     resetStepId: () => {
       dispatch(actions.switchStep(null));
     },
-    createOrUpdate: (stepId, content) => {
-      dispatch(actions.createStep(stepId, { ...content }));
+    createOrUpdate: (stepId, content, option: {}) => {
+      dispatch(actions.createStep(stepId, { ...content }, option));
     },
     deleteStep: (stepId: number) => {
       dispatch(actions.deleteStep(stepId));
