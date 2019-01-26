@@ -2,10 +2,8 @@ import { call, put, takeEvery, select } from 'redux-saga/effects';
 import {
   CREATE_STEP,
   UPDATE_RECIPE,
-  SET_EDIT_RECIPE,
-  SET_PLAY_RECIPE,
-  GET_EDIT_RECIPE,
-  GET_PLAY_RECIPE,
+  SET_RECIPE,
+  GET_RECIPE,
   DELETE_RECIPE,
   DELETE_RECIPE_SUCCEEDED,
   DELETE_STEP,
@@ -24,20 +22,19 @@ function* createStep(action) {
   const getCurrent = state => state.current;
   const current = yield select(getCurrent);
   const getToken = state => state.user.token;
-  const getOption = state => state.current.editRecipe.option;
   const token = yield select(getToken);
-  const option = yield select(getOption);
+  const { option, stepId, content } = action;
   const recipe = yield call(createOrUpdateStepRequest, {
     token,
     option,
-    stepId: action.stepId,
-    recipeId: current.editRecipe.id,
+    stepId,
     pieceId: current.pieceId,
-    action: action.content,
+    action: content,
+    recipeId: current.recipe.id,
   });
   yield put({
     recipe,
-    type: SET_EDIT_RECIPE,
+    type: SET_RECIPE,
   });
 }
 
@@ -47,25 +44,17 @@ function* updateRecipe({ recipeId, title, desc, type }) {
   const recipe = yield call(updateRequest, { recipeId, title, desc, token });
   yield put({
     recipe,
-    type: SET_EDIT_RECIPE,
+    type: SET_RECIPE,
   });
 }
 
-function* getEditRecipe(action) {
+function* getRecipe(action) {
   const recipe = yield call(getRecipeRequest, action);
   yield put({
     recipe: {
       ...recipe,
     },
-    type: SET_EDIT_RECIPE,
-  });
-}
-
-function* getPlayRecipe(action) {
-  const recipe = yield call(getRecipeRequest, action);
-  yield put({
-    recipe,
-    type: SET_PLAY_RECIPE,
+    type: SET_RECIPE,
   });
 }
 
@@ -96,8 +85,7 @@ function* deleteStep(action) {
 function* reCookSaga() {
   yield takeEvery(CREATE_STEP, createStep);
   yield takeEvery(UPDATE_RECIPE, updateRecipe);
-  yield takeEvery(GET_EDIT_RECIPE, getEditRecipe);
-  yield takeEvery(GET_PLAY_RECIPE, getPlayRecipe);
+  yield takeEvery(GET_RECIPE, getRecipe);
   yield takeEvery(DELETE_RECIPE, deleteRecipe);
   yield takeEvery(DELETE_STEP, deleteStep);
 }
