@@ -32,11 +32,7 @@ export interface UserState {
 export interface CurrentState {
   pieceId: number;
   stepId: number;
-  editRecipe: {
-    id: number, title: string, steps: StepState[], desc: string,
-    option: { direction: string, stepId: number },
-  };
-  playRecipe: { id: number, title: string, steps: StepState[], desc: string };
+  recipe: { id: number, title: string, steps: StepState[], desc: string };
 }
 
 export interface FFState {
