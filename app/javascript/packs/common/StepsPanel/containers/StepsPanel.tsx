@@ -4,7 +4,6 @@ import StepsPanel from '../components/StepsPanel';
 
 export function mapStateToProps(state: StoreState) {
   return {
-    currentStepId: state.current.stepId,
   };
 }
 

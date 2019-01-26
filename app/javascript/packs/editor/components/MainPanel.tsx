@@ -20,15 +20,16 @@ export interface Props {
   updateRecipe(recipeId: number, title: string, desc: string): void;
   getRecipe(id: number): void;
   resetRecipe(): void;
-  switchStep(id): void;
+  switchStep(id, pieceId): void;
   resetStepId(): void;
-  createOrUpdate(stepId, {}): void;
+  createOrUpdate(stepId, {}, {}): void;
   deleteStep(stepId: number);
 }
 
 interface State {
   title?: string;
   desc?: string;
+  option?: { direction?: string, stepId?: number };
 }
 
 class MainPanel extends React.Component<RouteComponentProps<any> & Props, State> {
@@ -37,6 +38,7 @@ class MainPanel extends React.Component<RouteComponentProps<any> & Props, State>
   state = {
     title: '',
     desc: '',
+    option: { direction: null, stepId: null },
   };
 
   componentWillUnmount() {
@@ -56,38 +58,55 @@ class MainPanel extends React.Component<RouteComponentProps<any> & Props, State>
   descOnChange = e => this.setState({ desc: e.target.value });
 
   textInputOnFocusout = (e) => {
-    this.props.updateRecipe(this.props.current.editRecipe.id, this.state.title, this.state.desc);
+    this.props.updateRecipe(this.props.current.recipe.id, this.state.title, this.state.desc);
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.current.editRecipe.title !== this.props.current.editRecipe.title) {
+    if (prevProps.current.recipe.title !== this.props.current.recipe.title) {
       this.setState({
-        title: this.props.current.editRecipe.title,
-        desc: this.props.current.editRecipe.desc,
+        title: this.props.current.recipe.title,
+        desc: this.props.current.recipe.desc,
       });
     }
   }
+
+  stepOnClick = (id, pieceId) => {
+    this.props.switchStep(id, pieceId);
+    this.setState({ option: {} });
+  }
+
+  updateEditOption = (direction) => {
+    this.setState({ option: { direction, stepId: this.props.current.stepId } });
+  }
+
   render() {
     const { current, createOrUpdate, deleteStep } = this.props;
+    const id = this.state.option.stepId ? null : current.stepId;
     const selectPiece = () => {
       let step;
       if (current.stepId) {
-        step = JSON.parse(current.editRecipe.steps.find(s => s.id === current.stepId).content);
+        step = JSON.parse(current.recipe.steps.find(s => s.id === current.stepId).content);
       }
       switch (current.pieceId) {
         case FF_ID:
-          return <FF step={step} id={current.stepId}
-                  createOrUpdate={content => createOrUpdate(current.stepId, content)}
+          return <FF step={step} id={id}
+                  createOrUpdate={
+                    content => createOrUpdate(current.stepId, content, this.state.option)
+                  }
                   deleteStep={() => deleteStep(current.stepId)}
                 />;
         case TEXT_ID:
-          return <EditorText step={step} id={current.stepId}
-                  createOrUpdate={content => createOrUpdate(current.stepId, content)}
+          return <EditorText step={step} id={id}
+                  createOrUpdate={
+                    content => createOrUpdate(current.stepId, content, this.state.option)
+                  }
                   deleteStep={() => deleteStep(current.stepId)}
                 />;
         case TASTE_ID:
-          return <EditorTaste step={step} id={current.stepId}
-                  createOrUpdate={content => createOrUpdate(current.stepId, content)}
+          return <EditorTaste step={step} id={id}
+                  createOrUpdate={
+                    content => createOrUpdate(current.stepId, content, this.state.option)
+                  }
                   deleteStep={() => deleteStep(current.stepId)}
                 />;
         default:
@@ -95,11 +114,11 @@ class MainPanel extends React.Component<RouteComponentProps<any> & Props, State>
       }
     };
     const steps = [...this.props.steps];
-    if (current.editRecipe.option.direction) {
-      const step = (current.editRecipe.steps.find(s => s.id === current.editRecipe.option.stepId));
-      const idx = current.editRecipe.option.direction === 'before' ?
-        current.editRecipe.steps.indexOf(step) : current.editRecipe.steps.indexOf(step) + 1;
-      steps.splice(idx, 0, { id: 0, pieceId: 0, content: '', nextId: 0 });
+    if (this.state.option.direction) {
+      const step = (current.recipe.steps.find(s => s.id === this.state.option.stepId));
+      const idx = this.state.option.direction === 'before' ?
+        current.recipe.steps.indexOf(step) : current.recipe.steps.indexOf(step) + 1;
+      steps.splice(idx, 0, { id: null, pieceId: 0, content: '', nextId: 0 });
     }
     return (
       <Main>
@@ -119,9 +138,10 @@ class MainPanel extends React.Component<RouteComponentProps<any> & Props, State>
             innerRef={e => this.descDom = e}
             value={this.state.desc} />
           {selectPiece()}
-          { current.stepId && !current.editRecipe.option.direction ? <Option /> : null }
+          { current.stepId && !this.state.option.direction ?
+            <Option updateEditOption={this.updateEditOption} /> : null }
         </TopPanel>
-        <StepsPanel stepOnClick={this.props.switchStep} steps={steps} />
+        <StepsPanel stepOnClick={this.stepOnClick} steps={steps} currentStepId={id} />
       </Main>
     );
   }

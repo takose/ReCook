@@ -28,9 +28,6 @@ export function mapStateToProps(state: object) {
 
 export function mapDispatchToProps(dispatch) {
   return {
-    updateEditOption: (direction) => {
-      dispatch(actions.updateEditOption(direction));
-    },
   };
 }
 

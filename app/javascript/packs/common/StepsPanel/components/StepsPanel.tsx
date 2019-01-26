@@ -23,7 +23,7 @@ interface State {
 class StepsPanel extends React.Component<Props, State> {
   render () {
     const stepListDom = this.props.steps.map((step) => {
-      if (step.id === 0) {
+      if (!step.id) {
         return <Temp />;
       }
       let dom;
