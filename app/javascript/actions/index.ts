@@ -31,10 +31,13 @@ export function switchPiece(pieceId: number): SwitchPiece {
   };
 }
 
-export function createStep(stepId: number, content: any) {
+export function createStep(
+  stepId: number, content: any, option: { direction?: string, stepId?: number },
+) {
   return {
     stepId,
     content,
+    option,
     type: constants.CREATE_STEP,
   };
 }
@@ -63,50 +66,23 @@ export function switchStep(id: number) {
   };
 }
 
-export function updateEditOption(direction: string) {
+export function resetRecipe() {
   return {
-    direction,
-    type: constants.UPDATE_EDIT_OPTION,
+    type: constants.RESET_RECIPE,
   };
 }
 
-export function resetPlayRecipe() {
-  return {
-    type: constants.RESET_PLAY_RECIPE,
-  };
-}
-
-export function resetEditRecipe() {
-  return {
-    type: constants.RESET_EDIT_RECIPE,
-  };
-}
-
-export function getEditRecipe(id: number) {
+export function getRecipe(id: number) {
   return {
     id,
-    type: constants.GET_EDIT_RECIPE,
+    type: constants.GET_RECIPE,
   };
 }
 
-export function getPlayRecipe(id: number) {
-  return {
-    id,
-    type: constants.GET_PLAY_RECIPE,
-  };
-}
-
-export function setPlayRecipe(recipe: RecipeState) {
+export function setRecipe(recipe: RecipeState) {
   return {
     recipe,
-    type: constants.SET_EDIT_RECIPE,
-  };
-}
-
-export function setEditRecipe(recipe: RecipeState) {
-  return {
-    recipe,
-    type: constants.SET_PLAY_RECIPE,
+    type: constants.SET_RECIPE,
   };
 }
 
