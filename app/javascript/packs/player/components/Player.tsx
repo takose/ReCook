@@ -110,12 +110,12 @@ export default class Player extends React.Component<RouteComponentProps<any> & P
               <option value="ff1">FF1</option>
               <option value="ff2">FF2</option>
             </FFSelect>
-            {currentPiece}
             <EditLink to={`/recipes/edit/${this.props.match.params.id}`}>Edit</EditLink>
           </TopPanel>
           <StepsPanel
             steps={this.props.steps}
             currentStepId={this.props.stepId}
+            focusStep={currentPiece}
             stepOnClick={(stepId, pieceId) => this.props.switchStep(stepId, pieceId)} />
         </Main>
       </div>
