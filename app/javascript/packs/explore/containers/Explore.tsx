@@ -8,6 +8,7 @@ export function mapStateToProps(state: StoreState) {
   return {
     recipes: state.recipes,
     user: state.user,
+    steps: state.current.recipe.steps,
   };
 }
 

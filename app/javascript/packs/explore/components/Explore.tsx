@@ -2,7 +2,8 @@ import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faPlay, faEdit, faCodeBranch } from '@fortawesome/free-solid-svg-icons';
-import { RecipeState, UserState } from '../../../types';
+import { RecipeState, UserState, StepState } from '../../../types';
+import StepsPanel from '../../common/StepsPanel/containers/StepsPanel';
 import {
   main as Main,
   recipeItem as RecipeItem,
@@ -26,6 +27,7 @@ export interface Props {
   user: UserState;
   setRecipes(recipes: RecipeState[]): void;
   deleteRecipe(id: number): void;
+  steps: StepState[];
 }
 
 class Explore extends React.Component<RouteComponentProps<any> & Props, object> {
