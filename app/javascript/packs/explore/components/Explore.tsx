@@ -19,6 +19,9 @@ import {
   bottomBlock as BottomBlock,
   user as User,
   userIcon as UserIcon,
+  modeSelector as ModeSelector,
+  modeSelectorItem as ModeSelectorItem,
+  listWrapper as ListWrapper,
 } from '../styles/Explore';
 import RecipeTree from './RecipeTree';
 
@@ -30,7 +33,13 @@ export interface Props {
   steps: StepState[];
 }
 
-class Explore extends React.Component<RouteComponentProps<any> & Props, object> {
+interface States {
+  mode: string;
+}
+
+class Explore extends React.Component<RouteComponentProps<any> & Props, States> {
+  state = { mode: 'TREE' };
+
   componentWillMount() {
     fetch('/api/recipes')
       .then(res => res.json())
@@ -108,10 +117,16 @@ class Explore extends React.Component<RouteComponentProps<any> & Props, object> 
     return (
       <div>
         <Main>
-          <RecipeList>
-            {recipeList}
-          </RecipeList>
-          <RecipeTree recipes={this.props.recipes} />
+          <ModeSelector>
+            <ModeSelectorItem
+              isActive={this.state.mode === 'LIST'} onClick={() => this.setState({ mode: 'LIST' })}>
+              LIST
+            </ModeSelectorItem>
+            <ModeSelectorItem
+              isActive={this.state.mode === 'TREE'} onClick={() => this.setState({ mode: 'TREE' })}>
+              TREE
+            </ModeSelectorItem>
+          </ModeSelector>
         </Main>
       </div>
     );
