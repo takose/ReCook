@@ -2,7 +2,8 @@ import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faPlay, faEdit, faCodeBranch } from '@fortawesome/free-solid-svg-icons';
-import { RecipeState, UserState } from '../../../types';
+import { RecipeState, UserState, StepState } from '../../../types';
+import StepsPanel from '../../common/StepsPanel/containers/StepsPanel';
 import {
   main as Main,
   recipeItem as RecipeItem,
@@ -18,17 +19,27 @@ import {
   bottomBlock as BottomBlock,
   user as User,
   userIcon as UserIcon,
+  modeSelector as ModeSelector,
+  modeSelectorItem as ModeSelectorItem,
+  listWrapper as ListWrapper,
 } from '../styles/Explore';
-import RecipeTree from './RecipeTree';
+import RecipeTree from '../containers/RecipeTree';
 
 export interface Props {
   recipes: RecipeState[];
   user: UserState;
   setRecipes(recipes: RecipeState[]): void;
   deleteRecipe(id: number): void;
+  steps: StepState[];
 }
 
-class Explore extends React.Component<RouteComponentProps<any> & Props, object> {
+interface States {
+  mode: string;
+}
+
+class Explore extends React.Component<RouteComponentProps<any> & Props, States> {
+  state = { mode: 'TREE' };
+
   componentWillMount() {
     fetch('/api/recipes')
       .then(res => res.json())
@@ -106,10 +117,27 @@ class Explore extends React.Component<RouteComponentProps<any> & Props, object> 
     return (
       <div>
         <Main>
-          <RecipeList>
-            {recipeList}
-          </RecipeList>
-          <RecipeTree recipes={this.props.recipes} />
+          <ModeSelector>
+            <ModeSelectorItem
+              isActive={this.state.mode === 'LIST'} onClick={() => this.setState({ mode: 'LIST' })}>
+              LIST
+            </ModeSelectorItem>
+            <ModeSelectorItem
+              isActive={this.state.mode === 'TREE'} onClick={() => this.setState({ mode: 'TREE' })}>
+              TREE
+            </ModeSelectorItem>
+          </ModeSelector>
+          <ListWrapper>
+            { this.state.mode === 'LIST' ?
+              <RecipeList>{recipeList}</RecipeList> :
+              <RecipeTree recipes={this.props.recipes} />
+            }
+            {
+              this.props.steps.length > 0 ?
+                <StepsPanel stepOnClick={() => {}} steps={this.props.steps} currentStepId={null} />
+                : null
+            }
+          </ListWrapper>
         </Main>
       </div>
     );

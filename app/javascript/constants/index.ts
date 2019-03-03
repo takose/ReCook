@@ -9,6 +9,7 @@ export const CREATE_STEP = 'CREATE_STEP';
 export const DELETE_STEP = 'DELETE_STEP';
 export const DELETE_STEP_SUCCEEDED = 'DELETE_STEP_SUCCEEDED';
 export const UPDATE_RECIPE = 'UPDATE_RECIPE';
+export const UPDATE_EDIT_OPTION = 'UPDATE_EDIT_OPTION';
 export const SET_RECIPE = 'SET_RECIPE';
 export const GET_RECIPE = 'GET_RECIPE';
 export const RESET_RECIPE = 'RESET_RECIPE';
