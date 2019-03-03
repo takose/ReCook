@@ -110,3 +110,26 @@ export const recipeItem = styledComponents.div`
     }
   }
 `;
+
+export const modeSelector = styledComponents.div`
+  display: flex;
+  margin: 24px;
+`;
+
+export const modeSelectorItem = styledComponents.div`
+font-size: 18px;
+  cursor: pointer;
+  border:
+    ${(props: {isActive: boolean}) => (
+      props.isActive ? 'solid 3px #141B23' : 'none'
+    )};
+  border-width: 0 0 3px;
+  padding: 12px 18px;
+`;
+
+export const listWrapper = styledComponents.div`
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 120px);
+  flex-grow: 1;
+`;

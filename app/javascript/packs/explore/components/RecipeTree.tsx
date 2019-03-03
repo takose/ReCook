@@ -1,9 +1,16 @@
 import * as React from 'react';
-import { RecipeState } from '../../../types';
+import { RecipeState, StepState } from '../../../types';
 import { Tree } from 'react-d3-tree';
+import {
+  main as Main,
+  treeWrapper as TreeWrapper,
+} from '../styles/RecipeTree';
 
 export interface Props {
   recipes: RecipeState[];
+  steps: StepState[];
+  getRecipe(id: number): void;
+  resetRecipe(): void;
 }
 
 export interface State {
@@ -32,7 +39,7 @@ class RecipeTree extends React.Component<Props, State> {
       result.push({
         id: recipe.id,
         name: recipe.title,
-        attributes: diff,
+        attributes: { ...diff, id: recipe.id },
         children: [],
       });
       this.buildTree(recipe.id, result.find(r => r.id === recipe.id).children);
@@ -41,53 +48,64 @@ class RecipeTree extends React.Component<Props, State> {
   render() {
     if (this.state.result.length !== 0) {
       const tree = this.state.result.filter(r => r.children.length !== 0).map(r => (
+        <TreeWrapper>
           <Tree
             data={r}
             key={r.id}
             translate={{ x: 80, y: 160 }}
-            textLayout={{ y: -30, textAnchor: 'middle', size: '10' }}
-            zoomable={false}
-            nodeSize={{ x: 200, y: 60 }}
-            nodeSvgShape={{ shape: 'circle', shapeProps: { r: 5 } }}
+            textLayout={{ y: -50, x: 0, textAnchor: 'middle', size: '18' }}
+            zoomable={true}
+            nodeSize={{ x: 200, y: 100 }}
+            nodeSvgShape={{ shape: 'circle', shapeProps: { r: 18 } }}
+            onClick={(nodeData, e) => {
+              this.props.getRecipe(nodeData.attributes.id);
+            }}
+            collapsible={false}
             styles={{
               links: {
-                stroke: '#333',
+                stroke: '#87BEC1',
+                strokeWidth: 8,
               },
               nodes: {
                 leafNode: {
                   circle: {
-                    stroke: '#ccc',
-                    fill: '#ccc',
+                    stroke: '#87BEC1',
+                    fill: '#2E424B',
+                    strokeWidth: 8,
                   },
                   name: {
-                    stroke: '#333',
+                    stroke: '#87BEC1',
+                    fill: '#fff',
                     strokeWidth: 0,
                   },
                   attributes: {
+                    stroke: '#87BEC1',
                     strokeWidth: 0,
                   },
                 },
                 node: {
                   circle: {
-                    stroke: '#ccc',
-                    fill: '#ccc',
+                    stroke: '#87BEC1',
+                    fill: '#2E424B',
+                    strokeWidth: 8,
                   },
                   name: {
-                    stroke: '#333',
+                    stroke: '#87BEC1',
+                    fill: '#fff',
                     strokeWidth: 0,
                   },
                   attributes: {
+                    stroke: '#87BEC1',
                     strokeWidth: 0,
                   },
                 },
               },
             }}
           />
+        </TreeWrapper>
       ));
       return (
-        <div id="treeWrapper" style={{ width: '100%', height: '16em' }}>
-          {tree}
-        </div>
+        <Main>{tree}</Main>
       );
     }
     return null;

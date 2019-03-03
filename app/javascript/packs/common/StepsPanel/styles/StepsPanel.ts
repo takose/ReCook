@@ -7,6 +7,7 @@ export const main = styledComponents.div`
   padding: 8px;
   border-radius: 3px;
   border: solid 1px #ccc;
+  flex-shrink: 0;
 `;
 
 export const stepList = styledComponents.div`

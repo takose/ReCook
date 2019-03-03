@@ -23,7 +23,7 @@ import {
   modeSelectorItem as ModeSelectorItem,
   listWrapper as ListWrapper,
 } from '../styles/Explore';
-import RecipeTree from './RecipeTree';
+import RecipeTree from '../containers/RecipeTree';
 
 export interface Props {
   recipes: RecipeState[];
@@ -127,6 +127,17 @@ class Explore extends React.Component<RouteComponentProps<any> & Props, States> 
               TREE
             </ModeSelectorItem>
           </ModeSelector>
+          <ListWrapper>
+            { this.state.mode === 'LIST' ?
+              <RecipeList>{recipeList}</RecipeList> :
+              <RecipeTree recipes={this.props.recipes} />
+            }
+            {
+              this.props.steps.length > 0 ?
+                <StepsPanel stepOnClick={() => {}} steps={this.props.steps} currentStepId={null} />
+                : null
+            }
+          </ListWrapper>
         </Main>
       </div>
     );
