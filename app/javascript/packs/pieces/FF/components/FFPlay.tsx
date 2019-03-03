@@ -140,8 +140,8 @@ class FFPlay extends React.Component<Props, State> {
         // },
       }, audio: false })
       .then((stream) => {
-        const thermoVideo = window.URL.createObjectURL(stream);
-        this.setState({ stream: thermoVideo });
+        this.setState({ stream });
+        this.video.srcObject = stream;
       }).catch((error) => {
         console.error('mediaDevice.getUserMedia() error:', error);
         return;
@@ -283,7 +283,6 @@ class FFPlay extends React.Component<Props, State> {
         <Video
           innerRef={(e: HTMLVideoElement) => { this.video = e; }}
           autoPlay
-          src={this.state.stream}
           id="video"
         />
         <Canvas
