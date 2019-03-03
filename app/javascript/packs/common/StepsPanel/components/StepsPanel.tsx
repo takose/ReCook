@@ -15,7 +15,6 @@ export interface Props {
   steps: StepState[];
   currentStepId: number;
   stepOnClick(id: number, pieceId: number): void;
-  focusStep: any;
 }
 
 interface State {
@@ -26,9 +25,6 @@ class StepsPanel extends React.Component<Props, State> {
     const stepListDom = this.props.steps.map((step) => {
       if (!step.id) {
         return <Temp />;
-      }
-      if (step.id === this.props.currentStepId) {
-        return this.props.focusStep;
       }
       let dom;
       let pieceColor;

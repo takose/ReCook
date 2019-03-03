@@ -142,7 +142,7 @@ class MainPanel extends React.Component<RouteComponentProps<any> & Props, State>
             <Option updateEditOption={this.updateEditOption} /> : null }
         </TopPanel>
         <StepsPanel
-          stepOnClick={this.stepOnClick} steps={steps} currentStepId={id} focusStep={selectPiece()}
+          stepOnClick={this.stepOnClick} steps={steps} currentStepId={id}
         />
       </Main>
     );
