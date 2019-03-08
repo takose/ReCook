@@ -2,7 +2,7 @@ import styledComponents from 'styled-components';
 
 export const treeWrapper = styledComponents.div`
   width: 80%;
-  height: 16em;
+  height: 25em;
   background-color: #2E424B;
   margin-bottom: 8px;
 `;

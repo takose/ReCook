@@ -113,7 +113,7 @@ export const recipeItem = styledComponents.div`
 
 export const modeSelector = styledComponents.div`
   display: flex;
-  margin: 24px;
+  margin-bottom: 18px;
 `;
 
 export const modeSelectorItem = styledComponents.div`
@@ -124,7 +124,7 @@ font-size: 18px;
       props.isActive ? 'solid 3px #141B23' : 'none'
     )};
   border-width: 0 0 3px;
-  padding: 12px 18px;
+  padding: 10px 12px;
 `;
 
 export const listWrapper = styledComponents.div`
