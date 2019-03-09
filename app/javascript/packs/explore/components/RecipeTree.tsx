@@ -52,7 +52,7 @@ class RecipeTree extends React.Component<Props, State> {
           <Tree
             data={r}
             key={r.id}
-            translate={{ x: 80, y: 320 }}
+            translate={{ x: 80, y: 540 }}
             textLayout={{ y: -50, x: 0, textAnchor: 'middle', size: '18' }}
             zoomable={true}
             nodeSize={{ x: 200, y: 100 }}
