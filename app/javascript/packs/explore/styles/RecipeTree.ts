@@ -1,8 +1,8 @@
 import styledComponents from 'styled-components';
 
 export const treeWrapper = styledComponents.div`
-  width: 80%;
-  height: 25em;
+  width: 95%;
+  height: 50em;
   background-color: #2E424B;
   margin-bottom: 8px;
 `;
